@@ -5,19 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Hamdil Hasan — Personal website of Hamdil Hasan — a CSE student writing about technology, programming, robotics, reviews, findings and life.">
     <meta name="author" content="Hamdil Hasan">
-    <link rel="canonical" href="/category/robotics/index.html">
+    <link rel="canonical" href="https://hamdilhasan.dev/category/robotics/index.html">
+    <script>
+    (function () {
+        try {
+            var stored = localStorage.getItem("hamdil-theme");
+            var theme = stored || (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+            document.documentElement.setAttribute("data-theme", theme);
+        } catch (e) {
+            document.documentElement.setAttribute("data-theme", "dark");
+        }
+    })();
+    </script>
 
     <meta property="og:type" content="website">
     <meta property="og:title" content="Hamdil Hasan">
     <meta property="og:description" content="Personal website of Hamdil Hasan — a CSE student writing about technology, programming, robotics, reviews, findings and life.">
-    <meta property="og:url" content="">
+    <meta property="og:url" content="https://hamdilhasan.dev">
 
     <title>Hamdil Hasan</title>
 
-    <link rel="stylesheet" href="/theme/css/style.css">
-    <link rel="icon" href="/theme/images/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="https://hamdilhasan.dev/theme/css/style.css">
+    <link rel="icon" href="https://hamdilhasan.dev/theme/images/favicon.svg" type="image/svg+xml">
 
-    <link rel="alternate" type="application/atom+xml" title="Hamdil Hasan — Atom Feed" href="/feeds/all.atom.xml">
+    <link rel="alternate" type="application/atom+xml" title="Hamdil Hasan — Atom Feed" href="https://hamdilhasan.dev/feeds/all.atom.xml">
 
 </head>
 <body>
@@ -25,21 +36,27 @@
 
 <header class="site-header">
     <div class="container nav-wrap">
-        <a class="brand" href="/">
+        <a class="brand" href="https://hamdilhasan.dev/">
             <span class="brand-mark">H</span>
             <span>hamdilhasan<span class="brand-dot">.dev</span></span>
         </a>
 
-        <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
-
         <nav class="site-nav" aria-label="Main navigation">
-            <a href="/">Home</a>
-            <a href="/blog/">Blog</a>
-            <a href="/projects/">Projects</a>
-            <a href="/now/">Now</a>
-            <a href="/about/">About</a>
+            <a href="https://hamdilhasan.dev/">Home</a>
+            <a href="https://hamdilhasan.dev/blog/">Blog</a>
+            <a href="https://hamdilhasan.dev/projects/">Projects</a>
+            <a href="https://hamdilhasan.dev/now/">Now</a>
+            <a href="https://hamdilhasan.dev/about/">About</a>
             <a class="nav-portfolio" href="https://enigma-101.github.io/Portfolio/" target="_blank" rel="noopener">Portfolio ↗</a>
         </nav>
+
+        <div class="nav-right">
+            <button class="theme-toggle" type="button" aria-label="Toggle dark and light mode">
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+        </div>
     </div>
 </header>
 
@@ -56,10 +73,10 @@
             <article class="post-row">
                 <div class="post-row-date">August 24, 2026</div>
                 <div>
-                    <h2><a href="/blog/building-an-indoor-food-delivery-robot/">Building an Indoor Food Delivery Robot</a></h2>
+                    <h2><a href="https://hamdilhasan.dev/blog/building-an-indoor-food-delivery-robot/">Building an Indoor Food Delivery Robot</a></h2>
                     <p>A development log for my indoor food delivery robot project.</p>
                 </div>
-                <a class="post-arrow" href="/blog/building-an-indoor-food-delivery-robot/">→</a>
+                <a class="post-arrow" href="https://hamdilhasan.dev/blog/building-an-indoor-food-delivery-robot/">→</a>
             </article>
         </div>
     </div>
@@ -75,7 +92,7 @@
         <div class="footer-links">
             <a href="https://github.com/ENiGMA-101" target="_blank" rel="noopener">GitHub ↗</a>
             <a href="https://enigma-101.github.io/Portfolio/" target="_blank" rel="noopener">Portfolio ↗</a>
-<a href="/feeds/all.atom.xml">RSS / Atom</a>        </div>
+<a href="https://hamdilhasan.dev/feeds/all.atom.xml">RSS / Atom</a>        </div>
     </div>
     <div class="container footer-bottom">
         <span>© 2026 Hamdil Hasan</span>
@@ -83,6 +100,10 @@
     </div>
 </footer>
 
-<script src="/theme/js/main.js"></script>
+<button class="back-to-top" type="button" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"></path></svg>
+</button>
+
+<script src="https://hamdilhasan.dev/theme/js/main.js"></script>
 </body>
 </html>

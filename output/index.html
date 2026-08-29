@@ -5,19 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Hamdil Hasan — Personal website of Hamdil Hasan — a CSE student writing about technology, programming, robotics, reviews, findings and life.">
     <meta name="author" content="Hamdil Hasan">
-    <link rel="canonical" href="/index.html">
+    <link rel="canonical" href="https://hamdilhasan.dev/index.html">
+    <script>
+    (function () {
+        try {
+            var stored = localStorage.getItem("hamdil-theme");
+            var theme = stored || (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+            document.documentElement.setAttribute("data-theme", theme);
+        } catch (e) {
+            document.documentElement.setAttribute("data-theme", "dark");
+        }
+    })();
+    </script>
 
     <meta property="og:type" content="website">
     <meta property="og:title" content="Hamdil Hasan">
     <meta property="og:description" content="Personal website of Hamdil Hasan — a CSE student writing about technology, programming, robotics, reviews, findings and life.">
-    <meta property="og:url" content="">
+    <meta property="og:url" content="https://hamdilhasan.dev">
 
     <title>Hamdil Hasan</title>
 
-    <link rel="stylesheet" href="/theme/css/style.css">
-    <link rel="icon" href="/theme/images/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="https://hamdilhasan.dev/theme/css/style.css">
+    <link rel="icon" href="https://hamdilhasan.dev/theme/images/favicon.svg" type="image/svg+xml">
 
-    <link rel="alternate" type="application/atom+xml" title="Hamdil Hasan — Atom Feed" href="/feeds/all.atom.xml">
+    <link rel="alternate" type="application/atom+xml" title="Hamdil Hasan — Atom Feed" href="https://hamdilhasan.dev/feeds/all.atom.xml">
 
 </head>
 <body>
@@ -25,37 +36,45 @@
 
 <header class="site-header">
     <div class="container nav-wrap">
-        <a class="brand" href="/">
+        <a class="brand" href="https://hamdilhasan.dev/">
             <span class="brand-mark">H</span>
             <span>hamdilhasan<span class="brand-dot">.dev</span></span>
         </a>
 
-        <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
-
         <nav class="site-nav" aria-label="Main navigation">
-            <a href="/">Home</a>
-            <a href="/blog/">Blog</a>
-            <a href="/projects/">Projects</a>
-            <a href="/now/">Now</a>
-            <a href="/about/">About</a>
+            <a href="https://hamdilhasan.dev/">Home</a>
+            <a href="https://hamdilhasan.dev/blog/">Blog</a>
+            <a href="https://hamdilhasan.dev/projects/">Projects</a>
+            <a href="https://hamdilhasan.dev/now/">Now</a>
+            <a href="https://hamdilhasan.dev/about/">About</a>
             <a class="nav-portfolio" href="https://enigma-101.github.io/Portfolio/" target="_blank" rel="noopener">Portfolio ↗</a>
         </nav>
+
+        <div class="nav-right">
+            <button class="theme-toggle" type="button" aria-label="Toggle dark and light mode">
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+            <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+        </div>
     </div>
 </header>
 
 <main id="main">
 <section class="hero">
+    <div class="hero-glow g1"></div>
+    <div class="hero-glow g2"></div>
     <div class="container hero-grid">
         <div class="hero-copy">
             <p class="eyebrow">PERSONAL WEBSITE · NOTES · REVIEWS · BUILDS</p>
-            <h1>Hi, I'm <span>Hamdil.</span></h1>
+            <h1>Hi, I'm <span class="accent-text">Hamdil.</span></h1>
             <p class="hero-lede">
                 I'm a CSE undergraduate student who likes building things,
                 understanding how they work, and writing down what I learn.
             </p>
             <div class="hero-actions">
-                <a class="button button-primary" href="/blog/">Read the blog</a>
-                <a class="button button-secondary" href="/about/">About me</a>
+                <a class="button button-primary" href="https://hamdilhasan.dev/blog/">Read the blog</a>
+                <a class="button button-secondary" href="https://hamdilhasan.dev/about/">About me</a>
             </div>
             <div class="hero-meta">
                 <span>📍 Bangladesh</span>
@@ -67,21 +86,7 @@
 
         <aside class="hero-card">
             <div class="terminal-top"><span></span><span></span><span></span></div>
-            <pre><code><span class="code-muted">$</span> whoami
-
-<span class="code-key">hamdil_hasan</span>
-
-<span class="code-muted">interests = [</span>
-  "computer science",
-  "robotics",
-  "AI / ML",
-  "web development",
-  "interesting tools",
-  "life & learning"
-<span class="code-muted">]</span>
-
-<span class="code-muted">$</span> cat /purpose
-Build. Learn. Document. Repeat.</code></pre>
+            <pre><code><span class="type-line"><span class="code-muted">$</span> whoami</span><span class="type-line">&nbsp;</span><span class="type-line"><span class="code-key">hamdil_hasan</span></span><span class="type-line">&nbsp;</span><span class="type-line"><span class="code-muted">interests = [</span></span><span class="type-line">&nbsp;&nbsp;"computer science",</span><span class="type-line">&nbsp;&nbsp;"robotics",</span><span class="type-line">&nbsp;&nbsp;"AI / ML",</span><span class="type-line">&nbsp;&nbsp;"web development",</span><span class="type-line">&nbsp;&nbsp;"interesting tools",</span><span class="type-line">&nbsp;&nbsp;"life &amp; learning"</span><span class="type-line"><span class="code-muted">]</span></span><span class="type-line">&nbsp;</span><span class="type-line"><span class="code-muted">$</span> cat /purpose</span><span class="type-line">Build. Learn. Document. Repeat.<span class="type-cursor"></span></span></code></pre>
         </aside>
     </div>
 </section>
@@ -93,7 +98,7 @@ Build. Learn. Document. Repeat.</code></pre>
                 <p class="eyebrow">LATEST</p>
                 <h2>From the notebook</h2>
             </div>
-            <a class="text-link" href="/blog/">View all posts →</a>
+            <a class="text-link" href="https://hamdilhasan.dev/blog/">View all posts →</a>
         </div>
 
         <div class="post-grid">
@@ -102,36 +107,36 @@ Build. Learn. Document. Repeat.</code></pre>
                     <span class="category">Reviews</span>
                     <time datetime="2026-08-29T00:00:00+06:00">August 29, 2026</time>
                 </div>
-                <h3><a href="/blog/how-i-review-apps/">How I Plan to Review Apps and Software</a></h3>
+                <h3><a href="https://hamdilhasan.dev/blog/how-i-review-apps/">How I Plan to Review Apps and Software</a></h3>
                 <p>The framework I will use for future app and software reviews.</p>
-                <a class="read-more" href="/blog/how-i-review-apps/">Read →</a>
+                <a class="read-more" href="https://hamdilhasan.dev/blog/how-i-review-apps/">Read →</a>
             </article>
             <article class="post-card">
                 <div class="post-card-top">
                     <span class="category">Programming</span>
                     <time datetime="2026-08-29T00:00:00+06:00">August 29, 2026</time>
                 </div>
-                <h3><a href="/blog/my-personal-website-stack/">My Personal Website Stack: Python, Pelican and Markdown</a></h3>
+                <h3><a href="https://hamdilhasan.dev/blog/my-personal-website-stack/">My Personal Website Stack: Python, Pelican and Markdown</a></h3>
                 <p>Why I chose a Python static-site generator instead of building a full web application.</p>
-                <a class="read-more" href="/blog/my-personal-website-stack/">Read →</a>
+                <a class="read-more" href="https://hamdilhasan.dev/blog/my-personal-website-stack/">Read →</a>
             </article>
             <article class="post-card">
                 <div class="post-card-top">
                     <span class="category">Personal</span>
                     <time datetime="2026-08-29T00:00:00+06:00">August 29, 2026</time>
                 </div>
-                <h3><a href="/blog/why-i-started-building-my-own-website/">Why I Started Building My Own Website</a></h3>
+                <h3><a href="https://hamdilhasan.dev/blog/why-i-started-building-my-own-website/">Why I Started Building My Own Website</a></h3>
                 <p>Why I wanted a personal space for writing, experiments, reviews and everything that doesn't belong in a portfolio.</p>
-                <a class="read-more" href="/blog/why-i-started-building-my-own-website/">Read →</a>
+                <a class="read-more" href="https://hamdilhasan.dev/blog/why-i-started-building-my-own-website/">Read →</a>
             </article>
             <article class="post-card">
                 <div class="post-card-top">
                     <span class="category">Robotics</span>
                     <time datetime="2026-08-24T00:00:00+06:00">August 24, 2026</time>
                 </div>
-                <h3><a href="/blog/building-an-indoor-food-delivery-robot/">Building an Indoor Food Delivery Robot</a></h3>
+                <h3><a href="https://hamdilhasan.dev/blog/building-an-indoor-food-delivery-robot/">Building an Indoor Food Delivery Robot</a></h3>
                 <p>A development log for my indoor food delivery robot project.</p>
-                <a class="read-more" href="/blog/building-an-indoor-food-delivery-robot/">Read →</a>
+                <a class="read-more" href="https://hamdilhasan.dev/blog/building-an-indoor-food-delivery-robot/">Read →</a>
             </article>
         </div>
     </div>
@@ -147,22 +152,22 @@ Build. Learn. Document. Repeat.</code></pre>
         </div>
 
         <div class="explore-grid">
-            <a class="explore-card" href="/category/programming/">
+            <a class="explore-card" href="https://hamdilhasan.dev/category/programming/">
                 <span class="explore-icon">⌘</span>
                 <h3>Programming</h3>
                 <p>Notes, experiments, code and things I learn while building.</p>
             </a>
-            <a class="explore-card" href="/category/robotics/">
+            <a class="explore-card" href="https://hamdilhasan.dev/category/robotics/">
                 <span class="explore-icon">◈</span>
                 <h3>Robotics</h3>
                 <p>Projects, sensors, embedded systems and development logs.</p>
             </a>
-            <a class="explore-card" href="/category/reviews/">
+            <a class="explore-card" href="https://hamdilhasan.dev/category/reviews/">
                 <span class="explore-icon">★</span>
                 <h3>Reviews</h3>
                 <p>Apps, software, websites and devices I actually spend time with.</p>
             </a>
-            <a class="explore-card" href="/category/personal/">
+            <a class="explore-card" href="https://hamdilhasan.dev/category/personal/">
                 <span class="explore-icon">✦</span>
                 <h3>Personal</h3>
                 <p>Life updates, university experiences and thoughts worth keeping.</p>
@@ -183,7 +188,7 @@ Build. Learn. Document. Repeat.</code></pre>
                 technical articles. Others will simply be notes from the middle
                 of a project.
             </p>
-            <a class="text-link" href="/now/">See what I'm working on →</a>
+            <a class="text-link" href="https://hamdilhasan.dev/now/">See what I'm working on →</a>
         </div>
     </div>
 </section>
@@ -198,7 +203,7 @@ Build. Learn. Document. Repeat.</code></pre>
         <div class="footer-links">
             <a href="https://github.com/ENiGMA-101" target="_blank" rel="noopener">GitHub ↗</a>
             <a href="https://enigma-101.github.io/Portfolio/" target="_blank" rel="noopener">Portfolio ↗</a>
-<a href="/feeds/all.atom.xml">RSS / Atom</a>        </div>
+<a href="https://hamdilhasan.dev/feeds/all.atom.xml">RSS / Atom</a>        </div>
     </div>
     <div class="container footer-bottom">
         <span>© 2026 Hamdil Hasan</span>
@@ -206,6 +211,10 @@ Build. Learn. Document. Repeat.</code></pre>
     </div>
 </footer>
 
-<script src="/theme/js/main.js"></script>
+<button class="back-to-top" type="button" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"></path></svg>
+</button>
+
+<script src="https://hamdilhasan.dev/theme/js/main.js"></script>
 </body>
 </html>
