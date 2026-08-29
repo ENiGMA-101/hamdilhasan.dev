@@ -1,31 +1,5 @@
-{% if page.slug == "blog" %}
 {% extends "base.html" %}
-{% block content %}
-<div class="page-shell">
-    <div class="container">
-        <header class="listing-header">
-            <p class="eyebrow">THE NOTEBOOK</p>
-            <h1>Blog</h1>
-            <p>Things I'm learning, building, testing, reviewing and thinking about.</p>
-        </header>
-        <div class="post-list">
-        {% for article in articles %}
-            <article class="post-row">
-                <div class="post-row-date">{{ article.locale_date }}</div>
-                <div>
-                    <span class="category">{{ article.category }}</span>
-                    <h2><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></h2>
-                    <p>{{ article.summary|striptags }}</p>
-                </div>
-                <a class="post-arrow" href="{{ SITEURL }}/{{ article.url }}" aria-label="Read {{ article.title }}">→</a>
-            </article>
-        {% endfor %}
-        </div>
-    </div>
-</div>
-{% endblock %}
-{% else %}
-{% extends "base.html" %}
+
 {% block content %}
 <div class="page-shell">
     <div class="container narrow">
@@ -39,4 +13,3 @@
     </div>
 </div>
 {% endblock %}
-{% endif %}

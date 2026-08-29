@@ -92,3 +92,15 @@ Write here...
 ## License
 
 The website source is available under the repository license. Your original writing, photography, and other personal content remain yours unless separately licensed.
+
+## GitHub Pages deployment
+
+This site deploys through **GitHub Actions**.
+
+1. Open **Settings → Pages**.
+2. Under **Build and deployment**, set **Source** to **GitHub Actions**.
+3. Push to `main`.
+4. Open **Actions** and wait for `Deploy Pelican site to GitHub Pages` to finish.
+5. Under **Settings → Pages**, set the custom domain to `hamdilhasan.dev`.
+
+Do **not** use "Deploy from a branch" with the repository root. The root contains the Pelican source and README; the workflow publishes the generated `output/` directory as a Pages artifact.
