@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ SITENAME }} — {{ SITE_DESCRIPTION }}">
+    <meta name="author" content="{{ SITE_AUTHOR }}">
+    <link rel="canonical" href="{{ SITEURL }}/{{ output_file|default('') }}">
+
+    <meta property="og:type" content="{% if article %}article{% else %}website{% endif %}">
+    <meta property="og:title" content="{% if article %}{{ article.title }}{% elif page %}{{ page.title }}{% else %}{{ SITENAME }}{% endif %}">
+    <meta property="og:description" content="{{ SITE_DESCRIPTION }}">
+    <meta property="og:url" content="{{ SITEURL }}">
+
+    <title>{% if article %}{{ article.title }} · {% elif page %}{{ page.title }} · {% endif %}{{ SITENAME }}</title>
+
+    <link rel="stylesheet" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/style.css">
+    <link rel="icon" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/favicon.svg" type="image/svg+xml">
+
+    {% if FEED_ALL_ATOM %}
+    <link rel="alternate" type="application/atom+xml" title="{{ SITENAME }} — Atom Feed" href="{{ SITEURL }}/{{ FEED_ALL_ATOM }}">
+    {% endif %}
+
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+    <div class="container nav-wrap">
+        <a class="brand" href="{{ SITEURL }}/">
+            <span class="brand-mark">H</span>
+            <span>hamdilhasan<span class="brand-dot">.dev</span></span>
+        </a>
+
+        <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+
+        <nav class="site-nav" aria-label="Main navigation">
+            <a href="{{ SITEURL }}/">Home</a>
+            <a href="{{ SITEURL }}/blog/">Blog</a>
+            <a href="{{ SITEURL }}/projects/">Projects</a>
+            <a href="{{ SITEURL }}/now/">Now</a>
+            <a href="{{ SITEURL }}/about/">About</a>
+            <a class="nav-portfolio" href="{{ PORTFOLIO_URL }}" target="_blank" rel="noopener">Portfolio ↗</a>
+        </nav>
+    </div>
+</header>
+
+<main id="main">
+{% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+    <div class="container footer-grid">
+        <div>
+            <div class="footer-brand">Hamdil Hasan</div>
+            <p>A personal corner of the internet for things I build, learn, discover and think about.</p>
+        </div>
+        <div class="footer-links">
+            <a href="{{ GITHUB_URL }}" target="_blank" rel="noopener">GitHub ↗</a>
+            <a href="{{ PORTFOLIO_URL }}" target="_blank" rel="noopener">Portfolio ↗</a>
+            {% if FEED_ALL_ATOM %}<a href="{{ SITEURL }}/{{ FEED_ALL_ATOM }}">RSS / Atom</a>{% endif %}
+        </div>
+    </div>
+    <div class="container footer-bottom">
+        <span>© {{ current_year }} Hamdil Hasan</span>
+        <span>Built with Python + Pelican.</span>
+    </div>
+</footer>
+
+<script src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/main.js"></script>
+</body>
+</html>

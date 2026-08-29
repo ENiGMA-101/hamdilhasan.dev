@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Hamdil Hasan - Learning</title><link href="/" rel="alternate"/><link href="/feeds/tag-learning.atom.xml" rel="self"/><id>/</id><updated>2026-08-29T00:00:00+06:00</updated><subtitle>CSE student • developer • explorer</subtitle><entry><title>Why I Started Building My Own Website</title><link href="/blog/why-i-started-building-my-own-website/" rel="alternate"/><published>2026-08-29T00:00:00+06:00</published><updated>2026-08-29T00:00:00+06:00</updated><author><name>Hamdil Hasan</name></author><id>tag:None,2026-08-29:/blog/why-i-started-building-my-own-website/</id><summary type="html">&lt;p&gt;Why I wanted a personal space for writing, experiments, reviews and everything that doesn't belong in a portfolio.&lt;/p&gt;</summary><content type="html">&lt;h1 id="why-i-started-building-my-own-website"&gt;Why I Started Building My Own Website&lt;/h1&gt;
+&lt;p&gt;A portfolio is useful, but it only tells part of the story.&lt;/p&gt;
+&lt;p&gt;It shows projects, skills and achievements. It doesn't really show the small experiments, strange bugs, useful tools, personal discoveries or lessons that happen between those polished results.&lt;/p&gt;
+&lt;p&gt;So I wanted another place.&lt;/p&gt;
+&lt;h2 id="what-i-want-to-write-about"&gt;What I want to write about&lt;/h2&gt;
+&lt;p&gt;This site will be a mixture of:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;technical notes&lt;/li&gt;
+&lt;li&gt;programming experiments&lt;/li&gt;
+&lt;li&gt;robotics projects&lt;/li&gt;
+&lt;li&gt;AI and ML findings&lt;/li&gt;
+&lt;li&gt;software and app reviews&lt;/li&gt;
+&lt;li&gt;interesting tools and websites&lt;/li&gt;
+&lt;li&gt;university experiences&lt;/li&gt;
+&lt;li&gt;life updates and personal thoughts&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Not every post will be deeply technical. Some will simply be something I found useful and want to remember.&lt;/p&gt;
+&lt;h2 id="why-pelican"&gt;Why Pelican?&lt;/h2&gt;
+&lt;p&gt;I wanted the site itself to be a learning project.&lt;/p&gt;
+&lt;p&gt;Pelican gives me a Python-based static-site workflow while still letting me work directly with HTML, CSS, Jinja2 and Markdown.&lt;/p&gt;
+&lt;p&gt;That means the website can stay simple while I learn from the system behind it.&lt;/p&gt;
+&lt;h2 id="the-goal"&gt;The goal&lt;/h2&gt;
+&lt;p&gt;I don't want this to be a website that looks finished and then never changes.&lt;/p&gt;
+&lt;p&gt;I want it to become a record of learning and building.&lt;/p&gt;
+&lt;p&gt;Let's see where it goes.&lt;/p&gt;</content><category term="Personal"/><category term="Website"/><category term="Pelican"/><category term="Python"/><category term="Learning"/></entry></feed>

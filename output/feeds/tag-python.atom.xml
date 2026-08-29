@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Hamdil Hasan - Python</title><link href="/" rel="alternate"/><link href="/feeds/tag-python.atom.xml" rel="self"/><id>/</id><updated>2026-08-29T00:00:00+06:00</updated><subtitle>CSE student • developer • explorer</subtitle><entry><title>My Personal Website Stack: Python, Pelican and Markdown</title><link href="/blog/my-personal-website-stack/" rel="alternate"/><published>2026-08-29T00:00:00+06:00</published><updated>2026-08-29T00:00:00+06:00</updated><author><name>Hamdil Hasan</name></author><id>tag:None,2026-08-29:/blog/my-personal-website-stack/</id><summary type="html">&lt;p&gt;Why I chose a Python static-site generator instead of building a full web application.&lt;/p&gt;</summary><content type="html">&lt;h1 id="my-personal-website-stack"&gt;My Personal Website Stack&lt;/h1&gt;
+&lt;p&gt;For a personal blog, I don't need a database, login system or a large backend.&lt;/p&gt;
+&lt;p&gt;I need a reliable way to write content and turn it into a fast website.&lt;/p&gt;
+&lt;h2 id="the-stack"&gt;The stack&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Markdown
+   ↓
+Pelican
+   ↓
+Jinja2
+   ↓
+HTML + CSS
+   ↓
+GitHub Pages
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Python sits at the center because Pelican is Python-based.&lt;/p&gt;
+&lt;h2 id="why-static"&gt;Why static?&lt;/h2&gt;
+&lt;p&gt;A static website is easy to host, easy to version-control and difficult to accidentally break with a database problem.&lt;/p&gt;
+&lt;p&gt;Every article is just a Markdown file.&lt;/p&gt;
+&lt;p&gt;That makes the content portable and transparent.&lt;/p&gt;
+&lt;h2 id="why-not-django"&gt;Why not Django?&lt;/h2&gt;
+&lt;p&gt;Django is excellent, but it solves a much bigger problem.&lt;/p&gt;
+&lt;p&gt;If I eventually need accounts, dynamic data, an API or user-generated content, a backend may make sense.&lt;/p&gt;
+&lt;p&gt;For a personal blog, it would mostly be extra machinery.&lt;/p&gt;
+&lt;h2 id="the-learning-value"&gt;The learning value&lt;/h2&gt;
+&lt;p&gt;The best part is that the site itself becomes a CSE project.&lt;/p&gt;
+&lt;p&gt;I get to practice:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Python&lt;/li&gt;
+&lt;li&gt;templating&lt;/li&gt;
+&lt;li&gt;HTML/CSS&lt;/li&gt;
+&lt;li&gt;Git&lt;/li&gt;
+&lt;li&gt;CI/CD&lt;/li&gt;
+&lt;li&gt;web accessibility&lt;/li&gt;
+&lt;li&gt;SEO&lt;/li&gt;
+&lt;li&gt;static-site architecture&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And I get a website at the end.&lt;/p&gt;
+&lt;p&gt;That's a good trade.&lt;/p&gt;</content><category term="Programming"/><category term="Python"/><category term="Pelican"/><category term="Markdown"/><category term="Web Development"/><category term="GitHub"/></entry><entry><title>Why I Started Building My Own Website</title><link href="/blog/why-i-started-building-my-own-website/" rel="alternate"/><published>2026-08-29T00:00:00+06:00</published><updated>2026-08-29T00:00:00+06:00</updated><author><name>Hamdil Hasan</name></author><id>tag:None,2026-08-29:/blog/why-i-started-building-my-own-website/</id><summary type="html">&lt;p&gt;Why I wanted a personal space for writing, experiments, reviews and everything that doesn't belong in a portfolio.&lt;/p&gt;</summary><content type="html">&lt;h1 id="why-i-started-building-my-own-website"&gt;Why I Started Building My Own Website&lt;/h1&gt;
+&lt;p&gt;A portfolio is useful, but it only tells part of the story.&lt;/p&gt;
+&lt;p&gt;It shows projects, skills and achievements. It doesn't really show the small experiments, strange bugs, useful tools, personal discoveries or lessons that happen between those polished results.&lt;/p&gt;
+&lt;p&gt;So I wanted another place.&lt;/p&gt;
+&lt;h2 id="what-i-want-to-write-about"&gt;What I want to write about&lt;/h2&gt;
+&lt;p&gt;This site will be a mixture of:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;technical notes&lt;/li&gt;
+&lt;li&gt;programming experiments&lt;/li&gt;
+&lt;li&gt;robotics projects&lt;/li&gt;
+&lt;li&gt;AI and ML findings&lt;/li&gt;
+&lt;li&gt;software and app reviews&lt;/li&gt;
+&lt;li&gt;interesting tools and websites&lt;/li&gt;
+&lt;li&gt;university experiences&lt;/li&gt;
+&lt;li&gt;life updates and personal thoughts&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Not every post will be deeply technical. Some will simply be something I found useful and want to remember.&lt;/p&gt;
+&lt;h2 id="why-pelican"&gt;Why Pelican?&lt;/h2&gt;
+&lt;p&gt;I wanted the site itself to be a learning project.&lt;/p&gt;
+&lt;p&gt;Pelican gives me a Python-based static-site workflow while still letting me work directly with HTML, CSS, Jinja2 and Markdown.&lt;/p&gt;
+&lt;p&gt;That means the website can stay simple while I learn from the system behind it.&lt;/p&gt;
+&lt;h2 id="the-goal"&gt;The goal&lt;/h2&gt;
+&lt;p&gt;I don't want this to be a website that looks finished and then never changes.&lt;/p&gt;
+&lt;p&gt;I want it to become a record of learning and building.&lt;/p&gt;
+&lt;p&gt;Let's see where it goes.&lt;/p&gt;</content><category term="Personal"/><category term="Website"/><category term="Pelican"/><category term="Python"/><category term="Learning"/></entry></feed>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Hamdil Hasan - Hamdil Hasan</title><link href="/" rel="alternate"/><link href="/feeds/hamdil-hasan.atom.xml" rel="self"/><id>/</id><updated>2026-08-29T00:00:00+06:00</updated><subtitle>CSE student • developer • explorer</subtitle><entry><title>How I Plan to Review Apps and Software</title><link href="/blog/how-i-review-apps/" rel="alternate"/><published>2026-08-29T00:00:00+06:00</published><updated>2026-08-29T00:00:00+06:00</updated><author><name>Hamdil Hasan</name></author><id>tag:None,2026-08-29:/blog/how-i-review-apps/</id><summary type="html">&lt;p&gt;The framework I will use for future app and software reviews.&lt;/p&gt;</summary><content type="html">&lt;h1 id="how-i-plan-to-review-apps-and-software"&gt;How I Plan to Review Apps and Software&lt;/h1&gt;
+&lt;p&gt;I don't want my reviews to be just a list of features.&lt;/p&gt;
+&lt;p&gt;A feature can exist and still be frustrating to use.&lt;/p&gt;
+&lt;p&gt;So I plan to evaluate software from the perspective of actually using it.&lt;/p&gt;
+&lt;h2 id="what-i-will-look-at"&gt;What I will look at&lt;/h2&gt;
+&lt;h3 id="1-first-impression"&gt;1. First impression&lt;/h3&gt;
+&lt;p&gt;Is it easy to understand what the application does?&lt;/p&gt;
+&lt;h3 id="2-everyday-usability"&gt;2. Everyday usability&lt;/h3&gt;
+&lt;p&gt;How does it feel after using it for several days?&lt;/p&gt;
+&lt;h3 id="3-performance"&gt;3. Performance&lt;/h3&gt;
+&lt;p&gt;Does it remain responsive with normal workloads?&lt;/p&gt;
+&lt;h3 id="4-design"&gt;4. Design&lt;/h3&gt;
+&lt;p&gt;Is the interface clear, consistent and accessible?&lt;/p&gt;
+&lt;h3 id="5-privacy-and-trust"&gt;5. Privacy and trust&lt;/h3&gt;
+&lt;p&gt;What data does the product collect and what permissions does it request?&lt;/p&gt;
+&lt;h3 id="6-value"&gt;6. Value&lt;/h3&gt;
+&lt;p&gt;Is the product worth the money or the time it asks from the user?&lt;/p&gt;
+&lt;h2 id="the-most-important-rule"&gt;The most important rule&lt;/h2&gt;
+&lt;p&gt;I will try to separate &lt;strong&gt;facts&lt;/strong&gt; from &lt;strong&gt;my opinion&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;That makes a review more useful and more honest.&lt;/p&gt;</content><category term="Reviews"/><category term="Reviews"/><category term="Software"/><category term="Apps"/></entry><entry><title>My Personal Website Stack: Python, Pelican and Markdown</title><link href="/blog/my-personal-website-stack/" rel="alternate"/><published>2026-08-29T00:00:00+06:00</published><updated>2026-08-29T00:00:00+06:00</updated><author><name>Hamdil Hasan</name></author><id>tag:None,2026-08-29:/blog/my-personal-website-stack/</id><summary type="html">&lt;p&gt;Why I chose a Python static-site generator instead of building a full web application.&lt;/p&gt;</summary><content type="html">&lt;h1 id="my-personal-website-stack"&gt;My Personal Website Stack&lt;/h1&gt;
+&lt;p&gt;For a personal blog, I don't need a database, login system or a large backend.&lt;/p&gt;
+&lt;p&gt;I need a reliable way to write content and turn it into a fast website.&lt;/p&gt;
+&lt;h2 id="the-stack"&gt;The stack&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Markdown
+   ↓
+Pelican
+   ↓
+Jinja2
+   ↓
+HTML + CSS
+   ↓
+GitHub Pages
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Python sits at the center because Pelican is Python-based.&lt;/p&gt;
+&lt;h2 id="why-static"&gt;Why static?&lt;/h2&gt;
+&lt;p&gt;A static website is easy to host, easy to version-control and difficult to accidentally break with a database problem.&lt;/p&gt;
+&lt;p&gt;Every article is just a Markdown file.&lt;/p&gt;
+&lt;p&gt;That makes the content portable and transparent.&lt;/p&gt;
+&lt;h2 id="why-not-django"&gt;Why not Django?&lt;/h2&gt;
+&lt;p&gt;Django is excellent, but it solves a much bigger problem.&lt;/p&gt;
+&lt;p&gt;If I eventually need accounts, dynamic data, an API or user-generated content, a backend may make sense.&lt;/p&gt;
+&lt;p&gt;For a personal blog, it would mostly be extra machinery.&lt;/p&gt;
+&lt;h2 id="the-learning-value"&gt;The learning value&lt;/h2&gt;
+&lt;p&gt;The best part is that the site itself becomes a CSE project.&lt;/p&gt;
+&lt;p&gt;I get to practice:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Python&lt;/li&gt;
+&lt;li&gt;templating&lt;/li&gt;
+&lt;li&gt;HTML/CSS&lt;/li&gt;
+&lt;li&gt;Git&lt;/li&gt;
+&lt;li&gt;CI/CD&lt;/li&gt;
+&lt;li&gt;web accessibility&lt;/li&gt;
+&lt;li&gt;SEO&lt;/li&gt;
+&lt;li&gt;static-site architecture&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And I get a website at the end.&lt;/p&gt;
+&lt;p&gt;That's a good trade.&lt;/p&gt;</content><category term="Programming"/><category term="Python"/><category term="Pelican"/><category term="Markdown"/><category term="Web Development"/><category term="GitHub"/></entry><entry><title>Why I Started Building My Own Website</title><link href="/blog/why-i-started-building-my-own-website/" rel="alternate"/><published>2026-08-29T00:00:00+06:00</published><updated>2026-08-29T00:00:00+06:00</updated><author><name>Hamdil Hasan</name></author><id>tag:None,2026-08-29:/blog/why-i-started-building-my-own-website/</id><summary type="html">&lt;p&gt;Why I wanted a personal space for writing, experiments, reviews and everything that doesn't belong in a portfolio.&lt;/p&gt;</summary><content type="html">&lt;h1 id="why-i-started-building-my-own-website"&gt;Why I Started Building My Own Website&lt;/h1&gt;
+&lt;p&gt;A portfolio is useful, but it only tells part of the story.&lt;/p&gt;
+&lt;p&gt;It shows projects, skills and achievements. It doesn't really show the small experiments, strange bugs, useful tools, personal discoveries or lessons that happen between those polished results.&lt;/p&gt;
+&lt;p&gt;So I wanted another place.&lt;/p&gt;
+&lt;h2 id="what-i-want-to-write-about"&gt;What I want to write about&lt;/h2&gt;
+&lt;p&gt;This site will be a mixture of:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;technical notes&lt;/li&gt;
+&lt;li&gt;programming experiments&lt;/li&gt;
+&lt;li&gt;robotics projects&lt;/li&gt;
+&lt;li&gt;AI and ML findings&lt;/li&gt;
+&lt;li&gt;software and app reviews&lt;/li&gt;
+&lt;li&gt;interesting tools and websites&lt;/li&gt;
+&lt;li&gt;university experiences&lt;/li&gt;
+&lt;li&gt;life updates and personal thoughts&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Not every post will be deeply technical. Some will simply be something I found useful and want to remember.&lt;/p&gt;
+&lt;h2 id="why-pelican"&gt;Why Pelican?&lt;/h2&gt;
+&lt;p&gt;I wanted the site itself to be a learning project.&lt;/p&gt;
+&lt;p&gt;Pelican gives me a Python-based static-site workflow while still letting me work directly with HTML, CSS, Jinja2 and Markdown.&lt;/p&gt;
+&lt;p&gt;That means the website can stay simple while I learn from the system behind it.&lt;/p&gt;
+&lt;h2 id="the-goal"&gt;The goal&lt;/h2&gt;
+&lt;p&gt;I don't want this to be a website that looks finished and then never changes.&lt;/p&gt;
+&lt;p&gt;I want it to become a record of learning and building.&lt;/p&gt;
+&lt;p&gt;Let's see where it goes.&lt;/p&gt;</content><category term="Personal"/><category term="Website"/><category term="Pelican"/><category term="Python"/><category term="Learning"/></entry><entry><title>Building an Indoor Food Delivery Robot</title><link href="/blog/building-an-indoor-food-delivery-robot/" rel="alternate"/><published>2026-08-24T00:00:00+06:00</published><updated>2026-08-24T00:00:00+06:00</updated><author><name>Hamdil Hasan</name></author><id>tag:None,2026-08-24:/blog/building-an-indoor-food-delivery-robot/</id><summary type="html">&lt;p&gt;A development log for my indoor food delivery robot project.&lt;/p&gt;</summary><content type="html">&lt;h1 id="building-an-indoor-food-delivery-robot"&gt;Building an Indoor Food Delivery Robot&lt;/h1&gt;
+&lt;p&gt;One of my current project interests is an indoor food delivery robot.&lt;/p&gt;
+&lt;p&gt;The basic idea is simple: a small mobile robot should carry food from one point to another inside a controlled environment.&lt;/p&gt;
+&lt;p&gt;The engineering challenge is making the simple idea reliable.&lt;/p&gt;
+&lt;h2 id="what-i-am-exploring"&gt;What I am exploring&lt;/h2&gt;
+&lt;p&gt;The project involves several areas:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;motor control&lt;/li&gt;
+&lt;li&gt;obstacle detection&lt;/li&gt;
+&lt;li&gt;line detection&lt;/li&gt;
+&lt;li&gt;sensor integration&lt;/li&gt;
+&lt;li&gt;embedded programming&lt;/li&gt;
+&lt;li&gt;navigation logic&lt;/li&gt;
+&lt;li&gt;power management&lt;/li&gt;
+&lt;li&gt;physical design&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="why-this-is-interesting"&gt;Why this is interesting&lt;/h2&gt;
+&lt;p&gt;A robot that moves from point A to point B sounds easy until the real world gets involved.&lt;/p&gt;
+&lt;p&gt;A sensor gives noisy readings. Motors don't behave identically. The robot can drift away from a line. An obstacle can appear unexpectedly.&lt;/p&gt;
+&lt;p&gt;Those problems make the project much more valuable as a learning experience.&lt;/p&gt;
+&lt;h2 id="current-direction"&gt;Current direction&lt;/h2&gt;
+&lt;p&gt;I'm experimenting with ESP32-based control and different sensor arrangements.&lt;/p&gt;
+&lt;p&gt;Future posts will document the circuit, control logic, testing results and the mistakes that happen along the way.&lt;/p&gt;
+&lt;p&gt;This page is intentionally a development log rather than a polished final report.&lt;/p&gt;</content><category term="Robotics"/><category term="Robotics"/><category term="ESP32"/><category term="Arduino"/><category term="Sensors"/><category term="Projects"/></entry></feed>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Hamdil Hasan — Personal website of Hamdil Hasan — a CSE student writing about technology, programming, robotics, reviews, findings and life.">
+    <meta name="author" content="Hamdil Hasan">
+    <link rel="canonical" href="/blog/my-personal-website-stack/index.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="My Personal Website Stack: Python, Pelican and Markdown">
+    <meta property="og:description" content="Personal website of Hamdil Hasan — a CSE student writing about technology, programming, robotics, reviews, findings and life.">
+    <meta property="og:url" content="">
+
+    <title>My Personal Website Stack: Python, Pelican and Markdown · Hamdil Hasan</title>
+
+    <link rel="stylesheet" href="/theme/css/style.css">
+    <link rel="icon" href="/theme/images/favicon.svg" type="image/svg+xml">
+
+    <link rel="alternate" type="application/atom+xml" title="Hamdil Hasan — Atom Feed" href="/feeds/all.atom.xml">
+
+<meta property="article:published_time" content="2026-08-29T00:00:00+06:00">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+    <div class="container nav-wrap">
+        <a class="brand" href="/">
+            <span class="brand-mark">H</span>
+            <span>hamdilhasan<span class="brand-dot">.dev</span></span>
+        </a>
+
+        <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+
+        <nav class="site-nav" aria-label="Main navigation">
+            <a href="/">Home</a>
+            <a href="/blog/">Blog</a>
+            <a href="/projects/">Projects</a>
+            <a href="/now/">Now</a>
+            <a href="/about/">About</a>
+            <a class="nav-portfolio" href="https://enigma-101.github.io/Portfolio/" target="_blank" rel="noopener">Portfolio ↗</a>
+        </nav>
+    </div>
+</header>
+
+<main id="main">
+<div class="article-shell">
+    <div class="container">
+        <header class="article-header">
+            <a class="back-link" href="/blog/">← All posts</a>
+            <div class="article-meta">
+                <span class="category">Programming</span>
+                <time datetime="2026-08-29T00:00:00+06:00">August 29, 2026</time>
+            </div>
+            <h1>My Personal Website Stack: Python, Pelican and Markdown</h1>
+            <p class="article-lede">Why I chose a Python static-site generator instead of building a full web application.</p>
+        </header>
+
+        <div class="article-layout">
+            <article class="article-content">
+                <h1 id="my-personal-website-stack">My Personal Website Stack</h1>
+<p>For a personal blog, I don't need a database, login system or a large backend.</p>
+<p>I need a reliable way to write content and turn it into a fast website.</p>
+<h2 id="the-stack">The stack</h2>
+<div class="highlight"><pre><span></span><code>Markdown
+   ↓
+Pelican
+   ↓
+Jinja2
+   ↓
+HTML + CSS
+   ↓
+GitHub Pages
+</code></pre></div>
+
+<p>Python sits at the center because Pelican is Python-based.</p>
+<h2 id="why-static">Why static?</h2>
+<p>A static website is easy to host, easy to version-control and difficult to accidentally break with a database problem.</p>
+<p>Every article is just a Markdown file.</p>
+<p>That makes the content portable and transparent.</p>
+<h2 id="why-not-django">Why not Django?</h2>
+<p>Django is excellent, but it solves a much bigger problem.</p>
+<p>If I eventually need accounts, dynamic data, an API or user-generated content, a backend may make sense.</p>
+<p>For a personal blog, it would mostly be extra machinery.</p>
+<h2 id="the-learning-value">The learning value</h2>
+<p>The best part is that the site itself becomes a CSE project.</p>
+<p>I get to practice:</p>
+<ul>
+<li>Python</li>
+<li>templating</li>
+<li>HTML/CSS</li>
+<li>Git</li>
+<li>CI/CD</li>
+<li>web accessibility</li>
+<li>SEO</li>
+<li>static-site architecture</li>
+</ul>
+<p>And I get a website at the end.</p>
+<p>That's a good trade.</p>
+            </article>
+
+            <aside class="article-sidebar">
+                <div class="side-box">
+                    <span class="side-label">Written by</span>
+                    <strong>Hamdil Hasan</strong>
+                </div>
+                <div class="side-box">
+                    <span class="side-label">Tags</span>
+                    <div class="tag-list">
+                        <a href="/tag/python/">#Python</a>
+                        <a href="/tag/pelican/">#Pelican</a>
+                        <a href="/tag/markdown/">#Markdown</a>
+                        <a href="/tag/web-development/">#Web Development</a>
+                        <a href="/tag/github/">#GitHub</a>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>
+</main>
+
+<footer class="site-footer">
+    <div class="container footer-grid">
+        <div>
+            <div class="footer-brand">Hamdil Hasan</div>
+            <p>A personal corner of the internet for things I build, learn, discover and think about.</p>
+        </div>
+        <div class="footer-links">
+            <a href="https://github.com/ENiGMA-101" target="_blank" rel="noopener">GitHub ↗</a>
+            <a href="https://enigma-101.github.io/Portfolio/" target="_blank" rel="noopener">Portfolio ↗</a>
+<a href="/feeds/all.atom.xml">RSS / Atom</a>        </div>
+    </div>
+    <div class="container footer-bottom">
+        <span>© 2026 Hamdil Hasan</span>
+        <span>Built with Python + Pelican.</span>
+    </div>
+</footer>
+
+<script src="/theme/js/main.js"></script>
+</body>
+</html>

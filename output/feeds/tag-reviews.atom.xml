@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Hamdil Hasan - Reviews</title><link href="/" rel="alternate"/><link href="/feeds/tag-reviews.atom.xml" rel="self"/><id>/</id><updated>2026-08-29T00:00:00+06:00</updated><subtitle>CSE student • developer • explorer</subtitle><entry><title>How I Plan to Review Apps and Software</title><link href="/blog/how-i-review-apps/" rel="alternate"/><published>2026-08-29T00:00:00+06:00</published><updated>2026-08-29T00:00:00+06:00</updated><author><name>Hamdil Hasan</name></author><id>tag:None,2026-08-29:/blog/how-i-review-apps/</id><summary type="html">&lt;p&gt;The framework I will use for future app and software reviews.&lt;/p&gt;</summary><content type="html">&lt;h1 id="how-i-plan-to-review-apps-and-software"&gt;How I Plan to Review Apps and Software&lt;/h1&gt;
+&lt;p&gt;I don't want my reviews to be just a list of features.&lt;/p&gt;
+&lt;p&gt;A feature can exist and still be frustrating to use.&lt;/p&gt;
+&lt;p&gt;So I plan to evaluate software from the perspective of actually using it.&lt;/p&gt;
+&lt;h2 id="what-i-will-look-at"&gt;What I will look at&lt;/h2&gt;
+&lt;h3 id="1-first-impression"&gt;1. First impression&lt;/h3&gt;
+&lt;p&gt;Is it easy to understand what the application does?&lt;/p&gt;
+&lt;h3 id="2-everyday-usability"&gt;2. Everyday usability&lt;/h3&gt;
+&lt;p&gt;How does it feel after using it for several days?&lt;/p&gt;
+&lt;h3 id="3-performance"&gt;3. Performance&lt;/h3&gt;
+&lt;p&gt;Does it remain responsive with normal workloads?&lt;/p&gt;
+&lt;h3 id="4-design"&gt;4. Design&lt;/h3&gt;
+&lt;p&gt;Is the interface clear, consistent and accessible?&lt;/p&gt;
+&lt;h3 id="5-privacy-and-trust"&gt;5. Privacy and trust&lt;/h3&gt;
+&lt;p&gt;What data does the product collect and what permissions does it request?&lt;/p&gt;
+&lt;h3 id="6-value"&gt;6. Value&lt;/h3&gt;
+&lt;p&gt;Is the product worth the money or the time it asks from the user?&lt;/p&gt;
+&lt;h2 id="the-most-important-rule"&gt;The most important rule&lt;/h2&gt;
+&lt;p&gt;I will try to separate &lt;strong&gt;facts&lt;/strong&gt; from &lt;strong&gt;my opinion&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;That makes a review more useful and more honest.&lt;/p&gt;</content><category term="Reviews"/><category term="Reviews"/><category term="Software"/><category term="Apps"/></entry></feed>

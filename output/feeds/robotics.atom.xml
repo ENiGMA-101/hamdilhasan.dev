@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Hamdil Hasan - Robotics</title><link href="/" rel="alternate"/><link href="/feeds/robotics.atom.xml" rel="self"/><id>/</id><updated>2026-08-24T00:00:00+06:00</updated><subtitle>CSE student • developer • explorer</subtitle><entry><title>Building an Indoor Food Delivery Robot</title><link href="/blog/building-an-indoor-food-delivery-robot/" rel="alternate"/><published>2026-08-24T00:00:00+06:00</published><updated>2026-08-24T00:00:00+06:00</updated><author><name>Hamdil Hasan</name></author><id>tag:None,2026-08-24:/blog/building-an-indoor-food-delivery-robot/</id><summary type="html">&lt;p&gt;A development log for my indoor food delivery robot project.&lt;/p&gt;</summary><content type="html">&lt;h1 id="building-an-indoor-food-delivery-robot"&gt;Building an Indoor Food Delivery Robot&lt;/h1&gt;
+&lt;p&gt;One of my current project interests is an indoor food delivery robot.&lt;/p&gt;
+&lt;p&gt;The basic idea is simple: a small mobile robot should carry food from one point to another inside a controlled environment.&lt;/p&gt;
+&lt;p&gt;The engineering challenge is making the simple idea reliable.&lt;/p&gt;
+&lt;h2 id="what-i-am-exploring"&gt;What I am exploring&lt;/h2&gt;
+&lt;p&gt;The project involves several areas:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;motor control&lt;/li&gt;
+&lt;li&gt;obstacle detection&lt;/li&gt;
+&lt;li&gt;line detection&lt;/li&gt;
+&lt;li&gt;sensor integration&lt;/li&gt;
+&lt;li&gt;embedded programming&lt;/li&gt;
+&lt;li&gt;navigation logic&lt;/li&gt;
+&lt;li&gt;power management&lt;/li&gt;
+&lt;li&gt;physical design&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="why-this-is-interesting"&gt;Why this is interesting&lt;/h2&gt;
+&lt;p&gt;A robot that moves from point A to point B sounds easy until the real world gets involved.&lt;/p&gt;
+&lt;p&gt;A sensor gives noisy readings. Motors don't behave identically. The robot can drift away from a line. An obstacle can appear unexpectedly.&lt;/p&gt;
+&lt;p&gt;Those problems make the project much more valuable as a learning experience.&lt;/p&gt;
+&lt;h2 id="current-direction"&gt;Current direction&lt;/h2&gt;
+&lt;p&gt;I'm experimenting with ESP32-based control and different sensor arrangements.&lt;/p&gt;
+&lt;p&gt;Future posts will document the circuit, control logic, testing results and the mistakes that happen along the way.&lt;/p&gt;
+&lt;p&gt;This page is intentionally a development log rather than a polished final report.&lt;/p&gt;</content><category term="Robotics"/><category term="Robotics"/><category term="ESP32"/><category term="Arduino"/><category term="Sensors"/><category term="Projects"/></entry></feed>

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page-shell">
+    <div class="container">
+        <header class="listing-header">
+            <p class="eyebrow">CATEGORY</p>
+            <h1>{{ category }}</h1>
+            <p>Posts filed under this topic.</p>
+        </header>
+
+        <div class="post-list">
+        {% for article in articles %}
+            <article class="post-row">
+                <div class="post-row-date">{{ article.locale_date }}</div>
+                <div>
+                    <h2><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></h2>
+                    <p>{{ article.summary|striptags }}</p>
+                </div>
+                <a class="post-arrow" href="{{ SITEURL }}/{{ article.url }}">→</a>
+            </article>
+        {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

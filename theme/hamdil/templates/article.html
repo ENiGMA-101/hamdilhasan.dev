@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block extra_head %}
+<meta property="article:published_time" content="{{ article.date.isoformat() }}">
+{% endblock %}
+
+{% block content %}
+<div class="article-shell">
+    <div class="container">
+        <header class="article-header">
+            <a class="back-link" href="{{ SITEURL }}/blog/">← All posts</a>
+            <div class="article-meta">
+                <span class="category">{{ article.category }}</span>
+                <time datetime="{{ article.date.isoformat() }}">{{ article.locale_date }}</time>
+            </div>
+            <h1>{{ article.title }}</h1>
+            {% if article.summary %}
+            <p class="article-lede">{{ article.summary|striptags }}</p>
+            {% endif %}
+        </header>
+
+        <div class="article-layout">
+            <article class="article-content">
+                {{ article.content }}
+            </article>
+
+            <aside class="article-sidebar">
+                <div class="side-box">
+                    <span class="side-label">Written by</span>
+                    <strong>{{ article.author }}</strong>
+                </div>
+                {% if article.tags %}
+                <div class="side-box">
+                    <span class="side-label">Tags</span>
+                    <div class="tag-list">
+                    {% for tag in article.tags %}
+                        <a href="{{ SITEURL }}/{{ tag.url }}">#{{ tag }}</a>
+                    {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </aside>
+        </div>
+    </div>
+</div>
+{% endblock %}

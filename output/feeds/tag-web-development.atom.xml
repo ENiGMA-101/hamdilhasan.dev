@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Hamdil Hasan - Web Development</title><link href="/" rel="alternate"/><link href="/feeds/tag-web-development.atom.xml" rel="self"/><id>/</id><updated>2026-08-29T00:00:00+06:00</updated><subtitle>CSE student • developer • explorer</subtitle><entry><title>My Personal Website Stack: Python, Pelican and Markdown</title><link href="/blog/my-personal-website-stack/" rel="alternate"/><published>2026-08-29T00:00:00+06:00</published><updated>2026-08-29T00:00:00+06:00</updated><author><name>Hamdil Hasan</name></author><id>tag:None,2026-08-29:/blog/my-personal-website-stack/</id><summary type="html">&lt;p&gt;Why I chose a Python static-site generator instead of building a full web application.&lt;/p&gt;</summary><content type="html">&lt;h1 id="my-personal-website-stack"&gt;My Personal Website Stack&lt;/h1&gt;
+&lt;p&gt;For a personal blog, I don't need a database, login system or a large backend.&lt;/p&gt;
+&lt;p&gt;I need a reliable way to write content and turn it into a fast website.&lt;/p&gt;
+&lt;h2 id="the-stack"&gt;The stack&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Markdown
+   ↓
+Pelican
+   ↓
+Jinja2
+   ↓
+HTML + CSS
+   ↓
+GitHub Pages
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Python sits at the center because Pelican is Python-based.&lt;/p&gt;
+&lt;h2 id="why-static"&gt;Why static?&lt;/h2&gt;
+&lt;p&gt;A static website is easy to host, easy to version-control and difficult to accidentally break with a database problem.&lt;/p&gt;
+&lt;p&gt;Every article is just a Markdown file.&lt;/p&gt;
+&lt;p&gt;That makes the content portable and transparent.&lt;/p&gt;
+&lt;h2 id="why-not-django"&gt;Why not Django?&lt;/h2&gt;
+&lt;p&gt;Django is excellent, but it solves a much bigger problem.&lt;/p&gt;
+&lt;p&gt;If I eventually need accounts, dynamic data, an API or user-generated content, a backend may make sense.&lt;/p&gt;
+&lt;p&gt;For a personal blog, it would mostly be extra machinery.&lt;/p&gt;
+&lt;h2 id="the-learning-value"&gt;The learning value&lt;/h2&gt;
+&lt;p&gt;The best part is that the site itself becomes a CSE project.&lt;/p&gt;
+&lt;p&gt;I get to practice:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Python&lt;/li&gt;
+&lt;li&gt;templating&lt;/li&gt;
+&lt;li&gt;HTML/CSS&lt;/li&gt;
+&lt;li&gt;Git&lt;/li&gt;
+&lt;li&gt;CI/CD&lt;/li&gt;
+&lt;li&gt;web accessibility&lt;/li&gt;
+&lt;li&gt;SEO&lt;/li&gt;
+&lt;li&gt;static-site architecture&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And I get a website at the end.&lt;/p&gt;
+&lt;p&gt;That's a good trade.&lt;/p&gt;</content><category term="Programming"/><category term="Python"/><category term="Pelican"/><category term="Markdown"/><category term="Web Development"/><category term="GitHub"/></entry></feed>
