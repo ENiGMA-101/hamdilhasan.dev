@@ -76,6 +76,13 @@ PLUGINS = []
 # Don't copy these
 IGNORE_FILES = [".#*", "*~"]
 
+# Move content/extra/CNAME to the root of the generated site (output/CNAME).
+# GitHub Pages only reads the custom-domain file from the site root — leaving
+# it nested at output/extra/CNAME means the custom domain never gets picked up.
+EXTRA_PATH_METADATA = {
+    "extra/CNAME": {"path": "CNAME"},
+}
+
 # Custom variables used by the theme
 SITE_AUTHOR = "Hamdil Hasan"
 SITE_DESCRIPTION = (
