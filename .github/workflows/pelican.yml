@@ -36,7 +36,7 @@ jobs:
 
       - name: Build Pelican website
         run: |
-        PYTHONPATH=. pelican content -s publishconf.py
+          PYTHONPATH=. pelican content -s publishconf.py
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
