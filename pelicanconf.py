@@ -28,7 +28,7 @@ ARCHIVES_SAVE_AS = "blog/archive/index.html"
 THEME = "theme/hamdil"
 
 # Homepage
-DIRECT_TEMPLATES = ["index", "categories", "authors", "tags"]
+DIRECT_TEMPLATES = ["index", "categories", "authors", "tags", "404"]
 PAGINATED_DIRECT_TEMPLATES = ["index"]
 
 # Feed configuration
