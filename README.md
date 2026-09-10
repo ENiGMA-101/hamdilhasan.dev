@@ -1,74 +1,99 @@
-<div align="center">
-
 # hamdilhasan.dev
 
-### A personal website built to bring software, ideas, projects, writing, and photography into one place.
+<p align="center">
+  <strong>A personal website and digital workspace for software, ideas, projects, writing, and photography.</strong>
+</p>
 
-[![Live Website](https://img.shields.io/badge/Live%20Website-hamdilhasan.dev-111111?style=for-the-badge&logo=vercel&logoColor=white)](https://hamdilhasan.dev)
-[![GitHub](https://img.shields.io/badge/GitHub-ENiGMA--101-111111?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ENiGMA-101)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Hamdil%20Hasan-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/hamdil-hasan-p101/)
-[![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=111111)](https://react.dev/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Vite](https://img.shields.io/badge/Vite-7-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vite.dev/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+<p align="center">
+  <a href="https://hamdilhasan-dev.vercel.app/"><img src="https://img.shields.io/badge/Live%20Website-hamdilhasan.dev-111827?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Website"></a>
+  <a href="https://github.com/ENiGMA-101/hamdilhasan.dev"><img src="https://img.shields.io/badge/Source-GitHub-111827?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a>
+</p>
 
-<br />
-
-**I build ideas into reality.**
-
-</div>
-
----
-
-## About
-
-**hamdilhasan.dev** is my personal website and digital workspace — a place where I bring together the things I build, the technologies I explore, the ideas I write about, and the moments I capture through photography.
-
-Rather than treating a personal website as a static profile page, I designed this one as an evolving space that reflects how I learn and create.
-
-> **Software · AI · Robotics · IoT · Writing · Photography**
+<p align="center">
+  <img src="https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=111827" alt="React">
+  <img src="https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript">
+  <img src="https://img.shields.io/badge/Tailwind%20CSS-4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white" alt="Tailwind CSS">
+  <img src="https://img.shields.io/badge/Vite-7-646CFF?style=flat-square&logo=vite&logoColor=white" alt="Vite">
+  <img src="https://img.shields.io/badge/Deployed%20on-Vercel-000000?style=flat-square&logo=vercel&logoColor=white" alt="Vercel">
+</p>
 
 ---
 
-## ✨ What you'll find here
+## Overview
+
+**hamdilhasan.dev** is my personal website — built as more than a traditional developer profile.
+
+It brings together the work I build, the technologies I explore, the ideas I write about, and the moments I capture through photography.
+
+> **I build ideas into reality.**
+
+The website is designed as an evolving digital space rather than a static résumé: concise enough to explore quickly, but flexible enough to grow with new projects, experiments, writing, and creative work.
+
+---
+
+## What the website brings together
 
 | Section | Purpose |
-|---|---|
-| **About** | A concise introduction, background, and technical direction |
+| --- | --- |
+| **About** | Background, education, interests, and technical direction |
 | **Work** | Selected software, AI, robotics, and web projects |
-| **Focus** | The areas I'm actively exploring and building in |
-| **Photography** | A small collection of personal photographs |
-| **Writing** | Short notes and field observations from projects and learning |
-| **Contact** | Ways to connect, collaborate, or start a conversation |
+| **Focus** | Areas I am actively learning and building around |
+| **Photography** | A curated collection of personal photographs |
+| **Writing** | Short notes, observations, and lessons from building |
+| **Contact** | Ways to connect and collaborate |
 
 ---
 
-## 🧠 What I build around
+## Technical direction
 
-The website reflects the areas I enjoy connecting together:
+The website reflects the areas where I enjoy connecting software with real-world systems:
 
-- **Software Engineering** — practical applications and tools
-- **Artificial Intelligence** — intelligent systems and optimization
-- **Robotics & Embedded Systems** — hardware, sensors, motors, and control
+- **Software Engineering** — practical applications, tools, and systems
+- **Artificial Intelligence** — intelligent systems, optimization, and problem solving
+- **Robotics & Embedded Systems** — sensors, motors, microcontrollers, and control
 - **IoT** — connecting physical systems with software
-- **Web Development** — modern, responsive user experiences
+- **Web Development** — responsive and accessible user experiences
 - **Creative Work** — photography, visual storytelling, and technical writing
 
 ---
 
-## 🛠️ Technology
+## Selected work
 
-### Core
+### Fairness-Aware AI Timetable
+A scheduling system exploring how timetable generation can balance room conflicts, lecturer workload, and fairness.
 
-| Category | Technologies |
-|---|---|
-| Frontend | React, TypeScript |
+**Focus:** Python · AI · Optimization
+
+### Autonomous Delivery Robot
+An Arduino-based robotics prototype combining sensor input, motor control, and embedded decision-making.
+
+**Focus:** Arduino · C++ · L298N · Sensors · Motors
+
+### hamdilhasan.dev — v1
+The earlier version of this website, built with Flask and SQLite with server-side pages and an admin dashboard.
+
+**Focus:** Python · Flask · SQLite
+
+### hamdilhasan.dev — v2
+The current website — rebuilt as a lightweight static experience with a modern frontend stack and simple deployment workflow.
+
+**Focus:** React · TypeScript · Tailwind CSS · Vite · Vercel
+
+More experiments and projects live across my GitHub.
+
+---
+
+## Technology
+
+| Layer | Technology |
+| --- | --- |
+| Frontend | React + TypeScript |
 | Styling | Tailwind CSS |
-| Build Tool | Vite |
+| Build tool | Vite |
+| Version control | Git + GitHub |
 | Deployment | Vercel |
-| Version Control | Git & GitHub |
 
-### Technical interests represented on the site
+### Technical interests
 
 ```text
 Python          C++
@@ -81,39 +106,38 @@ Sensors         Motors
 Photography     Technical Writing
 ```
 
-The current implementation is intentionally **static and lightweight**, making it fast to deploy and easy to maintain.
-
 ---
 
-## 🎨 Design direction
+## Design & experience
 
-The visual language of the site is intentionally minimal, editorial, and technical.
+The visual direction is intentionally **minimal, editorial, and technical**.
 
 ### Design principles
 
-- Clean typography and strong hierarchy
-- Responsive layout for desktop and mobile
-- Motion used as enhancement, not distraction
-- Dark, focused visual atmosphere
-- Project information presented with context rather than long descriptions
-- Photography treated as part of the identity of the site
+- Strong typography and visual hierarchy
+- Responsive layouts for desktop and mobile
+- Motion used as enhancement rather than distraction
+- Focused dark visual atmosphere
+- Short, contextual project descriptions
+- Photography treated as part of the site's identity
 - Accessibility-conscious motion behavior
+- Lightweight architecture for straightforward deployment
 
-The website also includes reduced-motion handling for users who prefer less animation.
+The interface also respects users who prefer reduced motion.
 
 ---
 
-## 🏗️ Project structure
+## Architecture
 
 ```text
 hamdilhasan.dev/
 │
 ├── public/
-│   └── images/              # Local website photography & profile image
+│   └── images/              # Profile and photography assets
 │
 ├── src/
-│   ├── components/          # Reusable website sections/components
-│   ├── data.ts              # Website content and project data
+│   ├── components/          # Reusable website sections
+│   ├── data.ts              # Content and project data
 │   ├── App.tsx              # Main application
 │   └── ...
 │
@@ -130,7 +154,7 @@ hamdilhasan.dev/
 
 ---
 
-## 🚀 Run locally
+## Run locally
 
 ### Requirements
 
@@ -145,13 +169,13 @@ git clone https://github.com/ENiGMA-101/hamdilhasan.dev.git
 cd hamdilhasan.dev
 ```
 
-### Install dependencies
+### Install
 
 ```bash
 npm install
 ```
 
-### Start development server
+### Development
 
 ```bash
 npm run dev
@@ -169,7 +193,7 @@ http://localhost:5173
 npm run build
 ```
 
-### Preview the production build
+### Preview production build
 
 ```bash
 npm run preview
@@ -177,45 +201,42 @@ npm run preview
 
 ---
 
-## ☁️ Deployment
+## Deployment
 
-The site is designed for static deployment and is currently configured for **Vercel**.
-
-### Build configuration
+The website is designed for static deployment and is currently deployed with **Vercel**.
 
 ```text
-Framework: Vite
-Build command: npm run build
+Framework:        Vite
+Build command:    npm run build
 Output directory: dist
 ```
 
-The included `vercel.json` keeps the deployment configuration simple and reproducible.
+The repository includes `vercel.json` to keep deployment simple and reproducible.
 
-For detailed deployment instructions, see [`DEPLOY.md`](./DEPLOY.md).
-
----
-
-## 📸 Photography
-
-Photography is intentionally part of the website rather than a separate gallery project.
-
-The current implementation keeps the original image assets inside:
-
-```text
-public/images/
-```
-
-This means the site does not depend on external raw-image hosting for its core visual content.
+See [`DEPLOY.md`](./DEPLOY.md) for deployment instructions.
 
 ---
 
-## 🔄 From v1 to v2
+## Why static?
 
-This website is also the evolution of an earlier version of **hamdilhasan.dev**.
+The current version deliberately avoids unnecessary backend infrastructure.
+
+It does not require:
+
+- a Python runtime
+- a database
+- server-side rendering
+- an external image-hosting service for core assets
+
+The result is a fast, predictable, easy-to-maintain website that can be deployed as a static application.
+
+---
+
+## From v1 to v2
+
+This project is also an example of evolving a product instead of continuously adding complexity.
 
 ### v1
-
-The earlier version was built around:
 
 ```text
 Python
@@ -226,8 +247,6 @@ Admin dashboard
 ```
 
 ### v2
-
-The current version moved toward:
 
 ```text
 React
@@ -240,69 +259,45 @@ Vercel
 
 The goal was simple:
 
-> Keep the identity and content, but make the experience faster, cleaner, easier to maintain, and easier to deploy.
+> **Keep the identity and content, but make the experience faster, cleaner, easier to maintain, and easier to deploy.**
 
 ---
 
-## 📌 Selected work
+## Photography
 
-Some of the work represented on the website includes:
+Photography is intentionally part of the website rather than a separate project.
 
-- **Fairness-Aware AI Timetable** — constraint balancing, scheduling, room conflicts, and lecturer workload
-- **Autonomous Delivery Robot** — Arduino-based robotics prototype using sensors, motors, and L298N motor control
-- **hamdilhasan.dev v1** — Flask + SQLite web application
-- **hamdilhasan.dev v2** — React + TypeScript static web experience
+Image assets are bundled locally under:
 
-More projects and experiments live across my GitHub.
+```text
+public/images/
+```
 
----
-
-## 📈 What's next
-
-This website is designed to evolve.
-
-Planned improvements may include:
-
-- More detailed project case studies
-- Expanded technical writing
-- More photography collections
-- Better project demonstrations
-- More interactive experiments
-- Continuous refinement of performance and accessibility
+This keeps the site's core visual content inside the same version-controlled project and avoids depending on external raw-image hosting.
 
 ---
 
-## 👨‍💻 About the creator
+## Project status
 
-**Hamdil Hasan**  
-Developer & Builder · CSE Undergraduate
+**Active and evolving.**
 
-**University of Asia Pacific (UAP)**  
-BSc in Computer Science & Engineering
-
-I enjoy working at the intersection of **software, intelligent systems, robotics, IoT, and creative technology** — especially when an idea can move from a concept into something people can actually use.
-
-### Connect
-
-- 🌐 Website: [hamdilhasan.dev](https://hamdilhasan.dev)
-- 💻 GitHub: [ENiGMA-101](https://github.com/ENiGMA-101)
-- 💼 LinkedIn: [Hamdil Hasan](https://www.linkedin.com/in/hamdil-hasan-p101/)
-- ✉️ Email: [hamdilhasan101@gmail.com](mailto:hamdilhasan101@gmail.com)
+The website is a foundation for future project case studies, technical writing, experiments, and photography collections.
 
 ---
 
-## 📄 License
+## Connect
 
-This project is distributed under the license included in the repository.
+**Website:** https://hamdilhasan-dev.vercel.app/
 
-The website code and personal content are maintained by **Hamdil Hasan**.
+**GitHub:** https://github.com/ENiGMA-101
+
+**LinkedIn:** https://www.linkedin.com/in/hamdil-hasan-p101/
+
+**Email:** hamdilhasan101@gmail.com
 
 ---
 
-<div align="center">
-
-### Built with curiosity, code, and a little bit of obsession.
-
-**[Visit hamdilhasan.dev →](https://hamdilhasan.dev)**
-
-</div>
+<p align="center">
+  <strong>Built with curiosity, iteration, and a lot of debugging.</strong><br>
+  <sub>© Hamdil Hasan · hamdilhasan.dev</sub>
+</p>
