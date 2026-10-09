@@ -1,303 +1,177 @@
-# hamdilhasan.dev
+# Hamdil Hasan Partho (HHP) — Personal Portfolio Website
 
-<p align="center">
-  <strong>A personal website and digital workspace for software, ideas, projects, writing, and photography.</strong>
-</p>
+A premium, interactive, 3D personal technology portfolio designed for **Hamdil Hasan Partho** — Computer Science & Engineering undergraduate at the University of Asia Pacific (UAP), developer, and technology enthusiast.
 
-<p align="center">
-  <a href="https://hamdilhasan-dev.vercel.app/"><img src="https://img.shields.io/badge/Live%20Website-hamdilhasan.dev-111827?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Website"></a>
-  <a href="https://github.com/ENiGMA-101/hamdilhasan.dev"><img src="https://img.shields.io/badge/Source-GitHub-111827?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a>
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=111827" alt="React">
-  <img src="https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript">
-  <img src="https://img.shields.io/badge/Tailwind%20CSS-4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white" alt="Tailwind CSS">
-  <img src="https://img.shields.io/badge/Vite-7-646CFF?style=flat-square&logo=vite&logoColor=white" alt="Vite">
-  <img src="https://img.shields.io/badge/Deployed%20on-Vercel-000000?style=flat-square&logo=vercel&logoColor=white" alt="Vercel">
-</p>
+- **Live URL:** [https://hamdilhasan-dev.vercel.app/](https://hamdilhasan-dev.vercel.app/)
+- **GitHub Profile:** [@ENiGMA-101](https://github.com/ENiGMA-101)
+- **LinkedIn:** [hamdil-hasan-p101](https://www.linkedin.com/in/hamdil-hasan-p101/)
+- **Contact:** [hamdilhasan101@gmail.com](mailto:hamdilhasan101@gmail.com)
 
 ---
 
-## Overview
+## 🎨 Visual Identity & Brand System
 
-**hamdilhasan.dev** is my personal website — built as more than a traditional developer profile.
-
-It brings together the work I build, the technologies I explore, the ideas I write about, and the moments I capture through photography.
-
-> **I build ideas into reality.**
-
-The website is designed as an evolving digital space rather than a static résumé: concise enough to explore quickly, but flexible enough to grow with new projects, experiments, writing, and creative work.
-
----
-
-## What the website brings together
-
-| Section | Purpose |
-| --- | --- |
-| **About** | Background, education, interests, and technical direction |
-| **Work** | Selected software, AI, robotics, and web projects |
-| **Focus** | Areas I am actively learning and building around |
-| **Photography** | A curated collection of personal photographs |
-| **Writing** | Short notes, observations, and lessons from building |
-| **Contact** | Ways to connect and collaborate |
+- **Monogram:** **HHP** — Custom interwoven geometric typography combining midnight navy (`#0B1220`), electric blue (`#2563EB`), teal (`#14B8A6`), and white negative space with a circuit trace terminal.
+- **Color Palette:**
+  - **Midnight Navy:** `#0B1220` (Dark surface primary)
+  - **Deep Charcoal:** `#111827` (Card surface dark)
+  - **Electric Blue:** `#2563EB` (Primary brand accent)
+  - **Teal / Cyan:** `#14B8A6` (Secondary accent & circuit node)
+  - **Light Background:** `#F7F8FA` (Light mode base)
+  - **Text Primary (Light Mode):** `#111827`
+  - **Muted Slate:** `#94A3B8`
+- **Themes:** Dark Mode (default) & Light Mode with instant toggle and local storage persistence.
 
 ---
 
-## Technical direction
+## 🚀 Key Features
 
-The website reflects the areas where I enjoy connecting software with real-world systems:
-
-- **Software Engineering** — practical applications, tools, and systems
-- **Artificial Intelligence** — intelligent systems, optimization, and problem solving
-- **Robotics & Embedded Systems** — sensors, motors, microcontrollers, and control
-- **IoT** — connecting physical systems with software
-- **Web Development** — responsive and accessible user experiences
-- **Creative Work** — photography, visual storytelling, and technical writing
-
----
-
-## Selected work
-
-### Fairness-Aware AI Timetable
-A scheduling system exploring how timetable generation can balance room conflicts, lecturer workload, and fairness.
-
-**Focus:** Python · AI · Optimization
-
-### Autonomous Delivery Robot
-An Arduino-based robotics prototype combining sensor input, motor control, and embedded decision-making.
-
-**Focus:** Arduino · C++ · L298N · Sensors · Motors
-
-### hamdilhasan.dev — v1
-The earlier version of this website, built with Flask and SQLite with server-side pages and an admin dashboard.
-
-**Focus:** Python · Flask · SQLite
-
-### hamdilhasan.dev — v2
-The current website — rebuilt as a lightweight static experience with a modern frontend stack and simple deployment workflow.
-
-**Focus:** React · TypeScript · Tailwind CSS · Vite · Vercel
-
-More experiments and projects live across my GitHub.
+1. **Intro Sequence:** High-impact geometric monogram reveal featuring the HHP identity, circuit pulsation, and full name typography with auto-transition and `[ESC]` skip support.
+2. **Interactive 3D Hero:** Dynamic rotating skill interests ("Robotics & Embedded Systems", "Artificial Intelligence", "Software Engineering") paired with a 3D perspective mouse-tilt card.
+3. **Projects Showcase:**
+   - Horizontally moving carousel with manual scroll arrows, drag support, and pause-on-hover.
+   - Category filtering (Robotics & IoT, AI & ML, Research, Software & Web).
+   - Deep-dive modal revealing hardware components, pinouts, and GitHub repository links.
+   - Real verified projects: *Indoor Food Delivery Robot (ESP32-S3)*, *Fairness-Aware AI Routine Generator*, *Visible Light Communication (VLC) Research*, *Road Rash Computer Vision Game*, *Smart IoT Hydration System*, and *FIFA 2026 Match Bot*.
+4. **Editorial About Section:** Authentic narrative on CSE studies at University of Asia Pacific, hardware-software co-design philosophy, and engineering values.
+5. **Skills & Stack Matrix:** Bidirectional continuous marquees, categorized into Programming Languages, Web Development, Embedded Systems, AI/ML, Databases, and Tools. Zero arbitrary progress bars.
+6. **Education & Certifications:**
+   - Separate education showcase detailing degree coursework at UAP Dhaka.
+   - Continuous horizontal certificate gallery moving right-to-left with manual navigation and modal inspector.
+7. **Research & Experience Timeline:** Academic investigations in optical wireless communications (Li-Fi) and university scheduling algorithms.
+8. **Creative Lab & Photography:** Prototyping artifacts, breadboard setups, and computer vision landmarks with a lightbox viewer.
+9. **Functional Contact Dispatcher:** Real `mailto:` client launch with pre-filled structured inquiry templates, one-click draft copying, and a live Dhaka time clock (UTC+06:00).
 
 ---
 
-## Technology
+## 🛠️ Tech Stack
 
-| Layer | Technology |
-| --- | --- |
-| Frontend | React + TypeScript |
-| Styling | Tailwind CSS |
-| Build tool | Vite |
-| Version control | Git + GitHub |
-| Deployment | Vercel |
+- **Framework:** React 19 + TypeScript
+- **Styling:** Tailwind CSS v4 (configured via `@tailwindcss/vite`)
+- **Icons:** Lucide React + custom vector SVGs
+- **Build Tool:** Vite 7 (optimized single-file distribution ready for Vercel)
 
-### Technical interests
+---
+
+## 📁 Project Structure
 
 ```text
-Python          C++
-TypeScript      JavaScript
-React           Flask
-Tailwind CSS    SQLite
-AI / ML         Optimization
-Arduino         IoT
-Sensors         Motors
-Photography     Technical Writing
-```
-
----
-
-## Design & experience
-
-The visual direction is intentionally **minimal, editorial, and technical**.
-
-### Design principles
-
-- Strong typography and visual hierarchy
-- Responsive layouts for desktop and mobile
-- Motion used as enhancement rather than distraction
-- Focused dark visual atmosphere
-- Short, contextual project descriptions
-- Photography treated as part of the site's identity
-- Accessibility-conscious motion behavior
-- Lightweight architecture for straightforward deployment
-
-The interface also respects users who prefer reduced motion.
-
----
-
-## Architecture
-
-```text
-hamdilhasan.dev/
-│
+├── index.html                     # HTML entry point, SEO metadata & font preloads
 ├── public/
-│   └── images/              # Profile and photography assets
-│
+│   ├── favicon.svg               # SVG HHP brand icon
+│   └── images/
+│       ├── about/                # Editorial portraits
+│       ├── creative/             # Lab and electronics photography
+│       └── projects/             # Real-world project renders
 ├── src/
-│   ├── components/          # Reusable website sections
-│   ├── data.ts              # Content and project data
-│   ├── App.tsx              # Main application
-│   └── ...
-│
-├── index.html
-├── package.json
-├── package-lock.json
-├── tsconfig.json
-├── vite.config.ts
-├── vercel.json
-├── DEPLOY.md
-├── LICENSE
-└── README.md
+│   ├── components/
+│   │   ├── AboutSection.tsx      # Editorial bio & UAP profile
+│   │   ├── CertificationsSection.tsx # Horizontal certificate track
+│   │   ├── ContactSection.tsx    # Mailto dispatcher & live timezone
+│   │   ├── CreativeLabSection.tsx# Hardware photography & lightbox
+│   │   ├── EducationSection.tsx  # Academic degree & coursework
+│   │   ├── Footer.tsx            # Branded footer & replay intro
+│   │   ├── Hero.tsx              # 3D interactive hero
+│   │   ├── HHPLogo.tsx           # Vector SVG monogram component
+│   │   ├── IntroSequence.tsx     # Opening 3D animation sequence
+│   │   ├── Navbar.tsx            # Sticky header with theme toggle
+│   │   ├── ProjectsSection.tsx   # Horizontal project carousel & modal
+│   │   ├── ResearchTimeline.tsx  # Academic timeline
+│   │   ├── SkillsSection.tsx     # Animated skill marquees & tabs
+│   │   └── SocialIcons.tsx       # GitHub, LinkedIn brand vectors
+│   ├── data/
+│   │   └── portfolioData.ts      # Centralized source of truth for all content!
+│   ├── App.tsx                   # Top-level composition & theme manager
+│   ├── index.css                 # Base theme styles & custom animations
+│   └── main.tsx                  # React DOM entry
 ```
 
 ---
 
-## Run locally
+## ✏️ How to Edit Content
 
-### Requirements
+All data is decoupled from the UI components and centralized in **`src/data/portfolioData.ts`**.
 
-- Node.js
-- npm
-- Git
+### 1. Add or Edit a Project
+Open `src/data/portfolioData.ts` and update the `PROJECTS` array:
 
-### Clone
-
-```bash
-git clone https://github.com/ENiGMA-101/hamdilhasan.dev.git
-cd hamdilhasan.dev
+```ts
+{
+  id: 'my-new-project',
+  title: 'Autonomous Drone Navigation',
+  tagline: 'Edge AI computer vision path planning',
+  category: 'Robotics & IoT', // 'Robotics & IoT' | 'AI & ML' | 'Software & Web' | 'Research'
+  featured: true,
+  status: 'Completed',
+  image: '/images/projects/drone.jpg',
+  githubUrl: 'https://github.com/ENiGMA-101/drone-navigation',
+  description: 'Detailed description...',
+  detailedSpecs: ['ROS2 on Raspberry Pi 5', 'YOLOv8 nano model'],
+  technologies: ['Python', 'ROS2', 'OpenCV', 'C++'],
+  stats: [
+    { label: 'Latency', value: '24ms' }
+  ]
+}
 ```
 
-### Install
+### 2. Add or Edit a Certificate
+In `src/data/portfolioData.ts`, update `CERTIFICATIONS`:
 
+```ts
+{
+  id: 'cert-cloud',
+  title: 'AWS Certified Cloud Practitioner',
+  issuer: 'Amazon Web Services',
+  issueDate: '2026',
+  category: 'Cloud Computing',
+  skillsLearned: ['Cloud Architecture', 'IAM', 'S3 & Lambda'],
+  verifyUrl: 'https://aws.amazon.com/verification'
+}
+```
+
+### 3. Update Skills or Coursework
+- Update `SKILL_CATEGORIES` for technical skills.
+- Update `EDUCATION.coreCoursework` for completed university subjects.
+- Update `RESEARCH_TIMELINE` for new lab projects.
+
+### 4. Replace the Logo
+- The SVG monogram is defined in `src/components/HHPLogo.tsx`.
+- The browser favicon is in `public/favicon.svg`.
+
+---
+
+## 💻 Development & Deployment
+
+### Run Locally:
 ```bash
+# Install dependencies
 npm install
-```
 
-### Development
-
-```bash
+# Start Vite development server
 npm run dev
 ```
 
-Open the local URL shown by Vite, usually:
-
-```text
-http://localhost:5173
-```
-
-### Production build
-
+### Build for Production:
 ```bash
 npm run build
 ```
+The output will be created in the `dist/` directory.
 
-### Preview production build
-
-```bash
-npm run preview
-```
-
----
-
-## Deployment
-
-The website is designed for static deployment and is currently deployed with **Vercel**.
-
-```text
-Framework:        Vite
-Build command:    npm run build
-Output directory: dist
-```
-
-The repository includes `vercel.json` to keep deployment simple and reproducible.
-
-See [`DEPLOY.md`](./DEPLOY.md) for deployment instructions.
+### Deploy to Vercel:
+The project is built using standard Vite. To deploy to your existing Vercel project:
+1. Push your changes to the `main` branch on GitHub:
+   ```bash
+   git add .
+   git commit -m "Redesign: Premium HHP Portfolio with 3D depth & verified projects"
+   git push origin main
+   ```
+2. Vercel will automatically detect Vite and deploy the production build.
 
 ---
 
-## Why static?
+## 👤 Author
 
-The current version deliberately avoids unnecessary backend infrastructure.
-
-It does not require:
-
-- a Python runtime
-- a database
-- server-side rendering
-- an external image-hosting service for core assets
-
-The result is a fast, predictable, easy-to-maintain website that can be deployed as a static application.
-
----
-
-## From v1 to v2
-
-This project is also an example of evolving a product instead of continuously adding complexity.
-
-### v1
-
-```text
-Python
-Flask
-SQLite
-Server-side pages
-Admin dashboard
-```
-
-### v2
-
-```text
-React
-TypeScript
-Tailwind CSS
-Vite
-Static deployment
-Vercel
-```
-
-The goal was simple:
-
-> **Keep the identity and content, but make the experience faster, cleaner, easier to maintain, and easier to deploy.**
-
----
-
-## Photography
-
-Photography is intentionally part of the website rather than a separate project.
-
-Image assets are bundled locally under:
-
-```text
-public/images/
-```
-
-This keeps the site's core visual content inside the same version-controlled project and avoids depending on external raw-image hosting.
-
----
-
-## Project status
-
-**Active and evolving.**
-
-The website is a foundation for future project case studies, technical writing, experiments, and photography collections.
-
----
-
-## Connect
-
-**Website:** https://hamdilhasan-dev.vercel.app/
-
-**GitHub:** https://github.com/ENiGMA-101
-
-**LinkedIn:** https://www.linkedin.com/in/hamdil-hasan-p101/
-
-**Email:** hamdilhasan101@gmail.com
-
----
-
-<p align="center">
-  <strong>Built with curiosity, iteration, and a lot of debugging.</strong><br>
-  <sub>© Hamdil Hasan · hamdilhasan.dev</sub>
-</p>
+**Hamdil Hasan Partho (HHP)**  
+- Email: [hamdilhasan101@gmail.com](mailto:hamdilhasan101@gmail.com)  
+- GitHub: [@ENiGMA-101](https://github.com/ENiGMA-101)  
+- LinkedIn: [hamdil-hasan-p101](https://www.linkedin.com/in/hamdil-hasan-p101/)

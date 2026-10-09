@@ -1,0 +1,24 @@
+<svg viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" rx="128" fill="#0B1220"/>
+  <g transform="translate(6, 20) scale(0.83)">
+    <!-- Left H pillar -->
+    <path d="M 142 190 L 178 170 L 178 370 L 142 390 Z" fill="#F8FAFC"/>
+    <path d="M 178 270 L 232 238 L 232 290 L 178 322 Z" fill="#E2E8F0"/>
+    <path d="M 239 262 L 272 242 L 272 376 L 239 396 Z" fill="#F8FAFC"/>
+    
+    <!-- Blue Ribbon H -->
+    <path d="M 240 160 L 272 178 L 272 250 L 240 232 Z" fill="#60A5FA"/>
+    <path d="M 232 238 L 348 304 L 348 375 L 315 396 L 232 290 Z" fill="#2563EB"/>
+    <path d="M 232 238 L 272 215 L 348 259 L 348 304 Z" fill="#93C5FD"/>
+    <path d="M 315 320 L 347 302 L 347 380 L 315 402 Z" fill="#1D4ED8"/>
+    <path d="M 356 270 L 386 280 L 386 385 L 356 372 Z" fill="#2563EB"/>
+
+    <!-- P glyph -->
+    <path d="M 315 152 C 315 152 320 162 335 165 L 405 165 C 445 165 470 188 470 230 C 470 272 445 295 405 295 L 380 295 L 380 262 L 402 262 C 426 262 438 248 438 230 C 438 212 426 198 402 198 L 348 198 L 348 290 L 315 270 Z" fill="#F8FAFC"/>
+    
+    <!-- Circuit node in P -->
+    <path d="M 350 215 L 415 215" stroke="#14B8A6" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="424" cy="215" r="14" fill="#14B8A6"/>
+    <circle cx="424" cy="215" r="7" fill="#FFFFFF"/>
+  </g>
+</svg>

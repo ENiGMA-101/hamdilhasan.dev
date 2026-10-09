@@ -1,207 +1,234 @@
-import { PORTRAIT, PROFILE, TICKER } from "../data";
-import { useScramble, useTypewriter } from "../hooks";
+import React, { useState, useEffect, useRef } from 'react';
+import HHPLogo from './HHPLogo';
+import { PERSONAL_INFO } from '../data/portfolioData';
+import { ArrowDown, ArrowUpRight, Cpu, Layers, Sparkles, Terminal } from 'lucide-react';
+import { GitHubIcon, LinkedInIcon } from './SocialIcons';
 
-function Terminal() {
-  const { display, typing } = useTypewriter(
-    ["whoami", "developer & builder — CSE undergrad @ UAP"],
-    46,
-    420
-  );
-  return (
-    <div className="mb-7 max-w-xl border border-line bg-ink-2/80 p-4 font-mono text-[12.5px] leading-relaxed shadow-[0_0_40px_rgba(245,184,65,0.05)]">
-      <div className="mb-3 flex items-center gap-1.5">
-        <span className="h-2.5 w-2.5 rounded-full bg-rust/80" />
-        <span className="h-2.5 w-2.5 rounded-full bg-amber/80" />
-        <span className="h-2.5 w-2.5 rounded-full bg-mint/80" />
-        <span className="ml-2 text-[10px] tracking-[0.2em] text-dim">
-          enigma101@dhaka — bash
-        </span>
-      </div>
-      <p className="text-muted">
-        <span className="text-mint">enigma101@dhaka</span>
-        <span className="text-dim">:~$</span>{" "}
-        <span className="text-paper">{display[0] ?? ""}</span>
-        {display.length < 2 && (
-          <span className="ml-0.5 inline-block h-3.5 w-[7px] translate-y-0.5 animate-blink bg-amber" />
-        )}
-      </p>
-      {display[1] !== undefined && (
-        <p className="text-paper/90">
-          <span className="text-amber">→</span> {display[1]}
-          {typing && (
-            <span className="ml-0.5 inline-block h-3.5 w-[7px] translate-y-0.5 animate-blink bg-amber" />
-          )}
-        </p>
-      )}
-    </div>
-  );
-}
+export const Hero: React.FC = () => {
+  const [currentKeywordIndex, setCurrentKeywordIndex] = useState(0);
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const cardRef = useRef<HTMLDivElement>(null);
 
-function Portrait() {
-  return (
-    <div className="relative mx-auto w-full max-w-sm lg:max-w-none">
-      {/* orbit rings */}
-      <div className="pointer-events-none absolute -inset-6 lg:-inset-10">
-        <div className="absolute inset-0 animate-orbit-slow rounded-full border border-dashed border-line" />
-        <div className="absolute inset-6 animate-orbit-rev rounded-full border border-line-soft lg:inset-9">
-          <span className="absolute -top-1 left-1/2 h-2 w-2 -translate-x-1/2 rounded-full bg-amber shadow-[0_0_12px_rgba(245,184,65,0.9)]" />
-        </div>
-      </div>
+  // Rotate through interests
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentKeywordIndex((prev) => (prev + 1) % PERSONAL_INFO.heroKeywords.length);
+    }, 2800);
+    return () => clearInterval(interval);
+  }, []);
 
-      {/* HUD frame */}
-      <div className="relative aspect-[4/5] overflow-hidden border border-line bg-panel">
-        {/* corner brackets */}
-        {[
-          "left-2 top-2 border-l-2 border-t-2",
-          "right-2 top-2 border-r-2 border-t-2",
-          "bottom-2 left-2 border-b-2 border-l-2",
-          "bottom-2 right-2 border-b-2 border-r-2",
-        ].map((c) => (
-          <span key={c} className={`absolute z-10 h-5 w-5 border-amber ${c}`} />
-        ))}
-        {/* scanline */}
-        <span className="absolute left-0 z-10 h-px w-full animate-scan bg-mint/70 shadow-[0_0_14px_rgba(143,227,192,0.8)]" />
-        {/* labels */}
-        <span className="absolute left-4 top-4 z-10 font-mono text-[9.5px] tracking-[0.22em] text-mint">
-          CAM_01 · LIVE
-        </span>
-        <span className="absolute right-4 top-4 z-10 flex items-center gap-1.5 font-mono text-[9.5px] tracking-[0.22em] text-rust">
-          <span className="h-1.5 w-1.5 animate-blink rounded-full bg-rust" /> REC
-        </span>
-        <span className="absolute bottom-4 left-4 z-10 font-mono text-[9.5px] tracking-[0.18em] text-paper/70">
-          23.8103° N, 90.4125° E
-        </span>
-        <span className="absolute bottom-4 right-4 z-10 font-mono text-[9.5px] tracking-[0.18em] text-paper/70">
-          DHAKA / BD
-        </span>
+  // 3D Mouse Tilt interaction
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = ((y - centerY) / centerY) * -12;
+    const rotateY = ((x - centerX) / centerX) * 12;
+    setTilt({ x: rotateX, y: rotateY });
+  };
 
-        <img
-          src={PORTRAIT}
-          alt="Hamdil Hasan"
-          className="h-full w-full object-cover saturate-[0.85] transition-transform duration-[2.5s] ease-out hover:scale-105"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink/55 via-transparent to-ink/20" />
-      </div>
-
-      {/* badge */}
-      <div className="absolute -bottom-5 -left-3 border border-line bg-ink-2 px-4 py-3 shadow-[0_16px_40px_rgba(0,0,0,0.45)] lg:-left-8">
-        <p className="font-mono text-[10px] tracking-[0.25em] text-amber">
-          {PROFILE.handle}
-        </p>
-        <p className="mt-1 font-display text-sm font-600 uppercase leading-tight text-paper">
-          Developer
-          <br />&amp; Builder
-        </p>
-      </div>
-
-      {/* vertical year */}
-      <p className="absolute -right-7 top-0 hidden origin-top-right rotate-90 font-mono text-[10px] tracking-[0.5em] text-dim md:block">
-        PORTFOLIO — 2026
-      </p>
-    </div>
-  );
-}
-
-export default function Hero() {
-  const first = useScramble("HAMDIL", 400);
-  const last = useScramble("HASAN", 900);
+  const handleMouseLeave = () => {
+    setTilt({ x: 0, y: 0 });
+  };
 
   return (
-    <section id="top" className="relative overflow-hidden pt-28 md:pt-32">
-      <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 md:px-8 lg:grid-cols-[1.12fr_0.88fr] lg:gap-8">
-        <div>
-          <p className="mb-5 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.3em] text-muted">
-            <span className="h-2 w-2 rounded-full bg-mint animate-pulse-dot" />
-            Hello, I&rsquo;m {PROFILE.name}
-          </p>
+    <section
+      id="hero"
+      className="relative min-h-[92vh] flex items-center justify-center pt-28 pb-16 overflow-hidden"
+    >
+      {/* Background ambient lighting */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] sm:w-[900px] h-[400px] sm:h-[500px] bg-gradient-to-tr from-blue-600/15 via-teal-500/10 to-indigo-600/15 rounded-full blur-3xl pointer-events-none -z-10" />
 
-          <Terminal />
+      {/* Tech grid texture */}
+      <div className="absolute inset-0 bg-tech-grid-dark dark:opacity-30 opacity-15 pointer-events-none -z-10" />
 
-          <h1 className="font-display font-800 uppercase leading-[0.95] tracking-tight">
-            <span className="block text-[15vw] text-paper sm:text-7xl lg:text-[5.2rem] xl:text-[5.8rem]">
-              {first || "\u00A0"}
-            </span>
-            <span className="block text-[15vw] text-outline sm:text-7xl lg:text-[5.2rem] xl:text-[5.8rem]">
-              {last || "\u00A0"}
-            </span>
-          </h1>
-
-          <p className="mt-7 max-w-lg text-lg leading-relaxed text-muted md:text-xl">
-            I build ideas into{" "}
-            <em className="font-semibold not-italic text-amber">reality.</em>{" "}
-            <span className="text-paper/85">
-              CSE undergraduate at UAP
-            </span>{" "}
-            making practical software — and exploring AI, robotics and creative
-            technology along the way.
-          </p>
-
-          <div className="mt-9 flex flex-wrap items-center gap-6">
-            <a
-              href="#work"
-              className="group inline-flex items-center gap-3 bg-amber px-6 py-3.5 font-mono text-[12px] font-medium uppercase tracking-[0.18em] text-ink transition-all duration-300 hover:-translate-y-0.5 hover:bg-paper hover:shadow-[0_14px_35px_rgba(245,184,65,0.25)]"
-            >
-              Explore my work
-              <span className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5">
-                ↗
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          
+          {/* Left Column: Editorial Headline & Intro */}
+          <div className="lg:col-span-7 flex flex-col items-start text-left z-10">
+            
+            {/* Status Pill */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100/90 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 backdrop-blur-sm mb-6 text-xs text-slate-700 dark:text-slate-300">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-teal-500"></span>
               </span>
-            </a>
-            <a
-              href="#contact"
-              className="u-slide font-mono text-[12px] uppercase tracking-[0.18em] text-paper transition-colors hover:text-amber"
-            >
-              Start a conversation →
-            </a>
-          </div>
+              <span className="font-medium text-slate-900 dark:text-slate-200">
+                CSE Undergraduate @ University of Asia Pacific
+              </span>
+              <span className="hidden sm:inline text-slate-400">• Dhaka</span>
+            </div>
 
-          <div className="mt-10 flex flex-wrap gap-x-8 gap-y-3 border-t border-line-soft pt-6">
-            {[
-              { label: "GitHub", href: PROFILE.github, ext: true },
-              { label: "LinkedIn", href: PROFILE.linkedin, ext: true },
-              { label: "Email", href: `mailto:${PROFILE.email}`, ext: false },
-            ].map((l) => (
+            {/* Name with subtle monogram mark */}
+            <div className="flex items-center gap-3 mb-3">
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.1]">
+                Hamdil Hasan <span className="bg-gradient-to-r from-blue-600 to-teal-400 bg-clip-text text-transparent">Partho</span>
+              </h1>
+            </div>
+
+            {/* Dynamic Rotating Focus Statement */}
+            <div className="h-10 sm:h-12 flex items-center mb-6 overflow-hidden">
+              <span className="text-base sm:text-2xl font-medium text-slate-500 dark:text-slate-400 mr-2.5">
+                Focusing on
+              </span>
+              <div className="relative inline-block">
+                <span
+                  key={currentKeywordIndex}
+                  className="inline-block text-base sm:text-2xl font-bold text-blue-600 dark:text-teal-400 animate-[fadeIn_0.5s_ease-out]"
+                >
+                  {PERSONAL_INFO.heroKeywords[currentKeywordIndex]}
+                </span>
+              </div>
+            </div>
+
+            {/* Core Headline & Brief */}
+            <p className="text-lg sm:text-xl font-normal text-slate-800 dark:text-slate-200 mb-4 max-w-2xl leading-relaxed">
+              {PERSONAL_INFO.tagline}
+            </p>
+
+            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 mb-8 max-w-xl leading-relaxed">
+              Bridging modern software development, applied artificial intelligence, and embedded robotics. Currently researching algorithmic scheduling fairness and optical wireless communication.
+            </p>
+
+            {/* CTAs and Social Links */}
+            <div className="flex flex-wrap items-center gap-4 w-full sm:w-auto mb-10">
               <a
-                key={l.label}
-                href={l.href}
-                {...(l.ext ? { target: "_blank", rel: "noreferrer" } : {})}
-                className="u-slide font-mono text-[11px] uppercase tracking-[0.2em] text-muted transition-colors hover:text-mint"
+                href="#projects"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-sm bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 hover:from-blue-500 hover:to-indigo-600 text-white shadow-lg shadow-blue-600/25 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-blue-600/35"
               >
-                {l.label} <span className="text-amber">↗</span>
+                <span>Explore My Work</span>
+                <ArrowDown className="w-4 h-4" />
               </a>
-            ))}
-          </div>
-        </div>
 
-        <Portrait />
-      </div>
-
-      {/* scroll cue */}
-      <div className="mx-auto mt-16 flex max-w-7xl items-center gap-4 px-5 pb-8 md:px-8">
-        <span className="font-mono text-[10px] tracking-[0.4em] text-dim">
-          SCROLL
-        </span>
-        <span className="relative h-px flex-1 overflow-hidden bg-line-soft">
-          <span className="absolute inset-y-0 w-1/4 animate-[marquee_2.4s_linear_infinite] bg-amber/60" />
-        </span>
-        <span className="animate-bounce text-amber">↓</span>
-      </div>
-
-      {/* ticker */}
-      <div className="relative border-y border-line bg-ink-2/70 py-3.5">
-        <div className="flex overflow-hidden">
-          <div className="flex min-w-max animate-marquee items-center">
-            {[...TICKER, ...TICKER].map((t, i) => (
-              <span
-                key={i}
-                className="flex items-center font-mono text-[11px] uppercase tracking-[0.28em] text-muted"
+              <a
+                href="#contact"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-sm bg-slate-100 dark:bg-slate-800/90 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-700/80 transition-all duration-200 hover:-translate-y-0.5"
               >
-                <span className="px-6">{t}</span>
-                <span className="text-amber">✦</span>
-              </span>
-            ))}
+                <span>Get In Touch</span>
+                <ArrowUpRight className="w-4 h-4 text-blue-500" />
+              </a>
+
+              {/* Direct Social Links */}
+              <div className="flex items-center gap-2 sm:ml-2">
+                <a
+                  href={PERSONAL_INFO.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="GitHub Profile"
+                  className="p-3 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-800 hover:border-slate-400 dark:hover:border-slate-600 transition-all hover:scale-105"
+                  title="GitHub: ENiGMA-101"
+                >
+                  <GitHubIcon className="w-4 h-4" />
+                </a>
+
+                <a
+                  href={PERSONAL_INFO.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn Profile"
+                  className="p-3 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 border border-slate-200 dark:border-slate-800 hover:border-slate-400 dark:hover:border-slate-600 transition-all hover:scale-105"
+                  title="LinkedIn: hamdil-hasan-p101"
+                >
+                  <LinkedInIcon className="w-4 h-4" />
+                </a>
+              </div>
+            </div>
+
+            {/* Quick Stats Pill Strip */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 border-t border-slate-200 dark:border-slate-800/80 w-full max-w-xl">
+              {PERSONAL_INFO.stats.map((stat, idx) => (
+                <div key={idx} className="flex flex-col">
+                  <span className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+                    {stat.value}
+                  </span>
+                  <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">
+                    {stat.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+
           </div>
+
+          {/* Right Column: Interactive 3D Monogram & Engineering Deck */}
+          <div className="lg:col-span-5 flex justify-center perspective-1000">
+            <div
+              ref={cardRef}
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
+              style={{
+                transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
+                transition: tilt.x === 0 && tilt.y === 0 ? 'transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1)' : 'none',
+              }}
+              className="relative w-full max-w-[420px] aspect-[4/5] rounded-3xl p-7 flex flex-col justify-between bg-gradient-to-b from-white/90 via-slate-50/70 to-slate-100/90 dark:from-slate-900/90 dark:via-[#0E1726]/80 dark:to-[#0B1220]/95 border border-slate-200/80 dark:border-slate-800 shadow-2xl shadow-blue-900/10 dark:shadow-black/50 backdrop-blur-xl transform-style-3d group select-none"
+            >
+              {/* Corner decorative indicators */}
+              <div className="flex items-center justify-between text-xs font-mono text-slate-400 dark:text-slate-500">
+                <span className="inline-flex items-center gap-1.5">
+                  <Terminal className="w-3.5 h-3.5 text-blue-500" />
+                  <span>HHP.ENG // ID</span>
+                </span>
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-500 dark:text-teal-400 border border-blue-500/20">
+                  UAP • CSE
+                </span>
+              </div>
+
+              {/* Center 3D Monogram Hero */}
+              <div className="flex flex-col items-center justify-center my-auto py-4 relative">
+                {/* Concentric subtle radar circles */}
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <div className="w-56 h-56 rounded-full border border-blue-500/10 dark:border-blue-400/10 animate-ping opacity-25" />
+                  <div className="w-44 h-44 rounded-full border border-slate-300 dark:border-slate-800" />
+                </div>
+
+                <div className="relative z-10 transition-transform duration-300 group-hover:scale-105">
+                  <HHPLogo size={180} showGlow={true} />
+                </div>
+
+                <div className="mt-5 text-center">
+                  <span className="text-xs font-mono tracking-widest text-slate-500 dark:text-slate-400 uppercase">
+                    Hamdil Hasan Partho
+                  </span>
+                  <p className="text-xs font-semibold text-slate-800 dark:text-slate-200 mt-0.5">
+                    Geometric Monogram Identity
+                  </p>
+                </div>
+              </div>
+
+              {/* Bottom Interactive Engineering Badges */}
+              <div className="space-y-2.5 pt-4 border-t border-slate-200/60 dark:border-slate-800/70">
+                <div className="grid grid-cols-2 gap-2 text-[11px] font-mono">
+                  <div className="flex items-center gap-1.5 p-2 rounded-xl bg-slate-100 dark:bg-slate-800/60 text-slate-700 dark:text-slate-300">
+                    <Cpu className="w-3.5 h-3.5 text-teal-500" />
+                    <span className="truncate">ESP32 & C++</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 p-2 rounded-xl bg-slate-100 dark:bg-slate-800/60 text-slate-700 dark:text-slate-300">
+                    <Sparkles className="w-3.5 h-3.5 text-blue-500" />
+                    <span className="truncate">Computer Vision</span>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 px-1">
+                  <span className="flex items-center gap-1">
+                    <Layers className="w-3.5 h-3.5 text-slate-400" />
+                    <span>Interactive 3D Deck</span>
+                  </span>
+                  <span className="text-[10px] text-teal-500 dark:text-teal-400 font-mono">
+                    Move cursor to tilt
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
   );
-}
+};
+
+export default Hero;
