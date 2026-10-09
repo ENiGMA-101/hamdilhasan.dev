@@ -1,130 +1,149 @@
-import React, { useState } from 'react';
-import { CREATIVE_GALLERY, CreativeItem } from '../data/portfolioData';
-import { Camera, Maximize2, X, Sparkles } from 'lucide-react';
+import { useEffect, useRef, useState } from "react";
+import AutoCarousel from "./AutoCarousel";
+import { CREATIVE_GALLERY, type CreativeItem } from "../data/portfolioData";
 
-export const CreativeLabSection: React.FC = () => {
-  const [selectedPhoto, setSelectedPhoto] = useState<CreativeItem | null>(null);
+/* ==========================================================================
+   Creative Lab — horizontal filmstrip of prototyping artefacts
+   Same AutoCarousel behaviour as the certificate track.
+   ========================================================================== */
+
+export function CreativeLabSection() {
+  const [open, setOpen] = useState<CreativeItem | null>(null);
 
   return (
-    <section id="creative-lab" className="py-24 relative overflow-hidden bg-slate-100/30 dark:bg-[#0E1726]/30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Section Heading */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-          <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 text-xs font-mono text-teal-600 dark:text-teal-400 mb-3">
-              <Camera className="w-3.5 h-3.5" />
-              <span>VISUAL ARCHIVE // LAB & CODE</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-              Creative Lab & Prototyping Gallery
-            </h2>
-            <p className="mt-2 text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-2xl">
-              Glimpses into the workbench: microcontroller circuits, sensor breadboards, computer vision landmarks, and computational interface systems.
-            </p>
-          </div>
-          <span className="text-xs font-mono text-slate-400">
-            6 Selected Artifacts
-          </span>
-        </div>
+    <section
+      id="lab"
+      className="relative scroll-mt-24 overflow-hidden border-y border-[var(--line-subtle)] bg-[var(--surface-sunken)] py-20 sm:py-24"
+    >
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
+        <header className="max-w-2xl">
+          <p className="rule-label">Visual archive</p>
+          <h2 className="mt-3 font-display text-headline font-bold text-[var(--content-primary)]">
+            Lab, bench &amp; interfaces
+          </h2>
+          <p className="mt-4 text-body-lg text-[var(--content-muted)]">
+            Supporting visuals from the build process. These are art-directed concept
+            renders of the systems — they stand in until photographs of the finished
+            prototypes are published.
+          </p>
+        </header>
 
-        {/* Editorial Masonry/Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {CREATIVE_GALLERY.map((item) => (
-            <div
-              key={item.id}
-              onClick={() => setSelectedPhoto(item)}
-              className="group relative rounded-3xl overflow-hidden bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-xl shadow-slate-200/40 dark:shadow-black/40 cursor-pointer transform transition-all duration-300 hover:-translate-y-1 hover:border-teal-500/50"
-            >
-              <div className="relative aspect-[4/3] overflow-hidden">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  loading="lazy"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-85 group-hover:opacity-90 transition-opacity" />
-
-                {/* Overlaid Category Tag */}
-                <div className="absolute top-4 left-4">
-                  <span className="px-3 py-1 rounded-full text-[10px] font-mono font-semibold bg-black/60 text-teal-300 border border-teal-500/30 backdrop-blur-md">
+        <div className="mt-12">
+          <AutoCarousel
+            label="Visual archive"
+            speed={42}
+            gap={20}
+            edgeFade={false}
+            railClassName="-mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-10 lg:px-10"
+          >
+            {CREATIVE_GALLERY.map((item) => (
+              <figure
+                key={item.id}
+                className="group w-[260px] shrink-0 cursor-pointer overflow-hidden rounded-[20px] border border-[var(--line-subtle)] bg-[var(--surface-raised)] shadow-[var(--shadow-card)] transition duration-300 hover:-translate-y-1 hover:border-[var(--accent-solid)] sm:w-[320px]"
+                onClick={() => setOpen(item)}
+              >
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <img
+                    src={item.image}
+                    alt={`${item.title} — ${item.description}`}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"
+                  />
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/75 to-transparent"
+                  />
+                  <span className="absolute left-3 top-3 rounded-full bg-black/60 px-2.5 py-1 font-mono text-[10px] text-white backdrop-blur-sm">
                     {item.category}
                   </span>
                 </div>
-
-                {/* Expand icon on hover */}
-                <div className="absolute top-4 right-4 p-2 rounded-xl bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm">
-                  <Maximize2 className="w-4 h-4" />
-                </div>
-
-                {/* Bottom text info */}
-                <div className="absolute bottom-4 left-4 right-4">
-                  <h3 className="text-base font-bold text-white group-hover:text-teal-300 transition-colors">
+                <figcaption className="p-4">
+                  <h3 className="font-display text-[15px] font-bold text-[var(--content-primary)]">
                     {item.title}
                   </h3>
-                  <p className="text-xs text-slate-300 mt-1 line-clamp-2">
+                  <p className="mt-1 line-clamp-2 text-caption text-[var(--content-muted)]">
                     {item.description}
                   </p>
-                </div>
-              </div>
-            </div>
-          ))}
+                </figcaption>
+              </figure>
+            ))}
+          </AutoCarousel>
         </div>
-
       </div>
 
-      {/* Lightbox Modal */}
-      {selectedPhoto && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/90 backdrop-blur-md"
-          onClick={() => setSelectedPhoto(null)}
-          role="dialog"
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-4xl rounded-3xl overflow-hidden bg-slate-950 border border-slate-800 shadow-2xl"
-          >
-            <button
-              onClick={() => setSelectedPhoto(null)}
-              className="absolute top-4 right-4 z-10 p-2.5 rounded-full bg-black/60 text-white hover:bg-black transition-colors cursor-pointer"
-              aria-label="Close image viewer"
-            >
-              <X className="w-5 h-5" />
-            </button>
-
-            <div className="relative aspect-[16/10] max-h-[70vh] bg-black">
-              <img
-                src={selectedPhoto.image}
-                alt={selectedPhoto.title}
-                className="w-full h-full object-contain"
-              />
-            </div>
-
-            <div className="p-6 bg-[#0B1220] border-t border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div>
-                <span className="text-xs font-mono text-teal-400 uppercase tracking-wider block mb-1">
-                  {selectedPhoto.category}
-                </span>
-                <h4 className="text-xl font-bold text-white">
-                  {selectedPhoto.title}
-                </h4>
-                <p className="text-sm text-slate-300 mt-1">
-                  {selectedPhoto.description}
-                </p>
-              </div>
-
-              <div className="flex items-center gap-2 self-start sm:self-auto">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-xs font-mono text-slate-300">
-                  <Sparkles className="w-3.5 h-3.5 text-teal-400" />
-                  <span>Lab Photography</span>
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      {open && <Lightbox item={open} onClose={() => setOpen(null)} />}
     </section>
   );
-};
+}
+
+function Lightbox({ item, onClose }: { item: CreativeItem; onClose: () => void }) {
+  const closeRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    closeRef.current?.focus();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [onClose]);
+
+  return (
+    <div
+      className="fixed inset-0 z-50 grid place-items-center bg-black/80 p-4 backdrop-blur-md"
+      onClick={onClose}
+      role="presentation"
+    >
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="lab-lightbox-title"
+        onClick={(e) => e.stopPropagation()}
+        className="max-h-[90vh] w-full max-w-3xl overflow-hidden rounded-[24px] border border-[var(--line-subtle)] bg-[var(--surface-raised)] shadow-[var(--shadow-pop)]"
+      >
+        <div className="relative aspect-[16/10] bg-black">
+          <img
+            src={item.image}
+            alt={`${item.title} — ${item.description}`}
+            className="h-full w-full object-contain"
+          />
+          <button
+            ref={closeRef}
+            type="button"
+            onClick={onClose}
+            aria-label="Close image viewer"
+            className="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full bg-black/60 text-white transition hover:bg-black/80"
+          >
+            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true">
+              <path d="M6 6l12 12M18 6 6 18" />
+            </svg>
+          </button>
+        </div>
+        <div className="p-6">
+          <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-[var(--accent-text)]">
+            {item.category}
+          </p>
+          <h3 id="lab-lightbox-title" className="mt-1.5 font-display text-title font-bold text-[var(--content-primary)]">
+            {item.title}
+          </h3>
+          <p className="mt-2 max-w-[65ch] text-body text-[var(--content-secondary)]">
+            {item.description}
+          </p>
+          <p className="mt-4 rounded-xl border border-dashed border-[var(--line-strong)] bg-[var(--surface-sunken)] p-3 text-caption text-[var(--content-muted)]">
+            {item.visualKind === "photograph"
+              ? "Photograph of the actual prototype."
+              : "Art-directed concept render — not a photograph of the finished prototype."}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default CreativeLabSection;

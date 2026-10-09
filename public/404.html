@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page not found — Hamdil Hasan Partho</title>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <style>
+      :root {
+        --navy: #0b1220;
+        --ink: #111827;
+        --blue: #2563eb;
+        --teal: #14b8a6;
+        --mist: #f7f8fa;
+        --line: #1e293b;
+        --muted: #94a3b8;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 2rem;
+        background: var(--navy);
+        color: #f8fafc;
+        font-family: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+        text-align: center;
+      }
+      .grid-bg {
+        position: fixed;
+        inset: 0;
+        background-size: 44px 44px;
+        background-image:
+          linear-gradient(to right, rgba(148, 163, 184, 0.07) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(148, 163, 184, 0.07) 1px, transparent 1px);
+        mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 78%);
+        -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 78%);
+        pointer-events: none;
+      }
+      .card { position: relative; max-width: 30rem; }
+      .mono {
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 0.7rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      h1 {
+        font-size: clamp(2rem, 8vw, 3rem);
+        line-height: 1.05;
+        letter-spacing: -0.03em;
+        margin: 1rem 0 0.75rem;
+        font-weight: 700;
+      }
+      h1 span {
+        background: linear-gradient(100deg, var(--blue), var(--teal));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      p { color: #cbd5e1; line-height: 1.65; margin: 0 0 2rem; }
+      .actions { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+      a {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.25rem;
+        border-radius: 0.75rem;
+        font-size: 0.875rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: transform 0.15s ease, opacity 0.15s ease;
+      }
+      a:hover { transform: translateY(-1px); }
+      a.primary { background: var(--blue); color: #fff; }
+      a.ghost { border: 1px solid var(--line); color: #cbd5e1; }
+      .mark { display: flex; justify-content: center; margin-bottom: 1.75rem; }
+    </style>
+  </head>
+  <body>
+    <div class="grid-bg" aria-hidden="true"></div>
+    <main class="card">
+      <div class="mark">
+        <svg width="72" height="50" viewBox="0 0 600 420" fill="none" role="img" aria-label="HHP monogram">
+          <path d="M142 190 178 170v200l-36 20Z" fill="#F8FAFC"/>
+          <path d="M178 270 232 238v52l-54 32Z" fill="#F8FAFC" opacity="0.7"/>
+          <path d="M239 262 272 242v134l-33 20Z" fill="#F8FAFC"/>
+          <path d="M240 160 272 178v72l-32-18Z" fill="#3B82F6"/>
+          <path d="M232 238 348 304v71l-33 21-83-108Z" fill="#2563EB"/>
+          <path d="M232 238 272 215l76 44v45l-76-45Z" fill="#60A5FA" opacity="0.5"/>
+          <path d="M315 320 347 302v78l-32 22Z" fill="#1D4ED8"/>
+          <path d="M356 270 386 280v105l-30-13Z" fill="#2563EB"/>
+          <path d="M315 152c0 0 5 10 20 13l70 0c40 0 65 23 65 65s-25 65-65 65h-25v-33h22c24 0 36-14 36-32s-12-32-36-32h-54v92l-33-20Z" fill="#F8FAFC"/>
+          <path d="M350 215h65" stroke="#14B8A6" stroke-width="7" stroke-linecap="round"/>
+          <circle cx="424" cy="215" r="14" fill="#14B8A6"/>
+          <circle cx="424" cy="215" r="6.5" fill="#0B1220"/>
+        </svg>
+      </div>
+      <p class="mono">Error 404</p>
+      <h1>This page doesn't <span>exist</span></h1>
+      <p>
+        The link may be broken or the page may have moved. Everything I've built lives on
+        the home page.
+      </p>
+      <div class="actions">
+        <a class="primary" href="/">Back to home</a>
+        <a class="ghost" href="mailto:hamdilhasan101@gmail.com">Email me</a>
+      </div>
+    </main>
+  </body>
+</html>

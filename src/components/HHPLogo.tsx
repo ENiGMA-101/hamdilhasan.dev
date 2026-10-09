@@ -1,187 +1,91 @@
-import React from 'react';
+/* ==========================================================================
+   HHPLogo — the HHP monogram as a theme-aware vector
+   --------------------------------------------------------------------------
+   Geometric interwoven lettering: navy H pillars, electric-blue ribbon H,
+   navy P bowl, teal circuit trace terminating in a node.
+   Colours resolve from the theme tokens, so the mark inverts correctly in
+   light mode (navy → ink) and keeps its blue/teal accents in both themes.
+   ========================================================================== */
 
 interface HHPLogoProps {
   className?: string;
   size?: number;
-  animated?: boolean;
-  theme?: 'dark' | 'light' | 'auto';
+  /** Slow breathing glow behind the mark (used in hero/intro only). */
   showGlow?: boolean;
+  title?: string;
 }
 
-export const HHPLogo: React.FC<HHPLogoProps> = ({
-  className = 'w-10 h-10',
+export function HHPLogo({
+  className = "",
   size,
-  animated = false,
   showGlow = false,
-}) => {
+  title = "HHP monogram",
+}: HHPLogoProps) {
   return (
-    <div
-      className={`relative inline-flex items-center justify-center select-none ${className}`}
+    <span
+      className={`relative inline-flex items-center justify-center ${className}`}
       style={size ? { width: size, height: size * 0.68 } : undefined}
     >
       {showGlow && (
-        <div className="absolute -inset-2 bg-gradient-to-r from-blue-600/30 via-teal-500/20 to-blue-500/30 rounded-2xl blur-xl opacity-75 -z-10 pointer-events-none" />
+        <span
+          aria-hidden="true"
+          className="absolute -inset-3 -z-10 rounded-2xl bg-[var(--accent-solid)] opacity-20 blur-2xl"
+        />
       )}
       <svg
         viewBox="0 0 600 420"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className={`w-full h-full overflow-visible transition-transform duration-300 ${
-          animated ? 'hover:scale-105' : ''
-        }`}
+        role="img"
+        aria-label={title}
+        className="h-full w-full overflow-visible"
       >
         <defs>
-          {/* Gradients */}
-          <linearGradient id="hhp-blue-main" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#3B82F6" />
-            <stop offset="50%" stopColor="#2563EB" />
-            <stop offset="100%" stopColor="#1D4ED8" />
+          <linearGradient id="hhpBlue" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="var(--accent-solid)" />
+            <stop offset="100%" stopColor="var(--aqua-solid)" />
           </linearGradient>
-
-          <linearGradient id="hhp-blue-light" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#60A5FA" />
-            <stop offset="100%" stopColor="#3B82F6" />
+          <linearGradient id="hhpBlueDeep" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="var(--accent-solid)" />
+            <stop offset="100%" stopColor="var(--accent-text)" />
           </linearGradient>
-
-          <linearGradient id="hhp-blue-dark" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#2563EB" />
-            <stop offset="100%" stopColor="#1E40AF" />
-          </linearGradient>
-
-          <linearGradient id="hhp-teal-glow" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#2DD4BF" />
-            <stop offset="100%" stopColor="#0D9488" />
-          </linearGradient>
-
-          {/* Glow filter */}
-          <filter id="hhp-node-glow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="6" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
         </defs>
 
-        {/* Group with perspective styling */}
-        <g className="transition-all duration-500">
-          {/* ================= LEFT 'H' (Navy / Dark Elements) ================= */}
-          {/* Left vertical pillar */}
-          <path
-            d="M 142 190 L 178 170 L 178 370 L 142 390 Z"
-            className="fill-[#0B1220] dark:fill-slate-100 transition-colors duration-300"
-          />
+        {/* Left "H" — pillar + crossbar (navy in dark, ink in light) */}
+        <path
+          d="M142 190 178 170v200l-36 20Z"
+          fill="var(--content-primary)"
+        />
+        <path d="M178 270 232 238v52l-54 32Z" fill="var(--content-primary)" opacity="0.72" />
+        <path d="M239 262 272 242v134l-33 20Z" fill="var(--content-primary)" />
 
-          {/* Left top diagonal fin */}
-          <path
-            d="M 142 190 L 178 170 L 178 245 L 142 265 Z"
-            className="fill-[#111827] dark:fill-slate-200 transition-colors duration-300"
-          />
+        {/* Centre "H" — the electric-blue 3D ribbon */}
+        <path d="M240 160 272 178v72l-32-18Z" fill="var(--accent-solid)" />
+        <path d="M232 238 348 304v71l-33 21-83-108Z" fill="url(#hhpBlue)" />
+        <path d="M232 238 272 215l76 44v45l-76-45Z" fill="var(--accent-solid)" opacity="0.55" />
+        <path d="M315 320 347 302v78l-32 22Z" fill="url(#hhpBlueDeep)" />
+        <path d="M356 270 386 280v105l-30-13Z" fill="var(--accent-solid)" />
 
-          {/* Left diagonal cross connector (lower left upward) */}
-          <path
-            d="M 178 270 L 232 238 L 232 290 L 178 322 Z"
-            className="fill-[#0B1220] dark:fill-slate-200 transition-colors duration-300"
-          />
-
-          {/* First inner vertical pillar */}
-          <path
-            d="M 239 262 L 272 242 L 272 376 L 239 396 Z"
-            className="fill-[#0B1220] dark:fill-slate-100 transition-colors duration-300"
-          />
-
-          {/* ================= CENTER 'H' (Electric Blue 3D Ribbon) ================= */}
-          {/* Blue top vertical facet */}
-          <path
-            d="M 240 160 L 272 178 L 272 250 L 240 232 Z"
-            fill="url(#hhp-blue-light)"
-          />
-
-          {/* Blue diagonal descending cross ribbon - Main face */}
-          <path
-            d="M 232 238 L 348 304 L 348 375 L 315 396 L 232 290 Z"
-            fill="url(#hhp-blue-main)"
-          />
-
-          {/* Blue diagonal top edge highlight */}
-          <path
-            d="M 232 238 L 272 215 L 348 259 L 348 304 Z"
-            fill="url(#hhp-blue-light)"
-            opacity="0.9"
-          />
-
-          {/* Lower right vertical facet (underneath the ribbon) */}
-          <path
-            d="M 315 320 L 347 302 L 347 380 L 315 402 Z"
-            fill="url(#hhp-blue-dark)"
-          />
-          <path
-            d="M 347 302 L 356 297 L 356 375 L 347 380 Z"
-            fill="url(#hhp-blue-light)"
-          />
-
-          {/* Right vertical pillar facet beside P */}
-          <path
-            d="M 356 270 L 386 280 L 386 385 L 356 372 Z"
-            fill="url(#hhp-blue-main)"
-          />
-
-          {/* ================= RIGHT 'P' (Navy / Dark with Curved Head & Circuit Node) ================= */}
-          {/* Main top stem & bowl of the 'P' */}
-          <path
-            d="M 315 152 
-               C 315 152 320 162 335 165
-               L 405 165
-               C 445 165 470 188 470 230
-               C 470 272 445 295 405 295
-               L 380 295
-               L 380 262
-               L 402 262
-               C 426 262 438 248 438 230
-               C 438 212 426 198 402 198
-               L 348 198
-               L 348 290
-               L 315 270
-               Z"
-            className="fill-[#0B1220] dark:fill-slate-100 transition-colors duration-300"
-          />
-
-          {/* Inner circuit trace in the P loop */}
-          {/* Circuit line */}
-          <path
-            d="M 350 215 L 415 215"
-            stroke="#14B8A6"
-            strokeWidth="5"
-            strokeLinecap="round"
-            className="transition-colors duration-300"
-          />
-          {/* Circuit vertical connector */}
-          <path
-            d="M 350 205 L 350 225"
-            stroke="#14B8A6"
-            strokeWidth="4"
-            strokeLinecap="round"
-          />
-
-          {/* Circuit terminal node circle with teal glow */}
-          <circle
-            cx="424"
-            cy="215"
-            r="12"
-            fill="url(#hhp-teal-glow)"
-            filter="url(#hhp-node-glow)"
-            className="animate-pulse"
-          />
-          <circle
-            cx="424"
-            cy="215"
-            r="6"
-            fill="#FFFFFF"
-          />
-        </g>
+        {/* Right "P" — navy bowl with teal circuit trace */}
+        <path
+          d="M315 152c0 0 5 10 20 13l70 0c40 0 65 23 65 65s-25 65-65 65h-25v-33h22c24 0 36-14 36-32s-12-32-36-32h-54v92l-33-20Z"
+          fill="var(--content-primary)"
+        />
+        <path
+          d="M350 215h65"
+          stroke="var(--aqua-solid)"
+          strokeWidth="6"
+          strokeLinecap="round"
+        />
+        <path
+          d="M350 205v20"
+          stroke="var(--aqua-solid)"
+          strokeWidth="5"
+          strokeLinecap="round"
+        />
+        <circle cx="424" cy="215" r="13" fill="var(--aqua-solid)" />
+        <circle cx="424" cy="215" r="6" fill="var(--surface-canvas)" />
       </svg>
-    </div>
+    </span>
   );
-};
+}
 
 export default HHPLogo;

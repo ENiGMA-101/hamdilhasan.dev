@@ -1,105 +1,75 @@
-import React from 'react';
-import { EDUCATION } from '../data/portfolioData';
-import { GraduationCap, BookOpen, MapPin, Building, Sparkles } from 'lucide-react';
+import { EDUCATION } from "../data/portfolioData";
 
-export const EducationSection: React.FC = () => {
+/* ==========================================================================
+   Education — degree programme and coursework
+   No graduation dates or results are claimed anywhere in this section.
+   ========================================================================== */
+
+export function EducationSection() {
   return (
-    <section id="education" className="py-24 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Section Header */}
-        <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 text-xs font-mono text-blue-600 dark:text-blue-400 mb-3">
-            <GraduationCap className="w-3.5 h-3.5" />
-            <span>ACADEMIC FOUNDATION // CSE</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-            Education & Academic Curriculum
+    <section id="education" className="relative scroll-mt-24 py-20 sm:py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
+        <header className="max-w-2xl">
+          <p className="rule-label">Education</p>
+          <h2 className="mt-3 font-display text-headline font-bold text-[var(--content-primary)]">
+            {EDUCATION.degree}
           </h2>
-          <p className="mt-2 text-sm sm:text-base text-slate-600 dark:text-slate-400">
-            Rigorous undergraduate computer science and engineering coursework pairing fundamental algorithmic theory with embedded systems and systems software.
-          </p>
-        </div>
+          <p className="mt-4 text-body-lg text-[var(--content-muted)]">{EDUCATION.description}</p>
+        </header>
 
-        {/* Education Main Card */}
-        <div className="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 sm:p-10 shadow-xl shadow-slate-200/50 dark:shadow-black/30">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            
-            {/* Degree Summary */}
-            <div className="lg:col-span-5 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-slate-100 dark:border-slate-800 pb-6 lg:pb-0 lg:pr-8">
-              <div>
-                <div className="p-3 w-fit rounded-2xl bg-blue-600/10 dark:bg-blue-500/20 text-blue-600 dark:text-teal-400 mb-4">
-                  <GraduationCap className="w-8 h-8" />
-                </div>
-                <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white leading-tight">
-                  {EDUCATION.degree}
-                </h3>
-                <h4 className="text-base font-semibold text-blue-600 dark:text-teal-400 mt-1">
-                  {EDUCATION.institution}
-                </h4>
-
-                <div className="flex flex-col gap-2 mt-4 text-xs font-mono text-slate-500 dark:text-slate-400">
-                  <span className="flex items-center gap-2">
-                    <Building className="w-3.5 h-3.5 text-slate-400" />
-                    <span>{EDUCATION.department}</span>
-                  </span>
-                  <span className="flex items-center gap-2">
-                    <MapPin className="w-3.5 h-3.5 text-slate-400" />
-                    <span>{EDUCATION.location}</span>
-                  </span>
-                </div>
-
-                <div className="mt-6 inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 text-xs font-mono text-teal-700 dark:text-teal-300">
-                  <span className="w-2 h-2 rounded-full bg-teal-500 animate-pulse" />
-                  <span>{EDUCATION.status}</span>
-                </div>
-              </div>
-
-              <div className="mt-6 p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200/60 dark:border-slate-800/80">
-                <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400 uppercase tracking-wider block mb-1">
-                  // Academic Focus
+        <div className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-12">
+          {/* Programme card */}
+          <div className="lg:col-span-5">
+            <div className="h-full rounded-[24px] border border-[var(--line-subtle)] bg-[var(--surface-raised)] p-6 shadow-[var(--shadow-card)] sm:p-8">
+              <span className="inline-flex items-center gap-2 rounded-full border border-[var(--line-subtle)] bg-[var(--surface-sunken)] px-3 py-1 font-mono text-[11px] text-[var(--content-muted)]">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--aqua-solid)] opacity-70" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[var(--aqua-solid)]" />
                 </span>
-                <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
-                  {EDUCATION.academicFocus}
-                </p>
+                {EDUCATION.status}
+              </span>
+
+              <h3 className="mt-5 font-display text-title font-bold text-[var(--content-primary)]">
+                {EDUCATION.institution}
+              </h3>
+              <p className="mt-1.5 text-body text-[var(--content-secondary)]">
+                {EDUCATION.department}
+              </p>
+              <p className="mt-1 font-mono text-caption text-[var(--content-faint)]">
+                {EDUCATION.location}
+              </p>
+
+              <div className="mt-7 border-t border-[var(--line-subtle)] pt-6">
+                <p className="rule-label">Areas of focus</p>
+                <p className="mt-2 text-body text-[var(--content-secondary)]">{EDUCATION.focus}</p>
               </div>
             </div>
+          </div>
 
-            {/* Coursework Matrix */}
-            <div className="lg:col-span-7 flex flex-col justify-between">
-              <div>
-                <h4 className="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-4 flex items-center gap-2">
-                  <BookOpen className="w-4 h-4 text-blue-500" />
-                  <span>Key Completed & In-Progress Coursework</span>
-                </h4>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
-                  {EDUCATION.coreCoursework.map((course, idx) => (
-                    <div
-                      key={idx}
-                      className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/60 dark:border-slate-800/80 flex items-center gap-2.5 text-xs font-medium text-slate-800 dark:text-slate-200 hover:border-blue-400/50 transition-colors"
-                    >
-                      <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
-                      <span>{course}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/40 dark:to-indigo-950/30 border border-blue-200/60 dark:border-blue-900/40 flex items-center gap-3">
-                <Sparkles className="w-5 h-5 text-blue-600 dark:text-teal-400 flex-shrink-0" />
-                <p className="text-xs text-slate-700 dark:text-slate-300">
-                  <strong className="text-slate-900 dark:text-white">Active Research Track:</strong> Leading lab investigations in visible light optical wireless communication and heuristic timetable fairness algorithms.
-                </p>
-              </div>
+          {/* Coursework */}
+          <div className="lg:col-span-7">
+            <div className="h-full rounded-[24px] border border-[var(--line-subtle)] bg-[var(--surface-raised)] p-6 shadow-[var(--shadow-card)] sm:p-8">
+              <p className="rule-label">Coursework completed or in progress</p>
+              <ul className="mt-5 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+                {EDUCATION.coursework.map((course) => (
+                  <li
+                    key={course}
+                    className="flex items-center gap-2.5 rounded-xl border border-[var(--line-subtle)] bg-[var(--surface-sunken)] px-3.5 py-3 text-caption font-medium text-[var(--content-secondary)]"
+                  >
+                    <span
+                      aria-hidden="true"
+                      className="h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent-solid)]"
+                    />
+                    {course}
+                  </li>
+                ))}
+              </ul>
             </div>
-
           </div>
         </div>
-
       </div>
     </section>
   );
-};
+}
 
 export default EducationSection;

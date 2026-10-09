@@ -1,165 +1,126 @@
-import React from 'react';
-import { PERSONAL_INFO } from '../data/portfolioData';
-import { Compass, GraduationCap, MapPin, Sparkles, Terminal, CheckCircle } from 'lucide-react';
-import HHPLogo from './HHPLogo';
+import { useEffect, useRef, useState } from "react";
+import HHPLogo from "./HHPLogo";
+import { PERSONAL_INFO } from "../data/portfolioData";
 
-export const AboutSection: React.FC = () => {
-  const philosophies = [
-    {
-      title: 'Practical Hardware-Software Synthesis',
-      description: 'Bridging low-level firmware (C++, ESP32, sensors) with responsive web and desktop graphical interfaces.'
-    },
-    {
-      title: 'Algorithmic Fairness & Utility',
-      description: 'Tackling real academic and civic scheduling conflicts through constraint optimization, not just theoretical toy problems.'
-    },
-    {
-      title: 'Build in Public & Clean Documentation',
-      description: 'Commitment to maintainable code, descriptive READMEs, and open source collaboration on GitHub.'
+/* ==========================================================================
+   About — editorial two-column narrative with a portrait plate
+   ========================================================================== */
+
+export function AboutSection() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (typeof IntersectionObserver === "undefined") {
+      setVisible(true);
+      return;
     }
-  ];
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          setVisible(true);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.1 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   return (
-    <section id="about" className="py-24 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Section Pill */}
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 text-xs font-mono text-teal-600 dark:text-teal-400 mb-4">
-          <Terminal className="w-3.5 h-3.5" />
-          <span>DEVELOPER PROFILE // UAP CSE</span>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
-          {/* Left Column: Portrait & Visual Card */}
-          <div className="lg:col-span-5 relative">
-            <div className="relative mx-auto max-w-md">
-              
-              {/* Outer Decorative Glow */}
-              <div className="absolute -inset-4 rounded-3xl bg-gradient-to-tr from-blue-600/20 via-teal-500/20 to-indigo-600/20 blur-xl opacity-70 -z-10" />
-
-              {/* Card Container */}
-              <div className="relative rounded-3xl overflow-hidden bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl">
-                
-                {/* Editorial Portrait */}
-                <div className="relative aspect-[4/5] overflow-hidden bg-slate-950">
+    <section id="about" className="relative scroll-mt-24 py-20 sm:py-24 lg:py-28">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
+        <div
+          ref={ref}
+          className={`grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16 transition-all duration-700 ${
+            visible ? "translate-y-0 opacity-100" : "translate-y-5 opacity-0"
+          }`}
+        >
+          {/* Portrait plate */}
+          <div className="lg:col-span-5">
+            <div className="relative mx-auto max-w-sm lg:max-w-none">
+              <div
+                aria-hidden="true"
+                className="absolute -inset-3 -z-10 rounded-[28px] bg-[var(--glow-ambient)] blur-2xl"
+              />
+              <figure className="overflow-hidden rounded-[24px] border border-[var(--line-subtle)] bg-[var(--surface-raised)] shadow-[var(--shadow-lift)]">
+                <div className="relative aspect-[4/5]">
                   <img
                     src="/images/about/portrait-hamdil.jpg"
-                    alt="Hamdil Hasan Partho - Computer Science & Engineering"
-                    className="w-full h-full object-cover object-top hover:scale-102 transition-transform duration-700"
+                    alt="Hamdil Hasan Partho, Computer Science and Engineering student"
+                    loading="lazy"
+                    decoding="async"
+                    className="h-full w-full object-cover object-top"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-90" />
-
-                  {/* Overlaid Badges */}
-                  <div className="absolute bottom-6 left-6 right-6">
-                    <div className="flex items-center gap-3">
-                      <HHPLogo size={48} showGlow={true} />
-                      <div>
-                        <h3 className="text-lg font-bold text-white tracking-wide">
-                          Hamdil Hasan Partho
-                        </h3>
-                        <div className="flex items-center gap-1.5 text-xs text-teal-300 font-mono">
-                          <MapPin className="w-3.5 h-3.5" />
-                          <span>Dhaka, Bangladesh</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/75 to-transparent"
+                  />
+                  <figcaption className="absolute inset-x-0 bottom-0 flex items-center gap-3 p-5">
+                    <HHPLogo size={44} />
+                    <span>
+                      <span className="block font-display text-[15px] font-bold text-white">
+                        {PERSONAL_INFO.fullName}
+                      </span>
+                      <span className="block font-mono text-[11px] text-white/75">
+                        {PERSONAL_INFO.location}
+                      </span>
+                    </span>
+                  </figcaption>
                 </div>
-
-                {/* Card Footer Quick Info */}
-                <div className="p-5 bg-slate-50 dark:bg-slate-950/60 border-t border-slate-100 dark:border-slate-800/80">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="text-slate-500 dark:text-slate-400 font-mono">CURRENT INSTITUTION</span>
-                    <span className="font-semibold text-slate-800 dark:text-slate-200">Univ. of Asia Pacific</span>
-                  </div>
-                  <div className="flex items-center justify-between text-xs mt-2">
-                    <span className="text-slate-500 dark:text-slate-400 font-mono">PROGRAM</span>
-                    <span className="font-semibold text-blue-600 dark:text-teal-400">B.Sc. in CSE</span>
-                  </div>
-                </div>
-
-              </div>
-
-              {/* Floating Monogram Chip */}
-              <div className="absolute -bottom-5 -right-5 p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl hidden sm:flex items-center gap-2.5">
-                <Sparkles className="w-4 h-4 text-teal-500" />
-                <span className="text-xs font-mono font-bold text-slate-800 dark:text-slate-200">
-                  HHP IDENTITY
-                </span>
-              </div>
-
+              </figure>
             </div>
           </div>
 
-          {/* Right Column: Editorial Narrative & Principles */}
-          <div className="lg:col-span-7 flex flex-col">
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight mb-6">
-              Engineering with curiosity, precision, and practical purpose.
+          {/* Narrative */}
+          <div className="lg:col-span-7">
+            <p className="rule-label">About</p>
+            <h2 className="mt-3 font-display text-headline font-bold text-[var(--content-primary)]">
+              I like the part where the thing has to work
             </h2>
 
-            <div className="space-y-4 text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed mb-8">
-              {PERSONAL_INFO.aboutBio.map((paragraph, idx) => (
-                <p key={idx}>{paragraph}</p>
+            <div className="mt-6 max-w-[62ch] space-y-4">
+              {PERSONAL_INFO.aboutBio.map((p, i) => (
+                <p key={i} className="text-body-lg text-[var(--content-secondary)]">
+                  {p}
+                </p>
               ))}
             </div>
 
-            {/* University & Degree Callout Card */}
-            <div className="p-5 rounded-2xl bg-gradient-to-r from-blue-50/80 to-teal-50/80 dark:from-blue-950/40 dark:to-teal-950/30 border border-blue-200/80 dark:border-blue-900/60 mb-8">
-              <div className="flex items-start gap-3.5">
-                <div className="p-2.5 rounded-xl bg-blue-600 text-white flex-shrink-0">
-                  <GraduationCap className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="text-sm font-bold text-slate-900 dark:text-white">
-                    {PERSONAL_INFO.degree}
+            {/* Degree callout */}
+            <div className="mt-9 rounded-2xl border border-[var(--line-subtle)] bg-[var(--surface-raised)] p-6 shadow-[var(--shadow-card)]">
+              <p className="rule-label">Currently studying</p>
+              <h3 className="mt-2 font-display text-title font-bold text-[var(--content-primary)]">
+                {PERSONAL_INFO.degree}
+              </h3>
+              <p className="mt-1 text-body text-[var(--accent-text)]">
+                {PERSONAL_INFO.institution} · Dhaka, Bangladesh
+              </p>
+            </div>
+
+            {/* Principles */}
+            <h3 className="mt-11 rule-label">How I work</h3>
+            <ul className="mt-4 space-y-3">
+              {PERSONAL_INFO.principles.map((p, i) => (
+                <li
+                  key={i}
+                  className="rounded-2xl border border-[var(--line-subtle)] bg-[var(--surface-raised)] p-5 transition hover:border-[var(--accent-solid)]"
+                >
+                  <h4 className="font-display text-[15px] font-bold text-[var(--content-primary)]">
+                    {p.title}
                   </h4>
-                  <p className="text-xs text-blue-700 dark:text-teal-400 font-medium mt-0.5">
-                    {PERSONAL_INFO.institution} • {PERSONAL_INFO.location}
-                  </p>
-                  <p className="text-xs text-slate-600 dark:text-slate-400 mt-2">
-                    Focus on Algorithms, Microprocessors, Database Management Systems, and Artificial Intelligence research.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Engineering Principles */}
-            <div>
-              <h4 className="text-xs font-mono uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-3 flex items-center gap-1.5">
-                <Compass className="w-3.5 h-3.5 text-blue-500" />
-                <span>HOW I APPROACH ENGINEERING</span>
-              </h4>
-
-              <div className="space-y-3">
-                {philosophies.map((item, idx) => (
-                  <div
-                    key={idx}
-                    className="p-3.5 rounded-xl bg-white dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/80 hover:border-blue-500/40 transition-colors"
-                  >
-                    <div className="flex items-start gap-2.5">
-                      <CheckCircle className="w-4 h-4 text-teal-500 flex-shrink-0 mt-0.5" />
-                      <div>
-                        <h5 className="text-xs font-bold text-slate-900 dark:text-white">
-                          {item.title}
-                        </h5>
-                        <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">
-                          {item.description}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
+                  <p className="mt-1.5 text-body text-[var(--content-muted)]">{p.description}</p>
+                </li>
+              ))}
+            </ul>
           </div>
-
         </div>
-
       </div>
     </section>
   );
-};
+}
 
 export default AboutSection;

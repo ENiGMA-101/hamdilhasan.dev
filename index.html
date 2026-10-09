@@ -1,33 +1,93 @@
 <!doctype html>
-<html lang="en" class="scroll-smooth dark">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hamdil Hasan Partho — Developer, CSE & Creative Problem Solver</title>
-    
-    <!-- Meta tags -->
-    <meta name="description" content="Personal portfolio of Hamdil Hasan Partho (HHP) — Computer Science & Engineering student at University of Asia Pacific. Building thoughtful software, intelligent systems, robotics, IoT, and real-world web experiences." />
+
+    <!-- Primary Meta -->
+    <title>Hamdil Hasan Partho — Software, Robotics &amp; Intelligent Systems</title>
+    <meta
+      name="description"
+      content="Hamdil Hasan Partho (HHP) — Computer Science &amp; Engineering student at the University of Asia Pacific. Building software, robotics, and intelligent systems that solve real problems."
+    />
     <meta name="author" content="Hamdil Hasan Partho" />
-    <meta name="keywords" content="Hamdil Hasan Partho, HHP, Computer Science, University of Asia Pacific, Robotics, ESP32, Artificial Intelligence, Web Development, React, TypeScript, Python" />
-    
-    <!-- OpenGraph / Social -->
+    <meta name="theme-color" content="#0b1220" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f7f8fa" media="(prefers-color-scheme: light)" />
+    <meta
+      name="keywords"
+      content="Hamdil Hasan Partho, HHP, ENiGMA-101, Computer Science and Engineering, University of Asia Pacific, robotics, ESP32, embedded systems, artificial intelligence, computer vision, MediaPipe, React, TypeScript, Python, visible light communication, IoT"
+    />
+    <meta name="color-scheme" content="dark light" />
+
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Hamdil Hasan Partho" />
     <meta property="og:url" content="https://hamdilhasan-dev.vercel.app/" />
-    <meta property="og:title" content="Hamdil Hasan Partho — Portfolio" />
-    <meta property="og:description" content="Building thoughtful software, intelligent systems, and real-world experiences. Explore robotics, AI research, and engineering projects." />
-    <meta property="og:image" content="/images/projects/food-delivery-robot.jpg" />
-    
+    <meta property="og:title" content="Hamdil Hasan Partho — Software, Robotics &amp; Intelligent Systems" />
+    <meta
+      property="og:description"
+      content="CSE student at the University of Asia Pacific building autonomous robots, fairness-aware scheduling systems, and thoughtful digital experiences."
+    />
+    <meta property="og:image" content="https://hamdilhasan-dev.vercel.app/images/projects/delivery-robot-cafeteria.jpg" />
+    <meta property="og:image:alt" content="Hamdil Hasan Partho — portfolio" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Hamdil Hasan Partho — Software, Robotics &amp; Intelligent Systems" />
+    <meta
+      name="twitter:description"
+      content="CSE student at the University of Asia Pacific building autonomous robots, fairness-aware scheduling systems, and thoughtful digital experiences."
+    />
+    <meta name="twitter:image" content="https://hamdilhasan-dev.vercel.app/images/projects/delivery-robot-cafeteria.jpg" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://hamdilhasan-dev.vercel.app/" />
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="theme-color" content="#0B1220" />
-    
-    <!-- Editorial Fonts (Inter + Plus Jakarta Sans) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <link rel="mask-icon" href="/favicon.svg" color="#2563eb" />
+
+    <!-- Fonts: Space Grotesk (display) · Inter (body) · JetBrains Mono (meta) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Prevent theme flash: apply stored/system theme before first paint -->
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem("hhp-theme");
+          var systemLight =
+            window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: light)").matches;
+          var isDark = stored ? stored === "dark" : !systemLight;
+          var root = document.documentElement;
+          root.classList.toggle("dark", isDark);
+          root.classList.toggle("light", !isDark);
+          root.style.colorScheme = isDark ? "dark" : "light";
+        } catch (e) {
+          /* no-op: fall back to .dark from the class attribute */
+        }
+      })();
+    </script>
   </head>
-  <body class="bg-[#0B1220] text-slate-100 antialiased selection:bg-blue-600 selection:text-white min-h-screen">
+  <body>
     <div id="root"></div>
+    <noscript>
+      <div style="padding: 2rem; font-family: system-ui, sans-serif">
+        <h1>Hamdil Hasan Partho</h1>
+        <p>
+          Computer Science &amp; Engineering student at the University of Asia Pacific.
+          This portfolio uses JavaScript for its interactive features. Please enable
+          JavaScript, or reach out directly at
+          <a href="mailto:hamdilhasan101@gmail.com">hamdilhasan101@gmail.com</a>.
+        </p>
+      </div>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

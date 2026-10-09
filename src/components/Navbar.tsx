@@ -1,204 +1,281 @@
-import React, { useState, useEffect } from 'react';
-import HHPLogo from './HHPLogo';
-import { Moon, Sun, Menu, X, ArrowUpRight, Sparkles } from 'lucide-react';
-import { GitHubIcon } from './SocialIcons';
-import { PERSONAL_INFO } from '../data/portfolioData';
+import { useEffect, useState } from "react";
+import HHPLogo from "./HHPLogo";
+import { GitHubIcon, LinkedInIcon } from "./SocialIcons";
+import { NAV_LINKS, PERSONAL_INFO } from "../data/portfolioData";
+
+/* ==========================================================================
+   Navbar — monogram, section links, theme toggle, contact CTA
+   • Active section is tracked with an IntersectionObserver.
+   • Mobile drawer locks body scroll and closes on Escape / route change.
+   ========================================================================== */
 
 interface NavbarProps {
-  theme: 'dark' | 'light';
-  toggleTheme: () => void;
+  theme: "dark" | "light";
+  onToggleTheme: () => void;
   onReplayIntro?: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme, onReplayIntro }) => {
+export function Navbar({ theme, onToggleTheme, onReplayIntro }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('hero');
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [active, setActive] = useState("hero");
 
-  const navLinks = [
-    { label: 'Work', href: '#projects' },
-    { label: 'About', href: '#about' },
-    { label: 'Skills', href: '#skills' },
-    { label: 'Education', href: '#education' },
-    { label: 'Research', href: '#research' },
-    { label: 'Lab', href: '#creative-lab' },
-    { label: 'Contact', href: '#contact' },
-  ];
-
+  /* Scroll state */
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-
-      // Section spy
-      const sections = ['hero', 'projects', 'about', 'skills', 'education', 'research', 'creative-lab', 'contact'];
-      for (const sectionId of sections) {
-        const el = document.getElementById(sectionId);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 160 && rect.bottom >= 160) {
-            setActiveSection(sectionId);
-            break;
-          }
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  /* Active-section tracking */
+  useEffect(() => {
+    const ids = ["hero", "work", "about", "skills", "education", "research", "lab", "contact"];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) setActive(visible.target.id);
+      },
+      { rootMargin: "-45% 0px -50% 0px", threshold: [0, 0.25, 0.5] },
+    );
+    ids.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, []);
+
+  /* Lock scroll + Escape to close for the mobile drawer */
+  useEffect(() => {
+    if (!menuOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [menuOpen]);
+
+  const isDark = theme === "dark";
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+      className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,box-shadow] duration-300 ${
         scrolled
-          ? 'bg-[#0B1220]/85 dark:bg-[#0B1220]/85 light:bg-white/85 backdrop-blur-md border-b border-slate-200/20 dark:border-slate-800/80 shadow-lg shadow-black/5 dark:shadow-black/20 py-3'
-          : 'bg-transparent py-5'
+          ? "border-b border-[var(--line-subtle)] bg-[var(--surface-overlay)] backdrop-blur-xl"
+          : "border-b border-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
-          {/* Logo Brand */}
-          <a
-            href="#hero"
-            className="flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-lg p-1"
-            aria-label="Hamdil Hasan Partho Home"
-          >
-            <div className="transform transition-transform group-hover:scale-105 duration-200">
-              <HHPLogo size={38} showGlow={false} />
-            </div>
-            <div className="flex flex-col text-left">
-              <span className="font-bold text-sm sm:text-base tracking-tight text-slate-900 dark:text-white group-hover:text-blue-500 transition-colors">
-                Hamdil Hasan Partho
-              </span>
-              <span className="text-[10px] tracking-wider uppercase font-mono text-slate-500 dark:text-slate-400">
-                CSE • Developer • HHP
-              </span>
-            </div>
-          </a>
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-[68px] sm:px-6 lg:px-10">
+        {/* Brand */}
+        <a
+          href="#hero"
+          className="group flex items-center gap-2.5 rounded-lg"
+          aria-label={`${PERSONAL_INFO.fullName} — back to top`}
+        >
+          <HHPLogo size={36} className="transition-transform duration-300 group-hover:scale-105" />
+          <span className="flex flex-col leading-none">
+            <span className="font-display text-[15px] font-bold tracking-tight text-[var(--content-primary)]">
+              Hamdil Hasan Partho
+            </span>
+            <span className="mt-1 font-mono text-[10px] tracking-[0.14em] text-[var(--content-muted)]">
+              CSE · DEVELOPER
+            </span>
+          </span>
+        </a>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-1 bg-slate-100/70 dark:bg-slate-900/60 p-1.5 rounded-full border border-slate-200/60 dark:border-slate-800/80 backdrop-blur-sm">
-            {navLinks.map((link) => {
-              const isActive = activeSection === link.href.substring(1);
+        {/* Desktop links */}
+        <nav aria-label="Primary" className="hidden lg:block">
+          <ul className="flex items-center gap-0.5 rounded-full border border-[var(--line-subtle)] bg-[var(--surface-raised)] p-1">
+            {NAV_LINKS.map((link) => {
+              const isActive = active === link.href.slice(1);
               return (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-200 ${
-                    isActive
-                      ? 'bg-blue-600 text-white shadow-sm font-semibold'
-                      : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/50 dark:hover:bg-slate-800/60'
-                  }`}
-                >
-                  {link.label}
-                </a>
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    aria-current={isActive ? "true" : undefined}
+                    className={`block rounded-full px-3.5 py-1.5 text-[13px] font-medium transition-colors ${
+                      isActive
+                        ? "bg-[var(--accent-solid)] text-white"
+                        : "text-[var(--content-secondary)] hover:text-[var(--content-primary)]"
+                    }`}
+                  >
+                    {link.label}
+                  </a>
+                </li>
               );
             })}
-          </nav>
+          </ul>
+        </nav>
 
-          {/* Right Controls */}
-          <div className="flex items-center gap-2 sm:gap-3">
-            {/* Replay Intro button */}
-            {onReplayIntro && (
-              <button
-                onClick={onReplayIntro}
-                title="Replay intro animation"
-                className="hidden lg:flex items-center gap-1 text-[11px] font-mono text-slate-500 hover:text-blue-500 dark:text-slate-400 dark:hover:text-teal-400 px-2 py-1 rounded-md transition-colors"
-              >
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>Intro</span>
-              </button>
-            )}
+        {/* Actions */}
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          <a
+            href={PERSONAL_INFO.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub profile (opens in a new tab)"
+            className="grid h-10 w-10 place-items-center rounded-xl border border-[var(--line-subtle)] bg-[var(--surface-raised)] text-[var(--content-secondary)] transition hover:border-[var(--line-strong)] hover:text-[var(--content-primary)]"
+          >
+            <GitHubIcon className="h-[17px] w-[17px]" />
+          </a>
 
-            {/* GitHub Quick Link */}
+          <a
+            href={PERSONAL_INFO.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn profile (opens in a new tab)"
+            className="hidden h-10 w-10 place-items-center rounded-xl border border-[var(--line-subtle)] bg-[var(--surface-raised)] text-[var(--content-secondary)] transition hover:border-[var(--line-strong)] hover:text-[var(--accent-text)] sm:grid"
+          >
+            <LinkedInIcon className="h-[17px] w-[17px]" />
+          </a>
+
+          <button
+            type="button"
+            onClick={onToggleTheme}
+            aria-label={`Switch to ${isDark ? "light" : "dark"} theme`}
+            title={`Switch to ${isDark ? "light" : "dark"} theme`}
+            className="grid h-10 w-10 place-items-center rounded-xl border border-[var(--line-subtle)] bg-[var(--surface-raised)] text-[var(--content-secondary)] transition hover:border-[var(--line-strong)] hover:text-[var(--content-primary)]"
+          >
+            {isDark ? <SunIcon /> : <MoonIcon />}
+          </button>
+
+          <a
+            href="#contact"
+            className="hidden items-center gap-1.5 rounded-xl bg-[var(--accent-solid)] px-4 py-2.5 text-[13px] font-semibold text-white transition hover:bg-[var(--accent-solidHover)] sm:inline-flex"
+          >
+            Get in touch
+          </a>
+
+          <button
+            type="button"
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            className="grid h-10 w-10 place-items-center rounded-xl border border-[var(--line-subtle)] bg-[var(--surface-raised)] text-[var(--content-secondary)] transition hover:text-[var(--content-primary)] lg:hidden"
+          >
+            {menuOpen ? <CloseIcon /> : <MenuIcon />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile drawer */}
+      <div
+        id="mobile-menu"
+        hidden={!menuOpen}
+        className="border-t border-[var(--line-subtle)] bg-[var(--surface-canvas)] px-4 pb-6 pt-3 lg:hidden"
+      >
+        <nav aria-label="Mobile">
+          <ul className="flex flex-col">
+            {NAV_LINKS.map((link) => {
+              const isActive = active === link.href.slice(1);
+              return (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    onClick={() => setMenuOpen(false)}
+                    aria-current={isActive ? "true" : undefined}
+                    className={`flex items-center justify-between rounded-xl px-3 py-3 text-[15px] font-medium transition-colors ${
+                      isActive
+                        ? "bg-[var(--accent-softBg)] text-[var(--accent-text)]"
+                        : "text-[var(--content-secondary)] hover:bg-[var(--surface-sunken)]"
+                    }`}
+                  >
+                    {link.label}
+                    <span aria-hidden="true" className="font-mono text-xs text-[var(--content-faint)]">
+                      →
+                    </span>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+
+        <div className="mt-4 flex flex-col gap-2 border-t border-[var(--line-subtle)] pt-4">
+          <a
+            href="#contact"
+            onClick={() => setMenuOpen(false)}
+            className="inline-flex items-center justify-center rounded-xl bg-[var(--accent-solid)] px-4 py-3 text-sm font-semibold text-white"
+          >
+            Get in touch
+          </a>
+          <div className="flex gap-2">
             <a
               href={PERSONAL_INFO.github}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="GitHub Profile"
-              className="p-2 rounded-xl text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+              className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl border border-[var(--line-subtle)] bg-[var(--surface-raised)] px-4 py-3 text-sm font-medium text-[var(--content-secondary)]"
             >
-              <GitHubIcon className="w-4 h-4" />
+              <GitHubIcon className="h-4 w-4" /> GitHub
             </a>
-
-            {/* Theme Toggle Button */}
-            <button
-              onClick={toggleTheme}
-              aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-              className="p-2 rounded-xl text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors cursor-pointer"
-            >
-              {theme === 'dark' ? (
-                <Sun className="w-4 h-4 text-amber-400 hover:rotate-45 transition-transform" />
-              ) : (
-                <Moon className="w-4 h-4 text-blue-600 hover:-rotate-12 transition-transform" />
-              )}
-            </button>
-
-            {/* Contact CTA button */}
             <a
-              href="#contact"
-              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white shadow-md shadow-blue-500/20 transition-all duration-200 hover:shadow-blue-500/30 hover:-translate-y-0.5"
+              href={PERSONAL_INFO.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl border border-[var(--line-subtle)] bg-[var(--surface-raised)] px-4 py-3 text-sm font-medium text-[var(--content-secondary)]"
             >
-              <span>Get In Touch</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
+              <LinkedInIcon className="h-4 w-4" /> LinkedIn
             </a>
-
-            {/* Mobile Hamburger Button */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle navigation menu"
-              className="md:hidden p-2 rounded-xl text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
-            >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
           </div>
+          {onReplayIntro && (
+            <button
+              type="button"
+              onClick={() => {
+                setMenuOpen(false);
+                onReplayIntro();
+              }}
+              className="mt-1 rounded-xl px-3 py-2 font-mono text-xs text-[var(--content-muted)] transition hover:text-[var(--accent-text)]"
+            >
+              Replay intro sequence
+            </button>
+          )}
         </div>
       </div>
-
-      {/* Mobile Drawer Menu */}
-      {mobileMenuOpen && (
-        <div className="md:hidden fixed inset-x-0 top-[65px] bg-[#0B1220]/95 dark:bg-[#0B1220]/95 bg-white/95 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 px-6 py-6 shadow-2xl transition-all">
-          <div className="flex flex-col gap-2">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-between py-2.5 px-3 rounded-xl text-sm font-medium text-slate-800 dark:text-slate-200 hover:bg-blue-50 dark:hover:bg-slate-800/70 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-              >
-                <span>{link.label}</span>
-                <span className="text-xs font-mono text-slate-400">→</span>
-              </a>
-            ))}
-
-            <div className="pt-4 mt-2 border-t border-slate-200 dark:border-slate-800 flex flex-col gap-3">
-              <a
-                href="#contact"
-                onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-medium text-sm shadow-md"
-              >
-                <span>Get In Touch</span>
-                <ArrowUpRight className="w-4 h-4" />
-              </a>
-
-              {onReplayIntro && (
-                <button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onReplayIntro();
-                  }}
-                  className="flex items-center justify-center gap-2 py-2 text-xs font-mono text-slate-400 hover:text-white"
-                >
-                  <Sparkles className="w-3.5 h-3.5 text-teal-400" />
-                  <span>Replay HHP Intro Sequence</span>
-                </button>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
     </header>
   );
-};
+}
+
+/* --- Inline icons (kept local so the navbar stays a single unit) ---------- */
+
+function SunIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-[18px] w-[18px]" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+    </svg>
+  );
+}
+
+function MoonIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-[18px] w-[18px]" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" />
+    </svg>
+  );
+}
+
+function MenuIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+      <path d="M4 7h16M4 12h16M4 17h16" />
+    </svg>
+  );
+}
+
+function CloseIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+      <path d="M6 6l12 12M18 6 6 18" />
+    </svg>
+  );
+}
 
 export default Navbar;

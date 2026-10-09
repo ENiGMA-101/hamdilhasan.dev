@@ -1,85 +1,110 @@
-import { useState, useEffect } from 'react';
-import Navbar from './components/Navbar';
-import IntroSequence from './components/IntroSequence';
-import Hero from './components/Hero';
-import ProjectsSection from './components/ProjectsSection';
-import AboutSection from './components/AboutSection';
-import SkillsSection from './components/SkillsSection';
-import EducationSection from './components/EducationSection';
-import CertificationsSection from './components/CertificationsSection';
-import ResearchTimeline from './components/ResearchTimeline';
-import CreativeLabSection from './components/CreativeLabSection';
-import ContactSection from './components/ContactSection';
-import Footer from './components/Footer';
+import { useCallback, useEffect, useState } from "react";
+import Navbar from "./components/Navbar";
+import IntroSequence from "./components/IntroSequence";
+import Hero from "./components/Hero";
+import FeaturedProjects from "./components/FeaturedProjects";
+import ProjectsSection from "./components/ProjectsSection";
+import AboutSection from "./components/AboutSection";
+import SkillsSection from "./components/SkillsSection";
+import EducationSection from "./components/EducationSection";
+import CertificationsSection from "./components/CertificationsSection";
+import ResearchTimeline from "./components/ResearchTimeline";
+import CreativeLabSection from "./components/CreativeLabSection";
+import ContactSection from "./components/ContactSection";
+import Footer from "./components/Footer";
+
+/* ==========================================================================
+   App shell — theme state, intro gating, section order
+   --------------------------------------------------------------------------
+   The theme is applied by the inline script in index.html before first
+   paint, so there is no flash of the wrong theme. This component only
+   reconciles React state with what that script already decided.
+   ========================================================================== */
+
+type Theme = "dark" | "light";
+
+const THEME_KEY = "hhp-theme";
+const INTRO_KEY = "hhp-intro-seen";
+
+function readTheme(): Theme {
+  if (typeof document === "undefined") return "dark";
+  return document.documentElement.classList.contains("light") ? "light" : "dark";
+}
 
 export function App() {
-  // Theme state: dark mode initial default
-  const [theme, setTheme] = useState<'dark' | 'light'>(() => {
-    if (typeof window !== 'undefined') {
-      const savedTheme = localStorage.getItem('hhp_portfolio_theme');
-      if (savedTheme === 'light' || savedTheme === 'dark') {
-        return savedTheme;
-      }
-      // If user has system light preference
-      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-        return 'light';
-      }
-    }
-    return 'dark';
-  });
-
-  // Intro sequence state
+  const [theme, setTheme] = useState<Theme>(readTheme);
   const [showIntro, setShowIntro] = useState<boolean>(() => {
-    if (typeof window !== 'undefined') {
-      // Check session storage to avoid annoyance on every page refresh in same session
-      const hasSeenIntro = sessionStorage.getItem('hhp_has_seen_intro');
-      return !hasSeenIntro;
-    }
-    return true;
+    if (typeof sessionStorage === "undefined") return false;
+    return sessionStorage.getItem(INTRO_KEY) !== "1";
   });
 
-  // Apply theme to document element
+  /* Keep <html> and storage in sync with state. */
   useEffect(() => {
     const root = document.documentElement;
-    if (theme === 'dark') {
-      root.classList.add('dark');
-      root.classList.remove('light');
-    } else {
-      root.classList.remove('dark');
-      root.classList.add('light');
+    root.classList.toggle("dark", theme === "dark");
+    root.classList.toggle("light", theme === "light");
+    root.style.colorScheme = theme;
+    try {
+      localStorage.setItem(THEME_KEY, theme);
+    } catch {
+      /* storage blocked (private mode) — theme still applies for this visit */
     }
-    localStorage.setItem('hhp_portfolio_theme', theme);
   }, [theme]);
 
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
-  };
+  /* Follow the OS while the visitor hasn't made an explicit choice. */
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-color-scheme: light)");
+    const onChange = (e: MediaQueryListEvent) => {
+      let stored: string | null = null;
+      try {
+        stored = localStorage.getItem(THEME_KEY);
+      } catch {
+        /* ignore */
+      }
+      if (!stored) setTheme(e.matches ? "light" : "dark");
+    };
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
 
-  const handleIntroComplete = () => {
+  /* Restrained colour transition only around an actual toggle. */
+  const toggleTheme = useCallback(() => {
+    const root = document.documentElement;
+    root.classList.add("theme-transition");
+    setTheme((t) => (t === "dark" ? "light" : "dark"));
+    window.setTimeout(() => root.classList.remove("theme-transition"), 320);
+  }, []);
+
+  const endIntro = useCallback(() => {
     setShowIntro(false);
-    sessionStorage.setItem('hhp_has_seen_intro', 'true');
-  };
+    try {
+      sessionStorage.setItem(INTRO_KEY, "1");
+    } catch {
+      /* ignore */
+    }
+  }, []);
 
-  const handleReplayIntro = () => {
+  const replayIntro = useCallback(() => {
+    window.scrollTo({ top: 0, behavior: "auto" });
     setShowIntro(true);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  }, []);
 
   return (
-    <div className="min-h-screen bg-[#F7F8FA] dark:bg-[#0B1220] text-slate-900 dark:text-slate-100 transition-colors duration-300 selection:bg-blue-600 selection:text-white relative">
-      {/* Signature Opening Intro Animation */}
-      {showIntro && <IntroSequence onComplete={handleIntroComplete} />}
+    <>
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[110] focus:rounded-xl focus:bg-[var(--accent-solid)] focus:px-4 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-white"
+      >
+        Skip to content
+      </a>
 
-      {/* Persistent Navigation Bar */}
-      <Navbar
-        theme={theme}
-        toggleTheme={toggleTheme}
-        onReplayIntro={handleReplayIntro}
-      />
+      {showIntro && <IntroSequence onDone={endIntro} />}
 
-      {/* Main Content Layout */}
-      <main id="main-content" className="relative">
+      <Navbar theme={theme} onToggleTheme={toggleTheme} onReplayIntro={replayIntro} />
+
+      <main id="main">
         <Hero />
+        <FeaturedProjects />
         <ProjectsSection />
         <AboutSection />
         <SkillsSection />
@@ -90,9 +115,8 @@ export function App() {
         <ContactSection />
       </main>
 
-      {/* Branded Footer */}
-      <Footer onReplayIntro={handleReplayIntro} />
-    </div>
+      <Footer onReplayIntro={replayIntro} />
+    </>
   );
 }
 

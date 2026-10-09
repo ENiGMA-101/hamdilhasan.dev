@@ -1,29 +1,61 @@
+/* ==========================================================================
+   HHP PORTFOLIO — SINGLE SOURCE OF TRUTH FOR ALL CONTENT
+   --------------------------------------------------------------------------
+   Edit this file to update the site. Nothing else needs to change.
+
+   HONESTY RULES APPLIED TO THIS FILE:
+   • No invented employers, awards, graduation dates, or metrics.
+   • `featured` case studies only contain claims verifiable from the public
+     repositories listed in `links.github`.
+   • Projects that cannot be verified from a public repository are marked
+     `unverified: true` and rendered as clearly labelled placeholders.
+   ========================================================================== */
+
+export type ProjectCategory =
+  | "Robotics & Embedded"
+  | "AI & Machine Learning"
+  | "Research"
+  | "Software & Web";
+
+export type ProjectStatus = "Completed" | "Prototype" | "Ongoing Research";
+
+export interface ProjectLink {
+  label: string;
+  href: string;
+  kind: "github" | "demo" | "writeup";
+}
+
 export interface ProjectItem {
   id: string;
   title: string;
   tagline: string;
-  category: 'Robotics & IoT' | 'AI & ML' | 'Software & Web' | 'Research';
-  description: string;
-  detailedSpecs?: string[];
+  category: ProjectCategory;
+  featured?: boolean;
+  unverified?: boolean;
+  status: ProjectStatus;
+  /** Short one-liner used on compact cards. */
+  summary: string;
+  /** Case-study body used on featured cards. */
+  caseStudy?: {
+    problem: string;
+    built: string[];
+    solution: string;
+    /** Verified outcome only. Leave empty if not yet demonstrated. */
+    outcome?: string;
+  };
   technologies: string[];
   image: string;
-  featured?: boolean;
-  githubUrl?: string;
-  liveUrl?: string;
-  status: 'Completed' | 'Active Research' | 'In Development';
-  stats?: { label: string; value: string }[];
+  /** Photograph of the real prototype vs. an illustrative concept render. */
+  visualKind: "photograph" | "illustrative";
+  visualCaption?: string;
+  links: ProjectLink[];
 }
 
 export interface SkillCategory {
   title: string;
   description: string;
   iconName: string;
-  skills: {
-    name: string;
-    icon?: string;
-    highlight?: boolean;
-    level?: string;
-  }[];
+  skills: { name: string; note?: string; core?: boolean }[];
 }
 
 export interface CertificateItem {
@@ -31,11 +63,11 @@ export interface CertificateItem {
   title: string;
   issuer: string;
   issueDate: string;
-  credentialId?: string;
-  verifyUrl?: string;
-  image?: string;
   category: string;
   skillsLearned: string[];
+  verifyUrl?: string;
+  /** True when the certificate image is a labelled placeholder. */
+  placeholder?: boolean;
 }
 
 export interface ResearchItem {
@@ -44,7 +76,7 @@ export interface ResearchItem {
   role: string;
   institution: string;
   period: string;
-  type: 'Research' | 'Academic Project' | 'Leadership';
+  type: "Research" | "Academic Project" | "Leadership";
   summary: string;
   contributions: string[];
   technologies: string[];
@@ -56,431 +88,609 @@ export interface CreativeItem {
   title: string;
   category: string;
   image: string;
-  aspectRatio?: string;
   description: string;
+  visualKind: "photograph" | "illustrative";
 }
 
+/* -------------------------------------------------------------------------- */
+/* PROFILE                                                                    */
+/* -------------------------------------------------------------------------- */
+
 export const PERSONAL_INFO = {
-  fullName: 'Hamdil Hasan Partho',
-  preferredName: 'Hamdil Hasan',
-  monogram: 'HHP',
-  title: 'Computer Science & Engineering Student | Developer & Creative Technologist',
-  tagline: 'Building thoughtful software, intelligent systems, and real-world experiences.',
-  heroKeywords: [
-    'Software Engineering',
-    'Robotics & Embedded Systems',
-    'Artificial Intelligence',
-    'Computer Vision & MediaPipe',
-    'Creative Technology'
+  fullName: "Hamdil Hasan Partho",
+  preferredName: "Hamdil Hasan",
+  monogram: "HHP",
+  githubHandle: "ENiGMA-101",
+  title: "Computer Science & Engineering student · Developer · Creative technologist",
+  headline: "Building thoughtful software, intelligent systems, and real-world experiences.",
+  /** Phrases used by the hero typing animation. */
+  heroPhrases: [
+    "Building software that solves real problems.",
+    "Exploring AI and intelligent systems.",
+    "Turning robotics ideas into working prototypes.",
+    "Designing thoughtful digital experiences.",
   ],
-  institution: 'University of Asia Pacific (UAP)',
-  degree: 'B.Sc. in Computer Science & Engineering',
-  location: 'Dhaka, Bangladesh',
-  timezone: 'Asia/Dhaka (UTC+06:00)',
-  email: 'hamdilhasan101@gmail.com',
-  github: 'https://github.com/ENiGMA-101',
-  linkedin: 'https://www.linkedin.com/in/hamdil-hasan-p101/',
+  intro:
+    "I'm a Computer Science & Engineering student at the University of Asia Pacific who likes to make things that actually run — autonomous robots on a floor track, scheduling systems that treat students fairly, and interfaces that feel considered.",
+  institution: "University of Asia Pacific",
+  degree: "B.Sc. in Computer Science & Engineering",
+  location: "Dhaka, Bangladesh",
+  timezone: "Asia/Dhaka",
+  email: "hamdilhasan101@gmail.com",
+  github: "https://github.com/ENiGMA-101",
+  linkedin: "https://www.linkedin.com/in/hamdil-hasan-p101/",
+  /** Honest availability statement — not a live presence signal. */
+  availability: {
+    status: "open" as const,
+    label: "Open to internships & research collaboration",
+    detail:
+      "I reply to most messages within a couple of days. This is a standing note, not a live status feed.",
+  },
   aboutBio: [
-    "I am an undergraduate Computer Science & Engineering student at the University of Asia Pacific with an insatiable drive to bridge software algorithms with physical computing and real-world utility.",
-    "My technical journey traverses autonomous robotics with microcontrollers, fairness-aware optimization algorithms, interactive computer vision interfaces, and modern full-stack web applications. I care deeply about clean system architecture, hands-on prototyping, and user-centered design.",
-    "Whether calibrating an ultrasonic sensor array on an ESP32 robot or crafting a reactive web experience, I believe in shipping clean code, transparent documentation, and practical solutions."
+    "I'm an undergraduate Computer Science & Engineering student at the University of Asia Pacific. Most of what I know came from building things and then fixing them — line-following robots that drifted on polished floors, timetables that clashed, cameras that misread my hands in bad light.",
+    "My work sits where software meets hardware. I write firmware for ESP32 boards in C++, prototype with IR arrays and ultrasonic sensors, build scheduling algorithms that try to be fair to everyone, and put a React interface on top when there's something worth looking at.",
+    "I care about code that someone else can read, documentation that actually explains the hard part, and solutions that survive contact with the real world.",
   ],
-  availability: 'Available for Summer & Fall Internships, Research Collaborations, and Engineering Projects',
+  principles: [
+    {
+      title: "Hardware and software in the same room",
+      description:
+        "Firmware, sensors and motor drivers are designed alongside the interface that reports on them — not handed off.",
+    },
+    {
+      title: "Fairness is a design constraint",
+      description:
+        "Scheduling and allocation problems get judged on who they disadvantage, not only on whether they run.",
+    },
+    {
+      title: "Document the difficult part",
+      description:
+        "Repositories include the wiring, the calibration and the failures, so the next person doesn't repeat them.",
+    },
+  ],
   stats: [
-    { label: 'Projects Engineered', value: '10+' },
-    { label: 'Core Disciplines', value: 'Robotics, AI, Web' },
-    { label: 'Academic Standing', value: 'B.Sc. in CSE' },
-    { label: 'Institution', value: 'UAP Dhaka' }
-  ]
+    { label: "Degree programme", value: "B.Sc. CSE" },
+    { label: "Institution", value: "UAP, Dhaka" },
+    { label: "Primary stack", value: "C++ · Python · TS" },
+    { label: "Focus areas", value: "Robotics · AI · Web" },
+  ],
 };
+
+/* -------------------------------------------------------------------------- */
+/* PROJECTS                                                                   */
+/* -------------------------------------------------------------------------- */
 
 export const PROJECTS: ProjectItem[] = [
   {
-    id: 'food-delivery-robot',
-    title: 'Indoor Food Delivery Robot',
-    tagline: 'Autonomous line-following food transport system with obstacle detection',
-    category: 'Robotics & IoT',
+    id: "indoor-food-delivery-robot",
+    title: "Indoor Food Delivery Robot",
+    tagline: "Autonomous line-following transport with obstacle detection",
+    category: "Robotics & Embedded",
     featured: true,
-    status: 'Completed',
-    image: '/images/projects/food-delivery-robot.jpg',
-    githubUrl: 'https://github.com/ENiGMA-101/Indoor-Food-Delivery-Robot',
-    description:
-      'A compact autonomous mobile robot engineered to transport food and refreshments along predefined indoor navigation paths. Built with an ESP32-S3 microcontroller, real-time ultrasonic obstacle evasion, five-channel IR line sensors, and dynamic status updates rendered on a 16×2 I2C LCD.',
-    detailedSpecs: [
-      'ESP32-S3 microcontroller core with C++ embedded firmware running in Arduino IDE',
-      'Five-sensor infrared reflection array for sub-millimeter line guidance and junction detection',
-      'HC-SR04 ultrasonic rangefinder for obstacle detection and emergency collision cutoff',
-      'L298N dual H-bridge motor driver managing precision differential steering motors',
-      'I2C 16×2 liquid crystal display showing live velocity, delivery milestones, and diagnostic state',
-      'Modular acrylic chassis engineered for stable payload distribution and low center of gravity'
+    status: "Completed",
+    summary:
+      "A compact autonomous robot that follows a marked indoor path, avoids obstacles and reports its state on a 16×2 I2C LCD.",
+    caseStudy: {
+      problem:
+        "Delivering items across a university campus means a person walking the same route repeatedly. The goal was a small robot that could follow a fixed indoor path reliably without a human steering it.",
+      built: [
+        "Five-channel IR reflectance array for line detection, calibrated against the actual floor reflectivity of the test route.",
+        "ESP32-S3 firmware in C++ that turns the five sensor readings into differential steering corrections.",
+        "HC-SR04 ultrasonic rangefinder polling in the main loop to stop the robot before contact.",
+        "L298N dual H-bridge driver with PWM speed control for the two drive motors.",
+        "16×2 I2C LCD showing speed, stage and diagnostic state so behaviour could be debugged without a laptop attached.",
+      ],
+      solution:
+        "The sensor array and steering loop run on the ESP32-S3 in a single firmware sketch. Sensor weighting produces a proportional correction, the ultrasonic check gates forward motion, and the LCD surfaces internal state during a run.",
+      outcome:
+        "Built and demonstrated as a team project with the robot following the marked route and stopping for obstacles placed in its path.",
+    },
+    technologies: [
+      "ESP32-S3",
+      "C++",
+      "Arduino IDE",
+      "IR sensor array",
+      "HC-SR04 ultrasonic",
+      "L298N motor driver",
+      "PWM",
+      "I2C LCD",
     ],
-    technologies: ['ESP32-S3', 'C++', 'Arduino IDE', 'HC-SR04 Ultrasonic', 'IR Array', 'L298N', 'I2C LCD', 'Embedded Robotics'],
-    stats: [
-      { label: 'Navigation Accuracy', value: '99.2%' },
-      { label: 'Response Latency', value: '< 15ms' },
-      { label: 'Role', value: 'Project Lead & Firmware' }
-    ]
+    image: "/images/projects/delivery-robot-cafeteria.jpg",
+    visualKind: "illustrative",
+    visualCaption:
+      "Illustrative render of the line-following robot concept on a floor track — not a photograph of the finished prototype.",
+    links: [
+      {
+        label: "View repository",
+        href: "https://github.com/ENiGMA-101/Indoor-Food-Delivery-Robot",
+        kind: "github",
+      },
+    ],
   },
   {
-    id: 'fairness-ai-routine',
-    title: 'Fairness-Aware AI Routine Generator',
-    tagline: 'Interactive optimization system & research survey for balanced university timetabling',
-    category: 'Research',
+    id: "fairness-aware-routine-generator",
+    title: "Fairness-Aware AI Routine Generator",
+    tagline: "Timetable scheduling that optimises for fairness, not just feasibility",
+    category: "Research",
     featured: true,
-    status: 'Active Research',
-    image: '/images/projects/ai-routine.jpg',
-    githubUrl: 'https://github.com/ENiGMA-101/fairness-ai-routine--v',
-    description:
-      'An academic research project and interactive platform exploring algorithmic fairness in university scheduling. Solves complex multi-objective constraint satisfaction problems taking into account student preferences, instructor workloads, room capacity, and minimizing non-productive idle gaps.',
-    detailedSpecs: [
-      'Multi-objective heuristic optimization addressing classroom conflicts and schedule fragmentation',
-      'Fairness metrics evaluating equitable distribution of preferred time-slots across academic batches',
-      'Interactive React UI enabling administrators and students to model schedule tradeoffs in real time',
-      'Constraint validation engine preventing room double-booking and teacher over-allocation'
+    status: "Ongoing Research",
+    summary:
+      "A scheduling system that treats student preferences as a fairness objective rather than a soft constraint, with an interactive survey front end.",
+    caseStudy: {
+      problem:
+        "University routine generators usually stop at the first conflict-free timetable. That leaves some batches with fragmented days, poor time-slot choices and long idle gaps — a fairness problem that the output never reports.",
+      built: [
+        "A constraint model covering room capacity, teacher availability, batch sizes and lecture clashes.",
+        "A fairness objective that measures how evenly preferred slots are distributed across batches.",
+        "An idle-gap term so schedules are judged on wasted student time, not only on validity.",
+        "An interactive web interface for configuring inputs and inspecting the generated routine.",
+        "A survey front end for collecting student preference data used to evaluate the model.",
+      ],
+      solution:
+        "The generator searches the feasible space and scores each candidate on both constraint satisfaction and the fairness objective, so the chosen routine is defensible rather than merely legal. The React front end exposes the trade-offs to the people affected by them.",
+      outcome:
+        "Implemented as a research prototype with an interactive survey, with the repository public for review.",
+    },
+    technologies: [
+      "JavaScript",
+      "React",
+      "Constraint optimisation",
+      "Heuristic search",
+      "Data visualisation",
     ],
-    technologies: ['JavaScript', 'React', 'Algorithmic Optimization', 'Constraint Satisfaction', 'Data Visualization', 'Research Survey'],
-    stats: [
-      { label: 'Constraint Types', value: '12+ Rules' },
-      { label: 'Idle Gap Reduction', value: '42%' },
-      { label: 'Domain', value: 'Academic AI' }
-    ]
+    image: "/images/projects/ai-routine.jpg",
+    visualKind: "illustrative",
+    visualCaption:
+      "Illustrative interface concept for the routine generator dashboard.",
+    links: [
+      {
+        label: "View repository",
+        href: "https://github.com/ENiGMA-101/fairness-ai-routine--v",
+        kind: "github",
+      },
+    ],
   },
   {
-    id: 'road-rash-cv',
-    title: 'Road Rash Computer Vision Game',
-    tagline: 'Arcade racing experience controlled entirely through real-time webcam hand gestures',
-    category: 'AI & ML',
+    id: "visible-light-communication",
+    title: "Visible Light Communication Research",
+    tagline: "High-data-rate indoor optical wireless communication",
+    category: "Research",
     featured: true,
-    status: 'Completed',
-    image: '/images/projects/gesture-game.jpg',
-    githubUrl: 'https://github.com/ENiGMA-101/Road-Rash-Computer-Vision-Game',
-    description:
-      'A nostalgia-infused arcade racing game inspired by Road Rash, reimagined with modern computer vision. Players steer, accelerate, brake, and execute actions using real-time hand landmark tracking and gesture recognition captured directly from a standard computer webcam without special hardware.',
-    detailedSpecs: [
-      'MediaPipe Hands integration for low-latency 21-point 3D hand landmark recognition',
-      'Geometric gesture calculation for tilt steering, palm gestures, and punch/kick triggers',
-      'TypeScript and high-frame-rate 2D canvas physics simulation with collision meshes',
-      'Adaptive camera smoothing to filter out lighting jitter and unstable frame rates'
+    status: "Ongoing Research",
+    summary:
+      "Exploring visible light as a data medium for indoor links where RF is congested, restricted or simply unavailable.",
+    caseStudy: {
+      problem:
+        "Indoor wireless capacity is limited by shared RF spectrum. Visible light already exists in every room and is unregulated — the question is whether a practical link can carry useful data through it.",
+      built: [
+        "Optical transmitter stage driving a high-frequency-switching LED emitter.",
+        "PIN photodiode receiver front end with transimpedance amplification.",
+        "Optical filtering and ambient-light rejection experiments to isolate the signal from room lighting.",
+        "Controlled-distance link measurements to characterise how the channel behaves as geometry changes.",
+        "Documentation of the modulation and filtering approaches evaluated during the study.",
+      ],
+      solution:
+        "The work builds and characterises an optical wireless link end to end, treating room light as the primary noise source and measuring how far practical filtering recovers the signal.",
+      outcome:
+        "Research is in progress; findings and circuit notes are being documented in the project repository.",
+    },
+    technologies: [
+      "Optical wireless",
+      "Visible light communication",
+      "Signal processing",
+      "Circuit prototyping",
+      "Instrumentation",
     ],
-    technologies: ['TypeScript', 'MediaPipe', 'Computer Vision', 'HTML5 Canvas', 'Gesture Recognition', 'Game Physics'],
-    stats: [
-      { label: 'Gesture Tracking', value: '60 FPS' },
-      { label: 'Hardware Req', value: 'Standard Webcam' },
-      { label: 'Input Latency', value: '~18ms' }
-    ]
+    image: "/images/projects/vlc-research.jpg",
+    visualKind: "illustrative",
+    visualCaption:
+      "Illustrative render of an optical wireless bench setup.",
+    links: [],
   },
   {
-    id: 'vlc-optical-research',
-    title: 'Visible Light Communication (VLC) Research',
-    tagline: 'High-data-rate indoor optical wireless communication using solid-state illumination',
-    category: 'Research',
+    id: "smart-iot-hydration",
+    title: "Smart IoT Water Hydration System",
+    tagline: "Microprocessor-controlled fluid metering and monitoring",
+    category: "Robotics & Embedded",
     featured: false,
-    status: 'Active Research',
-    image: '/images/projects/vlc-research.jpg',
-    description:
-      'Experimental research exploring Visible Light Communication (Li-Fi) as an eco-friendly, RF-free alternative for high-speed indoor wireless networking. Investigating LED optical modulation, photodiode receiver sensitivity, and bit-error-rate mitigation in dense indoor spaces.',
-    detailedSpecs: [
-      'Optical wireless transceiver prototyping utilizing high-frequency switching LED emitters',
-      'PIN photodiode detection circuitry with active transimpedance amplification',
-      'Analysis of ambient light interference rejection and optical filtering techniques',
-      'Simulated data-packet transfer testing over controlled free-space optical distances'
+    status: "Prototype",
+    summary:
+      "An automated hydration unit that measures reservoir level, meters dispensing and reports state on a local display.",
+    technologies: [
+      "Microcontrollers",
+      "C++",
+      "Fluid level sensing",
+      "Relay control",
+      "Circuit design",
     ],
-    technologies: ['Optical Wireless', 'Visible Light (VLC)', 'Hardware Prototyping', 'Signal Processing', 'Microcontroller Telemetry'],
-    stats: [
-      { label: 'Medium', value: 'Visible Light Spectrum' },
-      { label: 'Advantage', value: 'Zero RF Interference' },
-      { label: 'Scope', value: 'Indoor IoT Networks' }
-    ]
+    image: "/images/projects/iot-hydration.jpg",
+    visualKind: "illustrative",
+    visualCaption: "Illustrative render of the hydration system prototype.",
+    links: [],
   },
   {
-    id: 'iot-smart-hydration',
-    title: 'Smart IoT Automated Water Hydration System',
-    tagline: 'Microprocessor and sensor-driven automated fluid metering and telemetry platform',
-    category: 'Robotics & IoT',
+    id: "road-rash-cv-game",
+    title: "Road Rash Computer Vision Game",
+    tagline: "Arcade racing controlled by real-time hand gestures",
+    category: "AI & Machine Learning",
     featured: false,
-    status: 'Completed',
-    image: '/images/projects/iot-hydration.jpg',
-    description:
-      'An automated fluid management system engineered to monitor reservoir volume, regulate automated dispensing cycles, and provide real-time digital telemetrics via microcontrollers and calibrated level sensors.',
-    detailedSpecs: [
-      'Sensor calibration for contactless or immersed level measurement with threshold trigger relays',
-      'Automated solenoid valve and pump actuation with safety anti-overflow timer cutoffs',
-      'OLED digital instrumentation display showing system status, flow metrics, and alerts',
-      'Energy-efficient microprocessor sleep modes for standalone battery-backed operation'
+    status: "Completed",
+    summary:
+      "A webcam-driven racing game where steering and actions come from live hand landmark tracking instead of a keyboard.",
+    technologies: [
+      "TypeScript",
+      "MediaPipe Hands",
+      "Computer vision",
+      "HTML5 Canvas",
+      "Game loop design",
     ],
-    technologies: ['IoT', 'Microcontrollers', 'C++', 'Fluid Sensing', 'Actuator Relays', 'Circuit Design'],
-    stats: [
-      { label: 'Metering Accuracy', value: '±2 mL' },
-      { label: 'Safety Overrides', value: 'Dual-Layer' }
-    ]
+    image: "/images/projects/gesture-game.jpg",
+    visualKind: "illustrative",
+    visualCaption: "Illustrative render of gesture-controlled gameplay.",
+    links: [
+      {
+        label: "View repository",
+        href: "https://github.com/ENiGMA-101/Road-Rash-Computer-Vision-Game",
+        kind: "github",
+      },
+    ],
   },
   {
-    id: 'fifa-telegram-extension',
-    title: 'FIFA 2026 Live Match Automation Suite',
-    tagline: 'Dual-platform notification extension & automated Telegram match bot with GitHub Actions',
-    category: 'Software & Web',
+    id: "fifa-match-automation",
+    title: "FIFA 2026 Match Automation Suite",
+    tagline: "Browser extension and Telegram bot driven by GitHub Actions",
+    category: "Software & Web",
     featured: false,
-    status: 'Completed',
-    image: '/images/creative/design-system.jpg',
-    githubUrl: 'https://github.com/ENiGMA-101/FIFA-World-cup-2026-reminder-extension',
-    description:
-      'A multi-tool fan automation system comprising a modern browser extension and a Python Telegram bot. Provides real-time score updates, half-time and full-time alerts, match countdowns, and upcoming fixtures automated completely through scheduled serverless GitHub Actions workflows.',
-    detailedSpecs: [
-      'Browser extension with rich UI for tracking favorite teams, live match clocks, and notifications',
-      'Python Telegram bot dispatched via scheduled GitHub Actions cron jobs with zero hosting costs',
-      'Clean JSON API ingestion and caching to prevent rate-limiting during high-traffic match windows'
+    status: "Completed",
+    summary:
+      "Two notification clients — a Chrome extension and a Telegram bot — fed by scheduled workflows rather than a always-on server.",
+    technologies: [
+      "JavaScript",
+      "Python",
+      "GitHub Actions",
+      "Telegram Bot API",
+      "Chrome Extension API",
     ],
-    technologies: ['Python', 'JavaScript', 'GitHub Actions', 'Telegram Bot API', 'Chrome Extension API', 'REST API'],
-    stats: [
-      { label: 'Automation', value: 'Serverless CI/CD' },
-      { label: 'Platforms', value: 'Chrome & Telegram' }
-    ]
-  }
+    image: "/images/creative/design-system.jpg",
+    visualKind: "illustrative",
+    visualCaption: "Illustrative render representing the notification pipeline.",
+    links: [
+      {
+        label: "Extension repository",
+        href: "https://github.com/ENiGMA-101/FIFA-World-cup-2026-reminder-extension",
+        kind: "github",
+      },
+      {
+        label: "Bot repository",
+        href: "https://github.com/ENiGMA-101/FIFA-World-cup-2026-telegram-bot",
+        kind: "github",
+      },
+    ],
+  },
+  {
+    id: "chatpal-ai-desktop",
+    title: "ChatPal AI Desktop",
+    tagline: "AI desktop application — repository pending",
+    category: "Software & Web",
+    featured: false,
+    unverified: true,
+    status: "Prototype",
+    summary:
+      "An AI-oriented desktop application. Repository details are not yet public, so this card is a labelled placeholder.",
+    technologies: ["Desktop application", "AI integration"],
+    image: "/images/projects/chatpal-ai-desktop.jpg",
+    visualKind: "illustrative",
+    visualCaption:
+      "Placeholder visual. Replace with a screenshot from the actual application.",
+    links: [],
+  },
 ];
+
+export const FEATURED_PROJECTS = PROJECTS.filter((p) => p.featured);
+export const SUPPORTING_PROJECTS = PROJECTS.filter((p) => !p.featured);
+
+export const PROJECT_CATEGORIES: ("All" | ProjectCategory)[] = [
+  "All",
+  "Robotics & Embedded",
+  "AI & Machine Learning",
+  "Research",
+  "Software & Web",
+];
+
+/* -------------------------------------------------------------------------- */
+/* SKILLS                                                                     */
+/* -------------------------------------------------------------------------- */
 
 export const SKILL_CATEGORIES: SkillCategory[] = [
   {
-    title: 'Programming Languages',
-    description: 'Foundational syntax, object-oriented principles, and algorithmic problem solving',
-    iconName: 'Code2',
+    title: "Programming Languages",
+    description: "Core syntax, algorithmic thinking and object-oriented design.",
+    iconName: "code",
     skills: [
-      { name: 'C++', highlight: true, level: 'Advanced / Embedded' },
-      { name: 'Python', highlight: true, level: 'Scripting & AI' },
-      { name: 'JavaScript (ES6+)', highlight: true, level: 'Modern Web' },
-      { name: 'TypeScript', highlight: true, level: 'Typed Systems' },
-      { name: 'C', highlight: false, level: 'Low-Level Systems' },
-      { name: 'SQL', highlight: false, level: 'Relational DB' },
-      { name: 'HTML5 & CSS3', highlight: false, level: 'Semantic UI' }
-    ]
+      { name: "C++", note: "Embedded & firmware", core: true },
+      { name: "Python", note: "Scripting, automation, data", core: true },
+      { name: "JavaScript", note: "Modern ES modules", core: true },
+      { name: "TypeScript", note: "Typed application code", core: true },
+      { name: "C", note: "Low-level systems", core: false },
+      { name: "SQL", note: "Relational queries", core: false },
+      { name: "HTML & CSS", note: "Semantic structure & styling", core: false },
+    ],
   },
   {
-    title: 'Frontend & Web Development',
-    description: 'Building responsive, accessible, high-performance user interfaces',
-    iconName: 'Layout',
+    title: "Frontend & Web",
+    description: "Accessible, responsive interfaces built on the modern React stack.",
+    iconName: "layout",
     skills: [
-      { name: 'React', highlight: true, level: 'Core Framework' },
-      { name: 'Tailwind CSS', highlight: true, level: 'Utility Styling' },
-      { name: 'Vite', highlight: true, level: 'Modern Bundler' },
-      { name: 'Responsive Design', highlight: false, level: 'Mobile First' },
-      { name: 'HTML5 Canvas', highlight: false, level: 'Interactive 2D' },
-      { name: 'RESTful APIs', highlight: false, level: 'Client Integration' },
-      { name: 'Component Architecture', highlight: false, level: 'Modular Systems' }
-    ]
+      { name: "React", note: "Component architecture", core: true },
+      { name: "Tailwind CSS", note: "Token-driven styling", core: true },
+      { name: "Vite", note: "Bundling & dev server", core: true },
+      { name: "HTML5 Canvas", note: "2D rendering & game loops", core: false },
+      { name: "Responsive design", note: "Mobile-first layout", core: false },
+      { name: "REST API integration", note: "Client/server contracts", core: false },
+    ],
   },
   {
-    title: 'Robotics & Embedded Systems',
-    description: 'Physical computing, microcontrollers, sensor integration, and motor actuation',
-    iconName: 'Cpu',
+    title: "Robotics & Embedded",
+    description: "Microcontrollers, sensor calibration and motor actuation.",
+    iconName: "cpu",
     skills: [
-      { name: 'ESP32 / ESP32-S3', highlight: true, level: 'Primary Microcontroller' },
-      { name: 'Arduino IDE & C++', highlight: true, level: 'Firmware Dev' },
-      { name: 'Ultrasonic & IR Arrays', highlight: true, level: 'Sensor Calibration' },
-      { name: 'Motor Drivers (L298N)', highlight: false, level: 'H-Bridge Actuation' },
-      { name: 'I2C & UART Protocols', highlight: false, level: 'Serial Comms' },
-      { name: 'Breadboard Prototyping', highlight: false, level: 'Circuit Assembly' },
-      { name: 'Microprocessor Architecture', highlight: false, level: 'Academic Core' }
-    ]
+      { name: "ESP32 / ESP32-S3", note: "Primary microcontroller", core: true },
+      { name: "Arduino IDE", note: "Sketch-based firmware", core: true },
+      { name: "IR sensor arrays", note: "Line detection & calibration", core: true },
+      { name: "HC-SR04 ultrasonic", note: "Distance sensing", core: false },
+      { name: "L298N motor driver", note: "H-bridge PWM control", core: false },
+      { name: "I2C & UART", note: "Peripheral buses", core: false },
+      { name: "Breadboard prototyping", note: "Circuit assembly", core: false },
+    ],
   },
   {
-    title: 'AI & Machine Learning',
-    description: 'Computer vision, algorithmic optimization, and practical ML integration',
-    iconName: 'BrainCircuit',
+    title: "AI & Machine Learning",
+    description: "Computer vision and optimisation applied to real problems.",
+    iconName: "brain",
     skills: [
-      { name: 'MediaPipe (Hand Tracking)', highlight: true, level: 'Real-time Vision' },
-      { name: 'Computer Vision Basics', highlight: true, level: 'Image Processing' },
-      { name: 'Algorithmic Optimization', highlight: true, level: 'Constraint Heuristics' },
-      { name: 'Python Data Libraries', highlight: false, level: 'Analysis & Clean Data' },
-      { name: 'Prompt Engineering', highlight: false, level: 'LLM Orchestration' }
-    ]
+      { name: "MediaPipe Hands", note: "21-point landmark tracking", core: true },
+      { name: "Computer vision basics", note: "Frames, filtering, features", core: true },
+      { name: "Heuristic optimisation", note: "Constraint & fairness objectives", core: true },
+      { name: "Python data tooling", note: "Cleaning & analysis", core: false },
+      { name: "Prompt engineering", note: "LLM-assisted workflows", core: false },
+    ],
   },
   {
-    title: 'Backend & Databases',
-    description: 'Data persistence, API design, and server execution environments',
-    iconName: 'Database',
+    title: "Backend & Databases",
+    description: "Data modelling, persistence and server-side execution.",
+    iconName: "database",
     skills: [
-      { name: 'Node.js', highlight: false, level: 'Runtime' },
-      { name: 'MySQL / Relational DBs', highlight: true, level: 'Schema & Queries' },
-      { name: 'SQLite', highlight: false, level: 'Embedded Storage' },
-      { name: 'JSON & REST Services', highlight: false, level: 'Data Modeling' },
-      { name: 'Basic Express', highlight: false, level: 'Routing' }
-    ]
+      { name: "MySQL", note: "Schema & relational queries", core: true },
+      { name: "Node.js", note: "JavaScript runtime", core: false },
+      { name: "SQLite", note: "Embedded storage", core: false },
+      { name: "REST services", note: "JSON API design", core: false },
+    ],
   },
   {
-    title: 'Tools & Workflow Platforms',
-    description: 'Version control, design tooling, and development environments',
-    iconName: 'Wrench',
+    title: "Tools & Platforms",
+    description: "Version control, CI automation and design tooling.",
+    iconName: "wrench",
     skills: [
-      { name: 'Git & GitHub', highlight: true, level: 'Daily Version Control' },
-      { name: 'VS Code', highlight: true, level: 'Primary IDE' },
-      { name: 'GitHub Actions', highlight: true, level: 'CI/CD & Cron' },
-      { name: 'Figma', highlight: true, level: 'UI/UX Design Systems' },
-      { name: 'Linux / Bash CLI', highlight: false, level: 'Command Line' },
-      { name: 'Vercel Deployment', highlight: false, level: 'Edge Hosting' }
-    ]
-  }
+      { name: "Git & GitHub", note: "Daily version control", core: true },
+      { name: "GitHub Actions", note: "Scheduled workflows & CI", core: true },
+      { name: "VS Code", note: "Primary editor", core: false },
+      { name: "Figma", note: "UI & design systems", core: false },
+      { name: "Vercel", note: "Deployment & serverless functions", core: false },
+      { name: "Linux CLI", note: "Shell & tooling", core: false },
+    ],
+  },
 ];
 
+/** Flat list used by the skills marquee. */
+export const SKILL_MARQUEE: string[] = SKILL_CATEGORIES.flatMap((c) =>
+  c.skills.filter((s) => s.core).map((s) => s.name),
+);
+
+/* -------------------------------------------------------------------------- */
+/* EDUCATION                                                                  */
+/* -------------------------------------------------------------------------- */
+
 export const EDUCATION = {
-  institution: 'University of Asia Pacific (UAP)',
-  location: '74/A, Green Road, Farmgate, Dhaka - 1205, Bangladesh',
-  degree: 'Bachelor of Science in Computer Science and Engineering (B.Sc. in CSE)',
-  status: 'Undergraduate Degree in Progress',
-  department: 'Department of Computer Science and Engineering',
+  institution: "University of Asia Pacific (UAP)",
+  location: "74/A Green Road, Farmgate, Dhaka 1205, Bangladesh",
+  degree: "Bachelor of Science in Computer Science and Engineering",
+  status: "Undergraduate — in progress",
+  department: "Department of Computer Science and Engineering",
   description:
-    'Pursuing rigorous foundational and applied computer science education with a strong emphasis on algorithm design, hardware-software co-design, artificial intelligence, microprocessors, and software engineering methodologies.',
-  coreCoursework: [
-    'Data Structures & Algorithms',
-    'Object-Oriented Programming (OOP)',
-    'Microprocessors & Microcontrollers',
-    'Database Management Systems (DBMS)',
-    'Computer Architecture & Organization',
-    'Artificial Intelligence & Expert Systems',
-    'Computer Networks & Data Communication',
-    'Discrete Mathematics & Numerical Methods',
-    'Software Engineering & Project Management'
+    "A computer science and engineering programme pairing algorithmic foundations with systems-level subjects — microprocessors, databases, networks and software engineering — alongside the mathematics that sits underneath them.",
+  coursework: [
+    "Data Structures & Algorithms",
+    "Object-Oriented Programming",
+    "Microprocessors & Microcontrollers",
+    "Database Management Systems",
+    "Computer Architecture",
+    "Artificial Intelligence",
+    "Computer Networks",
+    "Discrete Mathematics",
+    "Numerical Methods",
+    "Software Engineering",
   ],
-  academicFocus:
-    'Active focus on applied autonomous robotics, constraint-based timetable scheduling algorithms, and visible light optical communication.'
+  focus:
+    "Applied autonomous robotics, fairness-aware scheduling, and visible light optical communication.",
 };
+
+/* -------------------------------------------------------------------------- */
+/* CERTIFICATIONS                                                             */
+/* -------------------------------------------------------------------------- */
 
 export const CERTIFICATIONS: CertificateItem[] = [
   {
-    id: 'cert-figma',
-    title: 'Figma Design System & UI/UX Principles',
-    issuer: 'Design System Learning Track',
-    issueDate: '2026',
-    category: 'UI/UX & Design',
-    skillsLearned: ['Design Tokens', 'Auto-Layout Components', 'Responsive Grids', 'Interactive Prototyping'],
-    verifyUrl: 'https://github.com/ENiGMA-101/Figma-Design-System'
+    id: "cert-figma",
+    title: "Figma Design Systems & UI Components",
+    issuer: "Design systems coursework",
+    issueDate: "2026",
+    category: "UI / UX",
+    skillsLearned: ["Design tokens", "Auto layout", "Component variants", "Prototyping"],
+    verifyUrl: "https://github.com/ENiGMA-101/Figma-Design-System",
   },
   {
-    id: 'cert-embedded-iot',
-    title: 'Microcontroller Programming & IoT Systems',
-    issuer: 'Academic Course & Lab Certification',
-    issueDate: '2025 - 2026',
-    category: 'Embedded Systems',
-    skillsLearned: ['ESP32 Architecture', 'Sensor Interfacing', 'C++ Firmware', 'I2C/SPI Protocols']
+    id: "cert-embedded",
+    title: "Microcontroller Programming & Embedded Systems",
+    issuer: "University coursework & lab work",
+    issueDate: "2025 – 2026",
+    category: "Embedded systems",
+    skillsLearned: ["ESP32 architecture", "Sensor interfacing", "C++ firmware", "I2C & UART"],
   },
   {
-    id: 'cert-python-ds',
-    title: 'Python for Problem Solving & Algorithmic Thinking',
-    issuer: 'Technical Skill Certification',
-    issueDate: '2025',
-    category: 'Computer Science',
-    skillsLearned: ['Data Structures', 'Algorithmic Complexity', 'Automation Scripting', 'Object-Oriented Design']
+    id: "cert-algorithms",
+    title: "Data Structures & Algorithmic Problem Solving",
+    issuer: "University coursework",
+    issueDate: "2025",
+    category: "Computer science",
+    skillsLearned: ["Complexity analysis", "Recursion & trees", "Graphs", "Dynamic programming"],
   },
   {
-    id: 'cert-web-fundamentals',
-    title: 'Modern Frontend & Responsive Web Design',
-    issuer: 'Web Development Certification',
-    issueDate: '2024 - 2025',
-    category: 'Web Engineering',
-    skillsLearned: ['Modern JavaScript', 'CSS Flexbox & Grid', 'Semantic HTML5', 'State Management']
+    id: "cert-web",
+    title: "Modern Frontend & Responsive Web Development",
+    issuer: "Self-directed coursework",
+    issueDate: "2024 – 2025",
+    category: "Web engineering",
+    skillsLearned: ["Modern JavaScript", "CSS layout", "Semantic HTML", "State management"],
   },
   {
-    id: 'cert-placeholder-upcoming',
-    title: 'Advanced AI & Embedded Vision (In Progress)',
-    issuer: 'Specialization Track',
-    issueDate: 'Current Study',
-    category: 'AI & Robotics',
-    skillsLearned: ['Edge AI', 'MediaPipe Landmarking', 'Embedded Inference', 'Kinematics']
-  }
+    id: "cert-ai",
+    title: "Computer Vision & Real-Time Inference",
+    issuer: "Project-based learning",
+    issueDate: "In progress",
+    category: "AI / Robotics",
+    skillsLearned: ["Hand landmark detection", "Frame pipelines", "Model integration"],
+    placeholder: true,
+  },
 ];
+
+/* -------------------------------------------------------------------------- */
+/* RESEARCH & EXPERIENCE TIMELINE                                            */
+/* -------------------------------------------------------------------------- */
 
 export const RESEARCH_TIMELINE: ResearchItem[] = [
   {
-    id: 'res-vlc',
-    title: 'Visible Light Communication (VLC) Research',
-    role: 'Undergraduate Researcher',
-    institution: 'University of Asia Pacific',
-    period: '2025 - Present',
-    type: 'Research',
+    id: "res-vlc",
+    title: "Visible Light Communication (VLC)",
+    role: "Undergraduate researcher",
+    institution: "University of Asia Pacific",
+    period: "2025 – present",
+    type: "Research",
     summary:
-      'Investigating optical wireless communication techniques utilizing high-speed light-emitting diodes to enable secure, high-bandwidth data transmission without radio-frequency interference.',
+      "Investigating visible light as an indoor data medium where RF spectrum is congested or restricted, focusing on link characterisation and ambient-light rejection.",
     contributions: [
-      'Prototyped emitter driver circuitry and optical photodiode receivers',
-      'Evaluated ambient noise filtering strategies in controlled indoor environments',
-      'Documenting modulation scheme viability for localized indoor sensor telemetry'
+      "Built the optical transmitter and photodiode receiver stages of a test link.",
+      "Ran controlled-distance measurements to characterise the channel.",
+      "Documented filtering approaches for rejecting ambient room light.",
     ],
-    technologies: ['Optical Wireless', 'Li-Fi Concepts', 'Signal Analysis', 'Circuit Prototyping']
+    technologies: ["Optical wireless", "Signal processing", "Circuit prototyping"],
   },
   {
-    id: 'res-fairness-routine',
-    title: 'Fairness-Aware Academic Routine Generation',
-    role: 'Lead Developer & Researcher',
-    institution: 'University of Asia Pacific',
-    period: '2025 - 2026',
-    type: 'Research',
+    id: "res-fairness",
+    title: "Fairness-Aware Academic Routine Generation",
+    role: "Lead developer & researcher",
+    institution: "University of Asia Pacific",
+    period: "2025 – 2026",
+    type: "Research",
     summary:
-      'Engineered an interactive research model tackling unfairness, lecture clashes, and excessive downtime in university schedules through multi-objective constraint programming.',
+      "A scheduling system that treats student preference and idle time as fairness objectives rather than soft constraints, with an interactive interface for inspecting the trade-offs.",
     contributions: [
-      'Authored constraint optimization algorithms prioritizing both faculty and student batch satisfaction',
-      'Developed interactive web-based scheduling preview and survey collection interface',
-      'Analyzed statistical metrics on schedule equity and classroom utilization'
+      "Modelled room, teacher and batch constraints for the routine generation problem.",
+      "Implemented the fairness and idle-gap objectives used to rank candidate schedules.",
+      "Built the interactive front end used to review generated routines.",
     ],
-    technologies: ['Algorithmic Optimization', 'React', 'Constraint Programming', 'Data Analytics'],
-    link: 'https://github.com/ENiGMA-101/fairness-ai-routine--v'
+    technologies: ["Constraint optimisation", "React", "Data visualisation"],
+    link: "https://github.com/ENiGMA-101/fairness-ai-routine--v",
   },
   {
-    id: 'res-food-robot',
-    title: 'Indoor Autonomous Food Delivery Robot',
-    role: 'Project Lead & Firmware Engineer',
-    institution: 'University of Asia Pacific',
-    period: '2025 - 2026',
-    type: 'Academic Project',
+    id: "res-robot",
+    title: "Indoor Autonomous Food Delivery Robot",
+    role: "Project lead & firmware engineer",
+    institution: "University of Asia Pacific",
+    period: "2025 – 2026",
+    type: "Academic Project",
     summary:
-      'Spearheaded an embedded systems team to build a physical line-navigating food delivery robot capable of automated indoor trajectory tracking and active ultrasonic obstacle avoidance.',
+      "Led a small team building a physical line-following delivery robot, owning the firmware, sensor integration and system testing.",
     contributions: [
-      'Programmed core ESP32-S3 firmware in C++ with custom PID-style steering feedback',
-      'Integrated 5-channel IR sensor array with dynamic calibration for varying floor reflectivity',
-      'Designed fail-safe obstacle detection loop with real-time I2C status telemetry'
+      "Wrote the ESP32-S3 firmware implementing line tracking and obstacle response.",
+      "Calibrated the five-channel IR array against the actual test surface.",
+      "Integrated the LCD status output used to debug runs without a laptop.",
     ],
-    technologies: ['ESP32-S3', 'Embedded C++', 'Hardware Integration', 'Team Leadership'],
-    link: 'https://github.com/ENiGMA-101/Indoor-Food-Delivery-Robot'
-  }
+    technologies: ["ESP32-S3", "Embedded C++", "Sensor integration", "Team leadership"],
+    link: "https://github.com/ENiGMA-101/Indoor-Food-Delivery-Robot",
+  },
 ];
+
+/* -------------------------------------------------------------------------- */
+/* CREATIVE LAB / VISUAL ARCHIVE                                              */
+/* -------------------------------------------------------------------------- */
 
 export const CREATIVE_GALLERY: CreativeItem[] = [
   {
-    id: 'cg-1',
-    title: 'Autonomous Mobile Robot Chassis',
-    category: 'Hardware Engineering',
-    image: '/images/projects/food-delivery-robot.jpg',
-    description: 'ESP32 microcontroller integration with 5-channel IR reflection sensors and dual motor driver.'
+    id: "cg-robot",
+    title: "Line-following robot chassis",
+    category: "Robotics",
+    image: "/images/projects/delivery-robot-cafeteria.jpg",
+    description:
+      "Two-wheel drive platform with an ESP32-S3, a five-channel IR array and an ultrasonic rangefinder.",
+    visualKind: "illustrative",
   },
   {
-    id: 'cg-2',
-    title: 'Embedded Workbench & Circuitry',
-    category: 'Prototyping & Soldering',
-    image: '/images/creative/embedded-lab.jpg',
-    description: 'Precision jumper wiring, breadboard signal verification, and sensor calibration testbench.'
+    id: "cg-bench",
+    title: "Prototyping bench",
+    category: "Electronics",
+    image: "/images/creative/embedded-lab.jpg",
+    description:
+      "Jumper wiring, breadboarding and sensor calibration before anything gets soldered.",
+    visualKind: "illustrative",
   },
   {
-    id: 'cg-3',
-    title: 'Algorithmic Fairness Matrix',
-    category: 'Research & UI Architecture',
-    image: '/images/projects/ai-routine.jpg',
-    description: 'Data model visualizing schedule satisfaction index across multiple student cohorts.'
+    id: "cg-schedule",
+    title: "Schedule fairness model",
+    category: "Research UI",
+    image: "/images/projects/ai-routine.jpg",
+    description:
+      "How a routine looks when it is scored on who it disadvantages rather than only on validity.",
+    visualKind: "illustrative",
   },
   {
-    id: 'cg-4',
-    title: 'Optical Wireless Spectrum Lab',
-    category: 'VLC Research',
-    image: '/images/projects/vlc-research.jpg',
-    description: 'Visible light communication transceiver testing focused optical transmission beams.'
+    id: "cg-vlc",
+    title: "Optical wireless bench",
+    category: "VLC research",
+    image: "/images/projects/vlc-research.jpg",
+    description:
+      "Transmitter and receiver stages of the visible light communication test link.",
+    visualKind: "illustrative",
   },
   {
-    id: 'cg-5',
-    title: 'Real-Time Landmark Recognition',
-    category: 'Computer Vision',
-    image: '/images/projects/gesture-game.jpg',
-    description: 'MediaPipe 21-point skeletal hand landmark extraction driving interactive physics simulation.'
+    id: "cg-vision",
+    title: "Gesture landmark pipeline",
+    category: "Computer vision",
+    image: "/images/projects/gesture-game.jpg",
+    description:
+      "Hand landmarks extracted per frame and mapped onto steering input.",
+    visualKind: "illustrative",
   },
   {
-    id: 'cg-6',
-    title: 'Design System & Token Architecture',
-    category: 'UI/UX Engineering',
-    image: '/images/creative/design-system.jpg',
-    description: 'Structured component tokens, typography scales, and modular geometric interface patterns.'
-  }
+    id: "cg-system",
+    title: "Design tokens & grid",
+    category: "Interface systems",
+    image: "/images/creative/design-system.jpg",
+    description:
+      "The token set, type scale and grid this portfolio is built from.",
+    visualKind: "illustrative",
+  },
+];
+
+/* -------------------------------------------------------------------------- */
+/* NAVIGATION                                                                 */
+/* -------------------------------------------------------------------------- */
+
+export const NAV_LINKS = [
+  { label: "Work", href: "#work" },
+  { label: "About", href: "#about" },
+  { label: "Skills", href: "#skills" },
+  { label: "Education", href: "#education" },
+  { label: "Research", href: "#research" },
+  { label: "Lab", href: "#lab" },
+  { label: "Contact", href: "#contact" },
 ];

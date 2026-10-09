@@ -1,252 +1,275 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { CERTIFICATIONS, CertificateItem } from '../data/portfolioData';
-import { Award, ArrowLeft, ArrowRight, Play, Pause, ExternalLink, ShieldCheck, Check } from 'lucide-react';
-import HHPLogo from './HHPLogo';
+import { useEffect, useRef, useState } from "react";
+import AutoCarousel from "./AutoCarousel";
+import HHPLogo from "./HHPLogo";
+import { CERTIFICATIONS, type CertificateItem } from "../data/portfolioData";
 
-export const CertificationsSection: React.FC = () => {
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [selectedCert, setSelectedCert] = useState<CertificateItem | null>(null);
+/* ==========================================================================
+   Certifications — seamless right-to-left gallery
+   Uses the shared AutoCarousel, which fixes the previous janky
+   setInterval + scrollBy implementation:
+   • continuous, smooth right-to-left travel at a constant speed
+   • pauses immediately on hover, resumes on leave
+   • drag / touch supported, with accidental clicks suppressed after a drag
+   • loops seamlessly with no visible reset and no duplicated gap
+   • pauses while the tab is hidden
+   • respects prefers-reduced-motion (falls back to a scrollable rail)
+   ========================================================================== */
 
-  const scroll = (direction: 'left' | 'right') => {
-    if (scrollRef.current) {
-      const scrollAmount = 360;
-      scrollRef.current.scrollBy({
-        left: direction === 'left' ? -scrollAmount : scrollAmount,
-        behavior: 'smooth'
-      });
-    }
-  };
-
-  // Continuous right-to-left scroll
-  useEffect(() => {
-    if (!isAutoPlaying) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      setIsAutoPlaying(false);
-      return;
-    }
-
-    const interval = setInterval(() => {
-      if (scrollRef.current) {
-        const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-        if (scrollLeft + clientWidth >= scrollWidth - 10) {
-          scrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
-        } else {
-          scrollRef.current.scrollBy({ left: 1, behavior: 'auto' });
-        }
-      }
-    }, 35);
-
-    return () => clearInterval(interval);
-  }, [isAutoPlaying]);
+export function CertificationsSection() {
+  const [selected, setSelected] = useState<CertificateItem | null>(null);
 
   return (
-    <section id="certifications" className="py-24 relative overflow-hidden bg-slate-50/50 dark:bg-[#0B1220]/40">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-          <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 text-xs font-mono text-teal-600 dark:text-teal-400 mb-3">
-              <Award className="w-3.5 h-3.5" />
-              <span>ACCREDITATIONS & TRAININGS</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-              Certifications & Technical Credentials
-            </h2>
-            <p className="mt-2 text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-2xl">
-              Verified domain competencies spanning UI design systems, microcontrollers, algorithms, and web fundamentals.
-            </p>
-          </div>
+    <section
+      id="certifications"
+      className="relative scroll-mt-24 border-y border-[var(--line-subtle)] bg-[var(--surface-sunken)] py-20 sm:py-24"
+    >
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
+        <header className="max-w-2xl">
+          <p className="rule-label">Certifications</p>
+          <h2 className="mt-3 font-display text-headline font-bold text-[var(--content-primary)]">
+            Coursework &amp; credentials
+          </h2>
+          <p className="mt-4 text-body-lg text-[var(--content-muted)]">
+            Formal coursework and structured self-study, listed with what each one actually
+            covered. Certificate images are labelled placeholders until the issued PDFs are
+            added to the repository.
+          </p>
+        </header>
 
-          {/* Controls */}
-          <div className="flex items-center gap-2 self-start md:self-auto">
-            <button
-              onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-              className="p-2.5 rounded-xl border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-teal-400 transition-colors cursor-pointer"
-              title={isAutoPlaying ? 'Pause continuous motion' : 'Play continuous motion'}
-              aria-label={isAutoPlaying ? 'Pause certificate carousel' : 'Play certificate carousel'}
-            >
-              {isAutoPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-            </button>
-            <button
-              onClick={() => scroll('left')}
-              className="p-2.5 rounded-xl border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
-              aria-label="Previous certificate"
-            >
-              <ArrowLeft className="w-4 h-4" />
-            </button>
-            <button
-              onClick={() => scroll('right')}
-              className="p-2.5 rounded-xl border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
-              aria-label="Next certificate"
-            >
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </div>
-        </div>
-
-        {/* Horizontal Moving Certificate Track */}
-        <div
-          ref={scrollRef}
-          onMouseEnter={() => setIsAutoPlaying(false)}
-          className="flex gap-6 overflow-x-auto scroll-smooth pb-8 snap-x snap-mandatory focus:outline-none"
-          tabIndex={0}
-          aria-label="Horizontal certificates track"
-        >
-          {CERTIFICATIONS.map((cert) => {
-            const isPlaceholder = cert.id.includes('placeholder');
-            return (
-              <div
+        <div className="mt-12">
+          <AutoCarousel
+            label="Certificates"
+            speed={38}
+            gap={24}
+            edgeFade={false}
+            railClassName="-mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-10 lg:px-10"
+          >
+            {CERTIFICATIONS.map((cert) => (
+              <CertificateCard
                 key={cert.id}
-                onClick={() => setSelectedCert(cert)}
-                className={`flex-shrink-0 w-[290px] sm:w-[350px] snap-start rounded-3xl p-6 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 cursor-pointer border ${
-                  isPlaceholder
-                    ? 'border-dashed border-slate-300 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/40 opacity-80'
-                    : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xl shadow-slate-200/50 dark:shadow-black/30 hover:border-teal-500/50'
-                }`}
-              >
-                <div>
-                  {/* Top Header Badge */}
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="px-2.5 py-1 rounded-full text-[10px] font-mono font-semibold bg-blue-50 dark:bg-blue-950/80 text-blue-600 dark:text-teal-400 border border-blue-200 dark:border-blue-900">
-                      {cert.category}
-                    </span>
-                    <span className="text-xs font-mono text-slate-400">
-                      {cert.issueDate}
-                    </span>
-                  </div>
-
-                  {/* Certificate Graphical Embellishment */}
-                  <div className="relative aspect-[16/9] rounded-2xl overflow-hidden mb-5 bg-gradient-to-br from-slate-900 via-slate-950 to-blue-950 p-4 flex flex-col justify-between border border-slate-800/80">
-                    <div className="flex items-center justify-between">
-                      <HHPLogo size={32} showGlow={false} />
-                      <ShieldCheck className="w-5 h-5 text-teal-400" />
-                    </div>
-                    <div>
-                      <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest block">
-                        CERTIFICATE OF COMPLETION
-                      </span>
-                      <p className="text-xs font-bold text-white line-clamp-1 mt-0.5">
-                        {cert.title}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Title & Issuer */}
-                  <h3 className="text-base font-bold text-slate-900 dark:text-white leading-snug line-clamp-2">
-                    {cert.title}
-                  </h3>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 mb-4 font-mono">
-                    Issuer: {cert.issuer}
-                  </p>
-
-                  {/* Skills tags */}
-                  <div className="flex flex-wrap gap-1.5 mb-4">
-                    {cert.skillsLearned.map((skill, idx) => (
-                      <span
-                        key={idx}
-                        className="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-[10px] font-mono text-slate-700 dark:text-slate-300"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Footer Link */}
-                <div className="pt-3 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-xs">
-                  {cert.verifyUrl ? (
-                    <a
-                      href={cert.verifyUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                      className="inline-flex items-center gap-1.5 font-semibold text-blue-600 dark:text-teal-400 hover:underline"
-                    >
-                      <span>Verify Credential</span>
-                      <ExternalLink className="w-3.5 h-3.5" />
-                    </a>
-                  ) : (
-                    <span className="text-slate-400 font-mono text-[11px] flex items-center gap-1">
-                      <Check className="w-3.5 h-3.5 text-teal-500" />
-                      <span>Verified Coursework</span>
-                    </span>
-                  )}
-                  <span className="text-[10px] text-slate-400 font-mono">HHP.CERT</span>
-                </div>
-              </div>
-            );
-          })}
+                cert={cert}
+                onOpen={() => setSelected(cert)}
+              />
+            ))}
+          </AutoCarousel>
         </div>
-
       </div>
 
-      {/* Detail Dialog */}
-      {selectedCert && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
-          onClick={() => setSelectedCert(null)}
-          role="dialog"
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="w-full max-w-lg rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 sm:p-8 shadow-2xl"
-          >
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-xs font-mono text-teal-500 uppercase">
-                {selectedCert.category}
-              </span>
-              <span className="text-xs font-mono text-slate-400">
-                {selectedCert.issueDate}
-              </span>
-            </div>
-
-            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-1">
-              {selectedCert.title}
-            </h3>
-            <p className="text-xs font-mono text-blue-600 dark:text-teal-400 mb-4">
-              Issued by: {selectedCert.issuer}
-            </p>
-
-            <div className="space-y-3 mb-6">
-              <h4 className="text-xs font-mono uppercase text-slate-400">
-                // Competencies Validated:
-              </h4>
-              <ul className="space-y-1.5">
-                {selectedCert.skillsLearned.map((s, i) => (
-                  <li key={i} className="flex items-center gap-2 text-xs text-slate-700 dark:text-slate-300">
-                    <Check className="w-3.5 h-3.5 text-teal-400" />
-                    <span>{s}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-slate-800">
-              {selectedCert.verifyUrl && (
-                <a
-                  href={selectedCert.verifyUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-blue-600 text-white text-xs font-semibold hover:bg-blue-500"
-                >
-                  <span>Open Verification Link</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
-              )}
-              <button
-                onClick={() => setSelectedCert(null)}
-                className="px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-700 text-xs font-semibold ml-auto"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {selected && <CertificateDialog cert={selected} onClose={() => setSelected(null)} />}
     </section>
   );
-};
+}
+
+function CertificateCard({
+  cert,
+  onOpen,
+}: {
+  cert: CertificateItem;
+  onOpen: () => void;
+}) {
+  return (
+    <article className="flex w-[290px] flex-col rounded-[22px] border border-[var(--line-subtle)] bg-[var(--surface-raised)] p-5 shadow-[var(--shadow-card)] transition duration-300 hover:-translate-y-1 hover:border-[var(--accent-solid)] hover:shadow-[var(--shadow-lift)] sm:w-[340px]">
+      <div className="flex items-center justify-between gap-2">
+        <span className="rounded-full border border-[var(--line-subtle)] bg-[var(--surface-sunken)] px-2.5 py-1 font-mono text-[10px] font-medium text-[var(--content-secondary)]">
+          {cert.category}
+        </span>
+        <span className="font-mono text-[11px] text-[var(--content-faint)]">{cert.issueDate}</span>
+      </div>
+
+      {/* Certificate plate — clearly a placeholder, not a fabricated design */}
+      <div className="relative mt-4 flex aspect-[16/9] flex-col justify-between overflow-hidden rounded-2xl border border-[var(--line-subtle)] bg-[var(--surface-sunken)] p-4">
+        <div className="flex items-center justify-between">
+          <HHPLogo size={30} />
+          {cert.placeholder ? (
+            <span className="rounded-full border border-dashed border-[var(--line-strong)] px-2 py-0.5 font-mono text-[9px] uppercase tracking-wide text-[var(--content-faint)]">
+              Image pending
+            </span>
+          ) : (
+            <span className="rounded-full border border-[var(--line-subtle)] px-2 py-0.5 font-mono text-[9px] uppercase tracking-wide text-[var(--content-faint)]">
+              No image
+            </span>
+          )}
+        </div>
+        <div>
+          <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-[var(--content-faint)]">
+            Certificate record
+          </p>
+          <p className="mt-0.5 line-clamp-2 font-display text-[13px] font-bold leading-snug text-[var(--content-primary)]">
+            {cert.title}
+          </p>
+        </div>
+      </div>
+
+      <h3 className="mt-4 font-display text-[15px] font-bold leading-snug text-[var(--content-primary)]">
+        {cert.title}
+      </h3>
+      <p className="mt-1 font-mono text-[11px] text-[var(--content-muted)]">{cert.issuer}</p>
+
+      <ul className="mt-3.5 flex flex-wrap gap-1.5">
+        {cert.skillsLearned.map((s) => (
+          <li
+            key={s}
+            className="rounded-md bg-[var(--surface-sunken)] px-2 py-0.5 font-mono text-[10px] text-[var(--content-secondary)]"
+          >
+            {s}
+          </li>
+        ))}
+      </ul>
+
+      <div className="mt-auto flex items-center justify-between gap-2 border-t border-[var(--line-subtle)] pt-4">
+        <button
+          type="button"
+          onClick={onOpen}
+          className="text-[13px] font-semibold text-[var(--accent-text)] transition hover:underline"
+        >
+          Details
+        </button>
+        {cert.verifyUrl && (
+          <a
+            href={cert.verifyUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 text-[12px] font-medium text-[var(--content-muted)] transition hover:text-[var(--accent-text)]"
+          >
+            Source
+            <ExternalIcon />
+          </a>
+        )}
+      </div>
+    </article>
+  );
+}
+
+function CertificateDialog({
+  cert,
+  onClose,
+}: {
+  cert: CertificateItem;
+  onClose: () => void;
+}) {
+  const closeRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    closeRef.current?.focus();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [onClose]);
+
+  return (
+    <div
+      className="fixed inset-0 z-50 grid place-items-center bg-black/65 p-4 backdrop-blur-sm"
+      onClick={onClose}
+      role="presentation"
+    >
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="cert-dialog-title"
+        onClick={(e) => e.stopPropagation()}
+        className="max-h-[88vh] w-full max-w-lg overflow-y-auto rounded-[24px] border border-[var(--line-subtle)] bg-[var(--surface-raised)] p-6 shadow-[var(--shadow-pop)] sm:p-8"
+      >
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-[var(--accent-text)]">
+              {cert.category}
+            </p>
+            <h3
+              id="cert-dialog-title"
+              className="mt-1.5 font-display text-title font-bold text-[var(--content-primary)]"
+            >
+              {cert.title}
+            </h3>
+            <p className="mt-1.5 text-caption text-[var(--content-muted)]">
+              {cert.issuer} · {cert.issueDate}
+            </p>
+          </div>
+          <button
+            ref={closeRef}
+            type="button"
+            onClick={onClose}
+            aria-label="Close certificate details"
+            className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-[var(--line-subtle)] text-[var(--content-secondary)] transition hover:text-[var(--content-primary)]"
+          >
+            <CloseIcon />
+          </button>
+        </div>
+
+        <div className="mt-6">
+          <p className="rule-label">What it covered</p>
+          <ul className="mt-3 space-y-2">
+            {cert.skillsLearned.map((s) => (
+              <li key={s} className="flex items-start gap-2.5 text-body text-[var(--content-secondary)]">
+                <CheckIcon />
+                <span>{s}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {cert.placeholder && (
+          <p className="mt-6 rounded-xl border border-dashed border-[var(--line-strong)] bg-[var(--surface-sunken)] p-4 text-caption text-[var(--content-muted)]">
+            No certificate image is published for this entry yet. Add the issued PDF or image
+            to the repository and reference it in{" "}
+            <code className="font-mono">src/data/portfolioData.ts</code>.
+          </p>
+        )}
+
+        <div className="mt-7 flex flex-wrap gap-3 border-t border-[var(--line-subtle)] pt-5">
+          {cert.verifyUrl && (
+            <a
+              href={cert.verifyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-xl bg-[var(--accent-solid)] px-4 py-2.5 text-[13px] font-semibold text-white transition hover:bg-[var(--accent-solidHover)]"
+            >
+              Open source material
+              <ExternalIcon />
+            </a>
+          )}
+          <button
+            type="button"
+            onClick={onClose}
+            className="ml-auto rounded-xl border border-[var(--line-strong)] px-4 py-2.5 text-[13px] font-semibold text-[var(--content-secondary)] transition hover:text-[var(--content-primary)]"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ExternalIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M7 17 17 7" />
+      <path d="M8 7h9v9" />
+    </svg>
+  );
+}
+
+function CloseIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true">
+      <path d="M6 6l12 12M18 6 6 18" />
+    </svg>
+  );
+}
+
+function CheckIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="mt-[3px] h-3.5 w-3.5 shrink-0 text-[var(--aqua-solid)]" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="m5 13 4 4L19 7" />
+    </svg>
+  );
+}
 
 export default CertificationsSection;
