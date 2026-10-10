@@ -1,6 +1,6 @@
 import HHPLogo from "./HHPLogo";
 import { GitHubIcon, LinkedInIcon } from "./SocialIcons";
-import { NAV_LINKS, PERSONAL_INFO } from "../data/portfolioData";
+import { NAV_ITEMS, PERSONAL_INFO } from "../data/portfolioData";
 
 interface FooterProps {
   onReplayIntro?: () => void;
@@ -29,13 +29,13 @@ export function Footer({ onReplayIntro }: FooterProps) {
           <nav aria-label="Footer">
             <p className="rule-label">Sections</p>
             <ul className="mt-3 grid grid-cols-2 gap-x-8 gap-y-2 sm:grid-cols-3">
-              {NAV_LINKS.map((l) => (
-                <li key={l.href}>
+              {NAV_ITEMS.map((l) => (
+                <li key={l.id}>
                   <a
-                    href={l.href}
-                    className="text-caption text-[var(--content-secondary)] transition hover:text-[var(--accent-text)]"
+                    href={`#${l.id}`}
+                    className="inline-flex items-center gap-1.5 text-caption text-[var(--content-secondary)] transition hover:text-[var(--accent-text)]"
                   >
-                    {l.label}
+                    <span>{l.label}</span>
                   </a>
                 </li>
               ))}

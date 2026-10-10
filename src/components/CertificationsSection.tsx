@@ -44,10 +44,11 @@ export function CertificationsSection() {
             edgeFade={false}
             railClassName="-mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-10 lg:px-10"
           >
-            {CERTIFICATIONS.map((cert) => (
+            {CERTIFICATIONS.map((cert, index) => (
               <CertificateCard
                 key={cert.id}
                 cert={cert}
+                index={index}
                 onOpen={() => setSelected(cert)}
               />
             ))}
@@ -62,16 +63,22 @@ export function CertificationsSection() {
 
 function CertificateCard({
   cert,
+  index,
   onOpen,
 }: {
   cert: CertificateItem;
+  index: number;
   onOpen: () => void;
 }) {
+  const serial = String(index + 1).padStart(2, "0");
   return (
     <article className="flex w-[290px] flex-col rounded-[22px] border border-[var(--line-subtle)] bg-[var(--surface-raised)] p-5 shadow-[var(--shadow-card)] transition duration-300 hover:-translate-y-1 hover:border-[var(--accent-solid)] hover:shadow-[var(--shadow-lift)] sm:w-[340px]">
       <div className="flex items-center justify-between gap-2">
-        <span className="rounded-full border border-[var(--line-subtle)] bg-[var(--surface-sunken)] px-2.5 py-1 font-mono text-[10px] font-medium text-[var(--content-secondary)]">
-          {cert.category}
+        <span className="inline-flex items-center gap-2">
+          <span className="font-mono text-xs font-bold text-[var(--accent-text)]">{serial}</span>
+          <span className="rounded-full border border-[var(--line-subtle)] bg-[var(--surface-sunken)] px-2.5 py-1 font-mono text-[10px] font-medium text-[var(--content-secondary)]">
+            {cert.category}
+          </span>
         </span>
         <span className="font-mono text-[11px] text-[var(--content-faint)]">{cert.issueDate}</span>
       </div>

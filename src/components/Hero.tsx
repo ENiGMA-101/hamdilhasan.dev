@@ -47,9 +47,9 @@ export function Hero() {
         <div className="bg-tech-grid absolute inset-0" />
       </div>
 
-      <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-14 px-4 sm:px-6 lg:grid-cols-12 lg:gap-10 lg:px-10">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-8 px-4 sm:px-6 md:grid-cols-12 md:gap-6 lg:gap-10 lg:px-10">
         {/* ---------------- Narrative column ---------------- */}
-        <div className="lg:col-span-7">
+        <div className="md:col-span-7 lg:col-span-7 min-w-0 max-w-full">
           {/* Availability indicator */}
           <p className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-[var(--line-subtle)] bg-[var(--surface-raised)] px-3.5 py-1.5 text-[13px] text-[var(--content-secondary)]">
             <span className="relative flex h-2 w-2" aria-hidden="true">
@@ -68,12 +68,12 @@ export function Hero() {
           </h1>
 
           {/* Typing focus line */}
-          <p className="mt-6 flex min-h-[3.2em] flex-col text-headline font-medium text-[var(--content-secondary)] sm:min-h-[2.4em] sm:block">
+          <p className="mt-6 flex flex-col text-hero-headline font-medium text-[var(--content-secondary)] sm:block min-w-0 max-w-full overflow-wrap-break-word">
             <span className="sr-only">{PERSONAL_INFO.headline}</span>
-            <span aria-hidden="true" className="block sm:inline">
+            <span aria-hidden="true" className="inline max-w-full">
               <Typewriter
                 phrases={PERSONAL_INFO.heroPhrases}
-                className="text-[var(--accent-text)]"
+                className="text-[var(--accent-text)] max-w-full"
                 ariaLabel="Focus areas"
               />
             </span>
@@ -138,7 +138,7 @@ export function Hero() {
         </div>
 
         {/* ---------------- Identity card column ---------------- */}
-        <div className="lg:col-span-5">
+        <div className="md:col-span-5 lg:col-span-5">
           <div className="perspective-1200 mx-auto w-full max-w-[420px]">
             <div
               ref={cardRef}

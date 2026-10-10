@@ -95,10 +95,10 @@ export function Typewriter({
   const staticList = phrases.join("; ");
 
   return (
-    <span className={`inline-flex flex-col ${className}`}>
-      {/* Single-line box: prevents layout shift as text grows/shrinks */}
-      <span className="relative block min-h-[1.7em]">
-        <span aria-hidden="true" className="inline-block whitespace-pre">
+    <span className={`inline-flex flex-col max-w-full break-words ${className}`}>
+      {/* prevents layout shift as text grows/shrinks */}
+      <span className="relative block min-h-[1.7em] max-w-full break-words">
+        <span aria-hidden="true" className="inline whitespace-pre-wrap break-words">
           {text}
         </span>
         {!reduced && <span aria-hidden="true" className="hhp-caret" />}

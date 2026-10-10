@@ -103,10 +103,11 @@ export function App() {
       <Navbar theme={theme} onToggleTheme={toggleTheme} onReplayIntro={replayIntro} />
 
       <main id="main">
+        {/* About leads: identity first, then work — matching the nav order. */}
         <Hero />
+        <AboutSection />
         <FeaturedProjects />
         <ProjectsSection />
-        <AboutSection />
         <SkillsSection />
         <EducationSection />
         <CertificationsSection />

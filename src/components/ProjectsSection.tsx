@@ -30,7 +30,7 @@ export function ProjectsSection() {
   }, []);
 
   return (
-    <section id="projects" className="relative scroll-mt-24 border-y border-[var(--line-subtle)] bg-[var(--surface-sunken)] py-20 sm:py-24">
+    <section id="projects" className="relative scroll-mt-24 border-t border-[var(--line-subtle)] bg-[var(--surface-sunken)] py-20 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
         <header className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
@@ -87,8 +87,8 @@ export function ProjectsSection() {
               edgeFade={false}
               railClassName="-mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-10 lg:px-10"
             >
-              {projects.map((p) => (
-                <ProjectCard key={p.id} project={p} />
+              {projects.map((p, index) => (
+                <ProjectCard key={p.id} project={p} index={index} />
               ))}
             </AutoCarousel>
           )}
@@ -103,7 +103,8 @@ export function ProjectsSection() {
   );
 }
 
-function ProjectCard({ project }: { project: ProjectItem }) {
+function ProjectCard({ project, index }: { project: ProjectItem; index: number }) {
+  const serial = String(index + 1).padStart(2, "0");
   return (
     <article className="group flex w-[290px] flex-col overflow-hidden rounded-2xl border border-[var(--line-subtle)] bg-[var(--surface-raised)] shadow-[var(--shadow-card)] transition duration-300 hover:-translate-y-1 hover:border-[var(--accent-solid)] hover:shadow-[var(--shadow-lift)] sm:w-[330px]">
       <div className="relative aspect-[16/10] overflow-hidden bg-[var(--surface-sunken)]">
@@ -123,6 +124,11 @@ function ProjectCard({ project }: { project: ProjectItem }) {
               Unverified
             </span>
           )}
+        </div>
+        <div className="absolute right-3 top-3">
+          <span className="rounded-full bg-black/65 px-2.5 py-1 font-mono text-[10px] font-bold text-[var(--aqua-solid)] backdrop-blur-sm">
+            {serial}
+          </span>
         </div>
       </div>
 

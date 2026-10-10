@@ -12,8 +12,8 @@ export function SkillsSection() {
 
   return (
     <section
-      id="skills"
-      className="relative scroll-mt-24 overflow-hidden border-y border-[var(--line-subtle)] bg-[var(--surface-sunken)] py-20 sm:py-24"
+      id="focus"
+      className="relative scroll-mt-24 overflow-hidden border-b border-[var(--line-subtle)] bg-[var(--surface-sunken)] py-20 sm:py-24"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
         <header className="max-w-2xl">

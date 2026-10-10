@@ -51,18 +51,20 @@ export function EducationSection() {
             <div className="h-full rounded-[24px] border border-[var(--line-subtle)] bg-[var(--surface-raised)] p-6 shadow-[var(--shadow-card)] sm:p-8">
               <p className="rule-label">Coursework completed or in progress</p>
               <ul className="mt-5 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
-                {EDUCATION.coursework.map((course) => (
-                  <li
-                    key={course}
-                    className="flex items-center gap-2.5 rounded-xl border border-[var(--line-subtle)] bg-[var(--surface-sunken)] px-3.5 py-3 text-caption font-medium text-[var(--content-secondary)]"
-                  >
-                    <span
-                      aria-hidden="true"
-                      className="h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent-solid)]"
-                    />
-                    {course}
-                  </li>
-                ))}
+                {EDUCATION.coursework.map((course, index) => {
+                  const serial = String(index + 1).padStart(2, "0");
+                  return (
+                    <li
+                      key={course}
+                      className="flex items-center gap-2.5 rounded-xl border border-[var(--line-subtle)] bg-[var(--surface-sunken)] px-3.5 py-3 text-caption font-medium text-[var(--content-secondary)]"
+                    >
+                      <span className="font-mono text-[10px] font-bold text-[var(--accent-text)] shrink-0">
+                        {serial}
+                      </span>
+                      <span>{course}</span>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           </div>

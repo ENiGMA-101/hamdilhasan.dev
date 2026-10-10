@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import HHPLogo from "./HHPLogo";
 import { GitHubIcon, LinkedInIcon } from "./SocialIcons";
-import { NAV_LINKS, PERSONAL_INFO } from "../data/portfolioData";
+import { NAV_ITEMS, PERSONAL_INFO } from "../data/portfolioData";
 
 /* ==========================================================================
    Navbar — monogram, section links, theme toggle, contact CTA
@@ -30,7 +30,7 @@ export function Navbar({ theme, onToggleTheme, onReplayIntro }: NavbarProps) {
 
   /* Active-section tracking */
   useEffect(() => {
-    const ids = ["hero", "work", "about", "skills", "education", "research", "lab", "contact"];
+    const ids = ["hero", "about", "work", "focus", "photography", "writing", "contact"];
     const observer = new IntersectionObserver(
       (entries) => {
         const visible = entries
@@ -72,11 +72,11 @@ export function Navbar({ theme, onToggleTheme, onReplayIntro }: NavbarProps) {
           : "border-b border-transparent"
       }`}
     >
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-[68px] sm:px-6 lg:px-10">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-[68px] sm:px-6 lg:px-6 xl:px-10 relative">
         {/* Brand */}
         <a
           href="#hero"
-          className="group flex items-center gap-2.5 rounded-lg"
+          className="group flex items-center gap-2.5 rounded-lg z-10"
           aria-label={`${PERSONAL_INFO.fullName} — back to top`}
         >
           <HHPLogo size={36} className="transition-transform duration-300 group-hover:scale-105" />
@@ -90,23 +90,23 @@ export function Navbar({ theme, onToggleTheme, onReplayIntro }: NavbarProps) {
           </span>
         </a>
 
-        {/* Desktop links */}
-        <nav aria-label="Primary" className="hidden lg:block">
-          <ul className="flex items-center gap-0.5 rounded-full border border-[var(--line-subtle)] bg-[var(--surface-raised)] p-1">
-            {NAV_LINKS.map((link) => {
-              const isActive = active === link.href.slice(1);
+        {/* Desktop links — centered pill, visible from 1024px up */}
+        <nav aria-label="Primary" className="hidden lg:block lg:absolute lg:left-1/2 lg:-translate-x-1/2 z-0">
+          <ul className="flex items-center gap-0.5 xl:gap-1 rounded-full border border-[var(--line-subtle)] bg-[var(--surface-pill)] p-1 backdrop-blur-md">
+            {NAV_ITEMS.map((link) => {
+              const isActive = active === link.id;
               return (
-                <li key={link.href}>
+                <li key={link.id}>
                   <a
-                    href={link.href}
+                    href={`#${link.id}`}
                     aria-current={isActive ? "true" : undefined}
-                    className={`block rounded-full px-3.5 py-1.5 text-[13px] font-medium transition-colors ${
+                    className={`inline-flex items-center rounded-full px-2 py-1 xl:px-3.5 xl:py-1.5 text-[12px] xl:text-[13px] font-medium transition-colors ${
                       isActive
                         ? "bg-[var(--accent-solid)] text-white"
                         : "text-[var(--content-secondary)] hover:text-[var(--content-primary)]"
                     }`}
                   >
-                    {link.label}
+                    <span>{link.label}</span>
                   </a>
                 </li>
               );
@@ -115,7 +115,7 @@ export function Navbar({ theme, onToggleTheme, onReplayIntro }: NavbarProps) {
         </nav>
 
         {/* Actions */}
-        <div className="flex items-center gap-1.5 sm:gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2 z-10">
           <a
             href={PERSONAL_INFO.github}
             target="_blank"
@@ -148,7 +148,7 @@ export function Navbar({ theme, onToggleTheme, onReplayIntro }: NavbarProps) {
 
           <a
             href="#contact"
-            className="hidden items-center gap-1.5 rounded-xl bg-[var(--accent-solid)] px-4 py-2.5 text-[13px] font-semibold text-white transition hover:bg-[var(--accent-solidHover)] sm:inline-flex"
+            className="hidden items-center gap-1.5 rounded-xl bg-[var(--accent-solid)] px-3 py-2.5 text-[13px] font-semibold text-white transition hover:bg-[var(--accent-solidHover)] sm:inline-flex xl:px-4"
           >
             Get in touch
           </a>
@@ -174,12 +174,12 @@ export function Navbar({ theme, onToggleTheme, onReplayIntro }: NavbarProps) {
       >
         <nav aria-label="Mobile">
           <ul className="flex flex-col">
-            {NAV_LINKS.map((link) => {
-              const isActive = active === link.href.slice(1);
+            {NAV_ITEMS.map((link) => {
+              const isActive = active === link.id;
               return (
-                <li key={link.href}>
+                <li key={link.id}>
                   <a
-                    href={link.href}
+                    href={`#${link.id}`}
                     onClick={() => setMenuOpen(false)}
                     aria-current={isActive ? "true" : undefined}
                     className={`flex items-center justify-between rounded-xl px-3 py-3 text-[15px] font-medium transition-colors ${
@@ -188,7 +188,7 @@ export function Navbar({ theme, onToggleTheme, onReplayIntro }: NavbarProps) {
                         : "text-[var(--content-secondary)] hover:bg-[var(--surface-sunken)]"
                     }`}
                   >
-                    {link.label}
+                    <span>{link.label}</span>
                     <span aria-hidden="true" className="font-mono text-xs text-[var(--content-faint)]">
                       →
                     </span>

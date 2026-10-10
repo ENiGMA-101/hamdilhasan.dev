@@ -6,7 +6,7 @@ import { RESEARCH_TIMELINE } from "../data/portfolioData";
 
 export function ResearchTimeline() {
   return (
-    <section id="research" className="relative scroll-mt-24 py-20 sm:py-24">
+    <section id="writing" className="relative scroll-mt-24 py-20 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
         <header className="max-w-2xl">
           <p className="rule-label">Research &amp; activities</p>
@@ -20,17 +20,22 @@ export function ResearchTimeline() {
         </header>
 
         <ol className="mt-14 space-y-10 border-l border-[var(--line-subtle)] pl-6 sm:pl-8">
-          {RESEARCH_TIMELINE.map((item) => (
-            <li key={item.id} className="relative">
-              <span
-                aria-hidden="true"
-                className="absolute -left-[calc(1.5rem+5px)] top-1.5 h-2.5 w-2.5 rounded-full border-2 border-[var(--accent-solid)] bg-[var(--surface-canvas)] sm:-left-[calc(2rem+5px)]"
-              />
-              <article className="rounded-[22px] border border-[var(--line-subtle)] bg-[var(--surface-raised)] p-6 shadow-[var(--shadow-card)] transition hover:border-[var(--accent-solid)] sm:p-7">
-                <div className="flex flex-wrap items-center gap-2.5">
-                  <span className="rounded-full bg-[var(--accent-softBg)] px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-wide text-[var(--accent-text)]">
-                    {item.type}
-                  </span>
+          {RESEARCH_TIMELINE.map((item, index) => {
+            const serial = String(index + 1).padStart(2, "0");
+            return (
+              <li key={item.id} className="relative">
+                <span
+                  aria-hidden="true"
+                  className="absolute -left-[calc(1.5rem+5px)] top-1.5 h-2.5 w-2.5 rounded-full border-2 border-[var(--accent-solid)] bg-[var(--surface-canvas)] sm:-left-[calc(2rem+5px)]"
+                />
+                <article className="rounded-[22px] border border-[var(--line-subtle)] bg-[var(--surface-raised)] p-6 shadow-[var(--shadow-card)] transition hover:border-[var(--accent-solid)] sm:p-7">
+                  <div className="flex flex-wrap items-center gap-2.5">
+                    <span className="font-mono text-xs font-bold text-[var(--accent-text)] mr-2 bg-[var(--accent-softBg)] rounded-full px-2.5 py-1">
+                      {serial}
+                    </span>
+                    <span className="rounded-full bg-[var(--surface-sunken)] border border-[var(--line-subtle)] px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-wide text-[var(--content-secondary)]">
+                      {item.type}
+                    </span>
                   <span className="font-mono text-[11px] text-[var(--content-faint)]">{item.period}</span>
                   <span className="font-mono text-[11px] text-[var(--content-faint)]">
                     · {item.institution}
@@ -81,7 +86,8 @@ export function ResearchTimeline() {
                 </div>
               </article>
             </li>
-          ))}
+          );
+          })}
         </ol>
       </div>
     </section>

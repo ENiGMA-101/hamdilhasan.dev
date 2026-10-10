@@ -685,12 +685,16 @@ export const CREATIVE_GALLERY: CreativeItem[] = [
 /* NAVIGATION                                                                 */
 /* -------------------------------------------------------------------------- */
 
-export const NAV_LINKS = [
-  { label: "Work", href: "#work" },
-  { label: "About", href: "#about" },
-  { label: "Skills", href: "#skills" },
-  { label: "Education", href: "#education" },
-  { label: "Research", href: "#research" },
-  { label: "Lab", href: "#lab" },
-  { label: "Contact", href: "#contact" },
+export interface NavItem {
+  id: string;
+  label: string;
+}
+
+export const NAV_ITEMS: NavItem[] = [
+  { id: "about", label: "About" },
+  { id: "work", label: "Work" },
+  { id: "focus", label: "Focus" },
+  { id: "photography", label: "Photos" },
+  { id: "writing", label: "Writing" },
+  { id: "contact", label: "Contact" },
 ];
