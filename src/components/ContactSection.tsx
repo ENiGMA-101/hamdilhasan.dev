@@ -101,41 +101,60 @@ export function ContactSection() {
       /* clipboard unavailable — the mailto link still works */
     }
   };
-
+  
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (disabled) return;
 
     setFormError(null);
+
     const errors = validate();
     setFieldErrors(errors);
+
     if (Object.keys(errors).length > 0) {
       setStatus("error");
       setFormError("Please correct the highlighted fields.");
       return;
     }
 
+    if (honeypot.trim()) {
+      setStatus("success");
+      return;
+    }
+
+    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+
+    if (!accessKey) {
+      setStatus("error");
+      setFormError(
+        "Contact form is not configured. Please email me directly."
+      );
+      return;
+    }
+
     setStatus("submitting");
 
     try {
-      const res = await fetch("/api/send-email", {
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "content-type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
         body: JSON.stringify({
+          access_key: accessKey,
           name: name.trim(),
           email: email.trim(),
-          subject: subject.trim(),
+          subject: `[Portfolio] ${subject.trim()}`,
           message: message.trim(),
-          company: honeypot, // bots fill this; humans never see it
-          renderedAt: renderedAt.current,
+          from_name: "Hamdil Hasan Partho Portfolio",
+          botcheck: "",
         }),
       });
 
-      const data = (await res.json().catch(() => null)) as
-        | { ok?: boolean; error?: string; fields?: FieldErrors }
-        | null;
+      const data = await res.json();
 
-      if (res.ok && data?.ok) {
+      if (res.ok && data.success) {
         setStatus("success");
         setFieldErrors({});
         formRef.current?.reset();
@@ -143,22 +162,21 @@ export function ContactSection() {
         setEmail("");
         setSubject(SUBJECTS[0]);
         setMessage("");
-        return;
+        setHoneypot("");
+      } else {
+        setStatus("error");
+        setFormError(
+          data.message || "Message could not be sent. Please try again."
+        );
       }
-
-      setStatus("error");
-      setFieldErrors(data?.fields ?? {});
-      setFormError(
-        data?.error ??
-          "Something went wrong sending your message. Please try again, or email me directly.",
-      );
     } catch {
       setStatus("error");
       setFormError(
-        "Couldn't reach the contact service. Please check your connection, or email me directly.",
+        "Connection failed. Please check your internet or email me directly."
       );
     }
   };
+
 
   return (
     <section id="contact" className="relative scroll-mt-24 py-20 sm:py-24 lg:py-28">
